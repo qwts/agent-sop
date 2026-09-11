@@ -88,4 +88,6 @@ Cloning, drift detection, reconciliation, and harness synchronization are in
 | `diagram-dreamer` | public | active | no | managed | Playwright gates per ?state= fixture, axe-core at WCAG 2.1 AA, and a pseudo-localization build. |
 | `jwt-decoder` | public | active | no | managed | — |
 | `moonsweeper` | public | active | no | managed | — |
+| `managed-machine` | private | active | no | disabled | — |
+| `managed-machine-config` | private | active | no | disabled | — |
 <!-- END GENERATED governed-repos -->
