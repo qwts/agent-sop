@@ -43,12 +43,17 @@ broker or hand the human token to the agent, both rejected by that amendment.
    ENG-0016 amendment. A conversational "yes" is not a marker, and an env var
    the agent could set itself is not either; the marker must be verifiable
    state the runtime trusts, not input the agent controls.
-3. **The shim and the guard check the marker, then pass.** With a valid
-   marker and agent context in the owner's account, the `gh` shim passes
-   stock `gh` through and the `pre-commit` guard permits the human-attributed
-   commit. Without it, both refuse exactly as today — the marker widens
-   nothing in an agent account, for root, or under a foreign `HOME`, where
-   the refusal stands unconditionally.
+3. **The shim and the guard check the marker, then pass — except a fixed
+   undelegable set.** With a valid marker and agent context in the owner's
+   account, the `gh` shim passes stock `gh` through and the `pre-commit`
+   guard permits the human-attributed commit. The passthrough never covers
+   credential export or the review bar: `gh auth token` and equivalents stay
+   refused, and so do `gh pr review --approve`, `gh pr merge`, and the same
+   operations through `gh api` — otherwise a delegate could copy the owner's
+   token or satisfy a human-approval requirement on its own work, which is
+   exactly what point 6 forbids. Without a marker both refuse entirely — the
+   marker widens nothing in an agent account, for root, or under a foreign
+   `HOME`, where the refusal stands unconditionally.
 4. **Delegate writes are logged, not marked.** Each write the shim or guard
    allows under a marker is recorded as delegated in the runtime's own
    records. Commits carry no `Agent-Identity` trailer or other agent marker —
