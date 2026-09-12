@@ -141,6 +141,20 @@
       "sourceInputPolicy": "not-applicable",
       "generatedProjection": null,
       "harnessProjection": null
+    },
+    {
+      "repository": "qwts/managed-machine",
+      "metadataSystem": "none",
+      "sourceInputPolicy": "not-applicable",
+      "generatedProjection": null,
+      "harnessProjection": null
+    },
+    {
+      "repository": "qwts/managed-machine-config",
+      "metadataSystem": "none",
+      "sourceInputPolicy": "not-applicable",
+      "generatedProjection": null,
+      "harnessProjection": null
     }
   ]
 }

@@ -36,6 +36,8 @@ generated-projection identity of each. Coverage is a contract test.
 | `diagram-dreamer` | None | Not applicable; onboarding, no release metadata system. |
 | `jwt-decoder` | None | Not applicable. |
 | `moonsweeper` | None | Not applicable. |
+| `managed-machine` | Git tag via `scripts/release` | Not applicable; tags the sibling managed-machine-config checkout and pins the formula's config seed. |
+| `managed-machine-config` | Tag pushed by managed-machine `scripts/release` | Not applicable; ships as managed-machine's pinned config snapshot. |
 
 ## Repair handoff for a Changesets repository
 
@@ -81,7 +83,8 @@ Repository-specific notes:
 
 `playbook-engineering`, `quorum`, `agent-bot-identity`, `codex-rules-editor`,
 `playbook-dashboard`, `agentic-code-analysis`, `localnotes`,
-`universal-agentic-workflow`, `diagram-dreamer`, `jwt-decoder`, and `moonsweeper` carry `metadataSystem: "none"` and no generated
+`universal-agentic-workflow`, `diagram-dreamer`, `jwt-decoder`, `moonsweeper`,
+`managed-machine`, and `managed-machine-config` carry `metadataSystem: "none"` and no generated
 projection. They are the negative case: a migration must not add Changesets, a
 release-file check, or a bot exception to them, and their existing lifecycle,
 actor, fork, exact-SHA, CodeQL, and deployment gates are unchanged.
