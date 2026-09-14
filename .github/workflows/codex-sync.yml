@@ -45,7 +45,7 @@ concurrency:
 
 jobs:
   policy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64]
     timeout-minutes: 10
     steps:
       - uses: qwts/dev-steward/.github/actions/ci-policy@4e70c773155c2c804e52a487352627010bea1897
@@ -54,7 +54,7 @@ jobs:
 
   sync:
     needs: policy
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, ARM64]
     timeout-minutes: 30
     steps:
       - name: Mint the chores-dumb token
