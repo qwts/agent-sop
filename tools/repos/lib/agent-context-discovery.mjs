@@ -60,14 +60,21 @@ function replaceLegacySection(source, block) {
   return legacy.test(source) ? source.replace(legacy, `${block}\n\n`) : null;
 }
 
+export const LEGACY_PLAYBOOK_LINK_PREFIXES = [
+  ['https://github.com/qwts/playbook-engineering/blob/master/', 'https://github.com/qwts/dev-steward/blob/main/'],
+  ['https://github.com/qwts/playbook-engineering/blob/main/', 'https://github.com/qwts/dev-steward/blob/main/'],
+  ['https://github.com/qwts/dev-steward/blob/master/', 'https://github.com/qwts/dev-steward/blob/main/'],
+];
+
 export function projectDiscoveryBlock(source, canonicalBlock) {
   // A repository whose context is being reconciled is already being touched;
-  // retain the playbook link target but retire its old branch name. Never
-  // rewrite a repository-owned link: another project may still use master.
-  const current = source.replaceAll(
-    'https://github.com/qwts/playbook-engineering/blob/master/',
-    'https://github.com/qwts/playbook-engineering/blob/main/',
-  );
+  // retain the playbook link target but retire its old branch name and its
+  // former repository name (playbook-engineering → dev-steward, #355; GitHub
+  // redirects web links but Actions `uses:` and byte-compared blocks do not
+  // follow redirects). Never rewrite a repository-owned link: another project
+  // may still use master.
+  let current = source;
+  for (const [from, to] of LEGACY_PLAYBOOK_LINK_PREFIXES) current = current.replaceAll(from, to);
   const marked = replaceMarkedBlock(current, canonicalBlock);
   if (marked !== null) return marked;
 

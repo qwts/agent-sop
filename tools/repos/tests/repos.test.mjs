@@ -23,7 +23,7 @@ function validManifest() {
   return {
     account: 'qwts',
     repos: [
-      { name: 'playbook-engineering', visibility: 'public', status: 'active', sharedCi: true, delta: '', note: '' },
+      { name: 'dev-steward', visibility: 'public', status: 'active', sharedCi: true, delta: '', note: '' },
       { name: 'photos', visibility: 'public', status: 'onboarding', sharedCi: false, delta: 'A delta.', note: '' },
     ],
   };
@@ -50,7 +50,7 @@ test('rejects an unknown status', () => {
 
 test('rejects a duplicate repo name (case-insensitive)', () => {
   const m = validManifest();
-  m.repos[1].name = 'Playbook-Engineering';
+  m.repos[1].name = 'Dev-Steward';
   assert.ok(validateManifest(m).some((e) => e.includes('duplicate')));
 });
 
@@ -193,8 +193,8 @@ test('renderTable escapes backslashes before pipes, so \\| cannot smuggle a raw 
 });
 
 test('renderTable shows an em dash for an empty delta', () => {
-  // playbook-engineering has an empty delta in the fixture -> em dash cell.
-  assert.match(renderTable(validManifest()), /playbook-engineering.*\| — \|/);
+  // dev-steward has an empty delta in the fixture -> em dash cell.
+  assert.match(renderTable(validManifest()), /dev-steward.*\| — \|/);
 });
 
 test('renderTable shows managed Codex exceptions', () => {

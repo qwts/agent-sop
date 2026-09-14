@@ -159,6 +159,6 @@ drains is observation evidence, not a reason to weaken exact-SHA validation.
 Every active or onboarding repository has a verified release-mechanism
 disposition in the
 [release-lifecycle fleet handoff](governed-ci-release-lifecycle-fleet.md).
-`playbook-engineering` validates and merges the shared policy first. Consumers
+`dev-steward` validates and merges the shared policy first. Consumers
 then pin its reviewed immutable SHA and execute their repository-specific
 repair or retain the explicit not-applicable disposition.

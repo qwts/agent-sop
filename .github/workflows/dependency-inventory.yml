@@ -4,7 +4,7 @@
 #
 #   jobs:
 #     dependency-inventory:
-#       uses: qwts/playbook-engineering/.github/workflows/dependency-inventory.yml@v1
+#       uses: qwts/dev-steward/.github/workflows/dependency-inventory.yml@v1
 #
 # The caller repo provides its own dependency-inventory.config.json; Syft
 # produces a CycloneDX SBOM (license detection lives there, not in our code),
@@ -22,9 +22,13 @@ on:
         type: string
         default: dependency-inventory.config.json
       tooling-ref:
-        description: Ref of qwts/playbook-engineering to take the normalizer from
+        description: Ref of qwts/dev-steward to take the normalizer from
         type: string
         default: v1
+      runs-on:
+        description: JSON array of runner labels for the job. Default is the hosted runner so consumers are unaffected; this repo's own CI passes its self-hosted labels.
+        type: string
+        default: '["ubuntu-latest"]'
       use-local-tooling:
         description: Run the normalizer from the caller's own checkout (this repo's self-test; exercises the un-tagged tooling before v1 moves)
         type: boolean
@@ -36,7 +40,7 @@ on:
 
 jobs:
   dependency-inventory:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(inputs.runs-on) }}
     timeout-minutes: 20
     steps:
       - name: Check out caller repository
@@ -64,7 +68,7 @@ jobs:
         if: ${{ !inputs.use-local-tooling }}
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: qwts/playbook-engineering
+          repository: qwts/dev-steward
           ref: ${{ inputs.tooling-ref }}
           path: .dep-inventory/tooling
           persist-credentials: false

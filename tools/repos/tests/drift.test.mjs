@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { codeqlFreshness, codeqlSetupFrom, retiredDriftChecks } from '../drift.mjs';
+import { CODEQL_CHECK as DRIFT_CODEQL_CHECK, PVR_CHECK, codeqlFreshness, codeqlSetupFrom, publicOnlyChecks, retiredDriftChecks } from '../drift.mjs';
 import { plan, promotionPlan } from '../lib/reconcile-plan.mjs';
 import { RETIRED_HARNESS_FILES } from '../lib/baseline-files.mjs';
 
@@ -12,7 +12,7 @@ const defaultSetup = () => ({ analysis_key: 'dynamic/github-code-scanning/codeql
 const otherTool = (name = 'Semgrep') => ({ analysis_key: '.github/workflows/semgrep.yml:scan', tool: { name } });
 
 test('the setup is read from the marker GitHub stamps on each analysis', () => {
-  // Both strings are verbatim from live analyses: playbook-engineering (advanced)
+  // Both strings are verbatim from live analyses: dev-steward (advanced)
   // and bookmarkit before it went dark (default). The `dynamic/` prefix is
   // GitHub's own default-setup marker; anything else is a workflow path.
   assert.equal(codeqlSetupFrom([advanced()]), 'advanced');
@@ -153,4 +153,14 @@ test('retired-file drift is audited on active repos only', () => {
     failed: retiredDriftChecks({ status: 'onboarding' }),
   });
   assert.equal(stranded.eligible, true, 'a stranded retired file never blocks promotion');
+});
+
+test('a private repository records the public-only checks as not applicable', () => {
+  // Private vulnerability reporting and code scanning cannot be enabled on a
+  // private repo under a personal account (#355); a gate must not fail a repo
+  // for a feature it cannot turn on.
+  assert.deepEqual(publicOnlyChecks({ private: true }), [PVR_CHECK, DRIFT_CODEQL_CHECK]);
+  assert.deepEqual(publicOnlyChecks({ private: false }), []);
+  assert.deepEqual(publicOnlyChecks(undefined), []);
+  assert.equal(DRIFT_CODEQL_CHECK, CODEQL_CHECK, 'the exported key matches the one the tests already assert on');
 });

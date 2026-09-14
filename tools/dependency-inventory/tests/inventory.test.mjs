@@ -118,12 +118,12 @@ test('buildCatalog: governed @v1 workflows are exempt from unpinned findings', (
     components: [],
     toolConfigs: [],
     actions: [
-      { uses: 'qwts/playbook-engineering/.github/workflows/dependency-inventory.yml', ref: 'v1', pinnedSha: null },
+      { uses: 'qwts/dev-steward/.github/workflows/dependency-inventory.yml', ref: 'v1', pinnedSha: null },
       { uses: 'third-party/action', ref: 'v2', pinnedSha: null },
     ],
   };
   const catalog = buildCatalog([inv]);
-  const governed = catalog.actions.find((a) => a.uses.startsWith('qwts/playbook-engineering/'));
+  const governed = catalog.actions.find((a) => a.uses.startsWith('qwts/dev-steward/'));
   const thirdParty = catalog.actions.find((a) => a.uses === 'third-party/action');
   assert.deepEqual(governed.unpinnedIn, [], 'moving @v1 governed workflow is not a pin finding');
   assert.deepEqual(thirdParty.unpinnedIn, ['consumer'], 'third-party mutable ref still flagged');

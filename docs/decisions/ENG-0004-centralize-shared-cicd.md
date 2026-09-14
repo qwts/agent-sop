@@ -224,6 +224,14 @@ The moving `@v1` tag is retired by
 exact immutable releases, bumped by bot-authored align PRs. Everything else
 above stands, per amend-don't-rewrite.
 
+## Amendment — 2026-09-14: renamed to `qwts/dev-steward`
+
+Renamed again ([#355](https://github.com/qwts/dev-steward/issues/355)); the
+canonical consumption path is now
+`uses: qwts/dev-steward/.github/actions/<name>@<reviewed-sha>`. As in
+2026-07-22, GitHub's redirect does not cover Actions, so a `uses:` naming the
+old repository fails. Existing records keep the old name.
+
 ## References
 
 - [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) established this repo as the cross-repo home for shared engineering assets; this extends that from documents to CI/CD.

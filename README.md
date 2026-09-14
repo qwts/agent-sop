@@ -1,6 +1,6 @@
-# Software Engineering Playbook
+# dev-steward
 
-This repository is a curated collection of documents, processes, and workflows designed to guide software engineering practices and support the Software Development Life Cycle (SDLC). It serves as a centralized reference for teams to understand requirements gathering, architecture planning, infrastructure, security, observability, and more.
+The steward of the `qwts` engineering fleet: the governance manifest and its drift and reconcile tooling, shared CI, the docs-governance gate, the agent-harness seeds and skills catalog, the ENG decision series, shared SOPs, and the SDLC guides. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/dev-steward/issues/355)); historical records keep the old name.
 
 It is also the home for **cross-repo engineering decisions** — see the [decision index](docs/decisions/README.md) — and for the org-wide agent conventions every repo's [AGENTS.md](AGENTS.md) points to; see [AGENTS.md](AGENTS.md) for this repo's own agent context.
 

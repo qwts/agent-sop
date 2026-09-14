@@ -18,7 +18,7 @@ The action performs one ordered transaction:
    the default branch.
 
 ```yaml
-- uses: qwts/playbook-engineering/.github/actions/bounded-dependency-install@<reviewed-sha>
+- uses: qwts/dev-steward/.github/actions/bounded-dependency-install@<reviewed-sha>
   env:
     NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
   with:

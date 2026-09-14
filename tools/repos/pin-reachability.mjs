@@ -12,7 +12,7 @@
 // <path>@<40-hex>` where <owner> is ours — and fails when a pinned SHA is not
 // reachable from that target repo's default branch. Same-repo pins are checked
 // against local git; cross-repo pins (e.g. every governed repo pinning
-// playbook-engineering's ci-policy action) are checked through the compare API,
+// dev-steward's ci-policy action) are checked through the compare API,
 // which reports whether one commit is an ancestor of another.
 //
 //   node tools/repos/pin-reachability.mjs [--json] [--owner qwts]

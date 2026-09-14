@@ -66,8 +66,9 @@ export function plan(result) {
       out.human.push(`install ${check.slice(5)} on the repo — installation-repo management is user-to-server only`);
     } else if (/^retired .+ removed$/.test(check)) {
       // Retraction is the harness sync's lane (#287), not the reconciler's:
-      // the deletion ships in the repo's governance/harness-sync PR.
-      out.human.push(`${check}: delivered by the harness sync retraction PR — run the sync workflow if none is open, then approve via npm run codex:approve`);
+      // the deletion ships in the repo's governance/harness-sync PR. The
+      // scheduled workflow is retired (#355); the apply is a manual step.
+      out.human.push(`${check}: delivered by the harness sync retraction PR — if none is open, run node tools/repos/sync-codex.mjs --apply --repo <name> with an explicit chores-dumb[bot] GH_TOKEN, then approve via npm run codex:approve`);
     } else out.human.push(`${check}: no reconcile lane — converge manually`);
   }
   return out;

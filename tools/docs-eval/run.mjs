@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// docs-eval — the Phase 2 evaluation loop of qwts/playbook-engineering#2,
+// docs-eval — the Phase 2 evaluation loop of qwts/dev-steward#2,
 // SkillOpt-shaped: score an agent's task success against a docs revision, so
 // a doc edit is defended by evidence instead of taste.
 //
