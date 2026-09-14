@@ -91,3 +91,11 @@ The bounded dependency-install contract is unchanged: `runner.temp` is
 cleared per job on self-hosted runners too, and the cache service is the same.
 Everything above stands for the fleet; standard hosted runners remain the
 default for every other governed repository.
+
+The accepted risk: pull-request revisions, not only validated `main`, execute
+on a persistent machine. It is accepted because the private repository admits
+no fork, and the actor policy admits only the owner, `dependabot[bot]`, and the
+owner's registered agent Apps — identities that already execute on this
+machine, so a pull request they open runs nothing on the runner they cannot
+run locally. The ephemeral self-hosted image above remains the upgrade path
+if that boundary changes.
