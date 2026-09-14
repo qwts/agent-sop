@@ -3,8 +3,8 @@
   "repos": [
     {
       "name": "playbook-engineering",
-      "visibility": "public",
-      "publish": true,
+      "visibility": "private",
+      "publish": false,
       "status": "active",
       "sharedCi": true,
       "codexSync": {
@@ -12,7 +12,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "This repository — source of the governance it describes."
+      "note": "This repository — source of the governance it describes. Private since 2026-09-14 (#355)."
     },
     {
       "name": "overlook",

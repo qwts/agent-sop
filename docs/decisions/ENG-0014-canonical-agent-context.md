@@ -69,3 +69,14 @@ session.
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md) — amended (canonical file), retained (thin adapters)
 - [ENG-0011](ENG-0011-governed-scope-manifest.md) — the manifest that becomes the distribution list
 - [ENG-0012](ENG-0012-decision-priority-order.md) — the lens applied: token efficiency (3) drives vendoring; it never outranks the security caveats the baseline carries (1)
+
+## Amendment — 2026-09-14: this repository is private
+
+Decision item 4 said deep guidance is "fetched on demand from this public
+repo". The repository is private as of 2026-09-14
+([#355](https://github.com/qwts/playbook-engineering/issues/355)), so
+on-demand fetches need a credential: agents read linked guidance through the
+bot identities installed on every governed repository, and anonymous fetches
+of the discovery-block links no longer resolve. The link-vs-copy rule stands
+unchanged; the replacement channel — an installed CLI serving the pinned
+release offline — is the subject of #355 and lands as its own record.
