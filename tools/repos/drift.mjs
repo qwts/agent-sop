@@ -6,8 +6,10 @@
 //   - absence of retired harness files the sync no longer manages (#287)
 //   - a default-branch rule requiring at least one approving review
 //     (rulesets or classic branch protection)
-//   - private vulnerability reporting enabled
+//   - private vulnerability reporting enabled (public repos only)
 //   - CodeQL running from the repo's own workflow, not GitHub's default setup
+//     (public repos only — a private repo on a personal account cannot enable
+//     code scanning, so both checks are recorded as not applicable, #355)
 //   - installation of every active agent App in governance/agents.json
 //     (ENG-0016, ENG-0079 — the roster is data, so the count is not fixed)
 //
@@ -146,6 +148,18 @@ export function codeqlSetupFrom(analyses) {
 // running is caught the same day.
 export const CODEQL_GRACE_MS = 6 * 60 * 60 * 1000;
 
+export const PVR_CHECK = 'private vulnerability reporting';
+export const CODEQL_CHECK = 'code scanning (CodeQL, own workflow, current)';
+
+// Checks GitHub only offers on public repositories. Private vulnerability
+// reporting is public-only by definition, and code scanning on a private repo
+// needs GitHub Advanced Security, which a personal account cannot buy (#355).
+// A private repo therefore records these as not applicable rather than as
+// drift — the gate must not fail a repo for a feature it cannot turn on.
+export function publicOnlyChecks(meta) {
+  return meta?.private === true ? [PVR_CHECK, CODEQL_CHECK] : [];
+}
+
 // Whether the newest CodeQL analysis actually covers the current default-branch
 // head. Classification alone is not enough: GitHub keeps historical analyses
 // forever, so a repo whose workflow is deleted, disabled, or silently stops
@@ -219,8 +233,14 @@ export async function checkRepo(owner, entry, coverage, token, {
   const templates = await api(`/repos/${owner}/${entry.name}/contents/.github/ISSUE_TEMPLATE`, token);
   checks['feature issue template'] = Array.isArray(templates) && templates.some((t) => /feature/i.test(t.name));
   checks['review required to merge'] = await reviewRequired(owner, entry.name, meta.default_branch, token);
+  const notApplicable = publicOnlyChecks(meta);
+  if (notApplicable.length > 0) {
+    for (const slug of Object.keys(coverage)) checks[`app: ${slug}`] = coverage[slug].has(entry.name);
+    const failed = Object.entries(checks).filter(([, ok]) => !ok).map(([k]) => k);
+    return { name: entry.name, status: entry.status, checks, failed, discovery, notApplicable };
+  }
   const pvr = await api(`/repos/${owner}/${entry.name}/private-vulnerability-reporting`, token);
-  checks['private vulnerability reporting'] = pvr?.enabled === true;
+  checks[PVR_CHECK] = pvr?.enabled === true;
   // Pinned to the default branch: analyses are recorded against PR refs too, so
   // an unpinned read measures pull-request traffic rather than the repo's
   // steady state. `api` collapses 403 and 404 to null, so an unreadable repo
@@ -238,7 +258,7 @@ export async function checkRepo(owner, entry, coverage, token, {
   // own workflow or by having stopped. Splitting them would make a repo with no
   // CodeQL at all report two failures for one problem, and would force the
   // freshness line into a vacuous pass whenever there was nothing to be stale.
-  checks['code scanning (CodeQL, own workflow, current)'] =
+  checks[CODEQL_CHECK] =
     codeqlSetupFrom(analyses) === 'advanced' &&
     codeqlFreshness({
       analyses,
@@ -249,7 +269,7 @@ export async function checkRepo(owner, entry, coverage, token, {
   for (const slug of Object.keys(coverage)) checks[`app: ${slug}`] = coverage[slug].has(entry.name);
 
   const failed = Object.entries(checks).filter(([, ok]) => !ok).map(([k]) => k);
-  return { name: entry.name, status: entry.status, checks, failed, discovery };
+  return { name: entry.name, status: entry.status, checks, failed, discovery, notApplicable };
 }
 
 export function activeDrift(results) {
@@ -277,6 +297,7 @@ async function main() {
       const passed = total - r.failed.length;
       process.stdout.write(`${r.name} (${r.status}) — ${passed}/${total}\n`);
       for (const miss of r.failed) process.stdout.write(`  ✗ ${miss}\n`);
+      for (const skip of r.notApplicable ?? []) process.stdout.write(`  – ${skip} (not applicable: private repository)\n`);
       if (r.discovery?.state === 'migration') {
         process.stdout.write('  ↳ migration: shared agent-context discovery is incomplete; promotion to active remains blocked\n');
       }
