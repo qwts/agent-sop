@@ -23,6 +23,10 @@ on:
         description: Ref of qwts/dev-steward to take the checks from
         type: string
         default: v1
+      runs-on:
+        description: JSON array of runner labels for the job. Default is the hosted runner so consumers are unaffected; this repo's own CI passes its self-hosted labels.
+        type: string
+        default: '["ubuntu-latest"]'
       use-local-tooling:
         description: Run the checks from the caller's own checkout (this repo's self-test; exercises the un-tagged tooling before v1 moves)
         type: boolean
@@ -30,7 +34,7 @@ on:
 
 jobs:
   docs-gov:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(inputs.runs-on) }}
     timeout-minutes: 15
     steps:
       - name: Check out caller repository
