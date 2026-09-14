@@ -89,7 +89,6 @@ test('installation coverage paginates through an injected API seam', async () =>
 test('governed integrations use the installed CLI and the playbook suite excludes runtime tests', () => {
   const obsoleteRuntime = ['tools', 'agent-bot'].join('/');
   const claude = readFileSync(join(ROOT, '.claude', 'settings.json'), 'utf8');
-  const workflow = readFileSync(join(ROOT, '.github', 'workflows', 'codex-sync.yml'), 'utf8');
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 
   // The Codex environment carries no scripts of its own: identity comes from
@@ -99,7 +98,6 @@ test('governed integrations use the installed CLI and the playbook suite exclude
   assert.match(claude, /claude-worktree-create/);
   assert.doesNotMatch(claude, /playbook-claude/);
   assert.ok(!claude.includes(obsoleteRuntime));
-  assert.match(workflow, /tools\/repos\/lib\/agent-bot-client\.mjs/);
   assert.ok(!pkg.scripts.test.includes(obsoleteRuntime));
   assert.equal(pkg.scripts['agent:identity'], undefined);
 });

@@ -88,25 +88,21 @@ an organization-owned repository. User-owned repositories follow the governed
 updater fallback in the [CI execution policy](ci-execution-policy.md); asking
 GitHub to create an unavailable queue is not a valid reconciliation plan.
 
-## Continuous harness synchronization
+## Harness synchronization (workflow retired)
 
-The [Governed harness sync workflow](../../.github/workflows/codex-sync.yml)
-keeps the shared agent-harness environment — [`.codex/`](../../.codex/) and
-[`.claude/settings.json`](../../.claude/settings.json) — plus its consumer
-compatibility metadata current after onboarding. Seeding only fixes a
-*missing* file; this lane carries a change to managed files in repos that
-already have them. It runs when a managed source changes on `main`, on
-dispatch, and weekly as a repair loop. Also available locally as a read-only
-comparison:
+The scheduled *Governed harness sync* workflow was retired on 2026-09-14
+([#355](https://github.com/qwts/dev-steward/issues/355)): shared agent
+tooling is moving to the machine — `~/.agents/skills` and the user-level
+harness configuration installed by `dev-steward` — instead of being pushed
+into every repository's `.codex/` and `.claude/settings.json`. Until that
+lands, the comparison stays available locally, read-only:
 
 ```bash
 node tools/repos/sync-codex.mjs             # dry-run content comparison
 node tools/repos/sync-codex.mjs --repo NAME # scope the comparison
 ```
 
-Use the workflow dispatch to open or update downstream PRs; its repository
-secrets keep the shared automation credential out of developer machines. The
-`--apply` CLI remains available for recovery but requires an explicit
+`--apply` remains a manual recovery path only: it requires an explicit
 `chores-dumb[bot]` `GH_TOKEN` and never falls back to a local agent identity.
 
 Synchronization compares blobs and modes; most files are exact replacements.
@@ -156,8 +152,9 @@ interfaces, not identity boundaries.
 
 Fleet snapshots: [hook composition audits](hook-composition-audits.md).
 
-After the source change is reviewed and merged, approve the generated pull
-requests from a normal human checkout:
+After the source change is reviewed and merged, open the synchronization pull
+requests with the manual apply (there is no scheduled run any more), then
+approve them from a normal human checkout:
 
 ```bash
 npm run codex:approve                         # dry-run and validate every PR
@@ -180,29 +177,13 @@ from
 current-head [Copilot code review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review)
 with no inline findings. A new push makes older evidence stale until the
 updated head is reviewed. This keeps human approval explicit while removing
-the repetitive per-repository commands. Do not place a personal access token
-in the synchronization workflow; an unattended action would exercise a human
-identity without a fresh human decision.
+the repetitive per-repository commands. Never run `--apply` with a personal
+access token; that would exercise a human identity without a fresh human
+decision.
 
-The workflow requires the same two repository secrets used by every privileged
-`chores-dumb` consumer listed in the
-[governed CI rollout checklist](governed-ci-rollout.md):
-
-- `CHORES_DUMB_CLIENT_ID` — the Client ID for `chores-dumb`.
-- `CHORES_DUMB_PRIVATE_KEY` — that App's PEM private key.
-
-The ready-branch updater, Version packages PR creation or refresh, tag
-creation, release-recovery dispatch, this synchronization workflow, and any
-future privileged write or downstream-workflow initiator require both values.
-An obsolete App ID variable is not a substitute for the Client ID, and
-`RELEASE_TOKEN` is not a fallback. Actor authorization remains separate from
-stored credentials.
-
-GitHub's token action mints a short-lived installation token for every
-repository in the App's `qwts` installation, down-scoped to contents and pull
-request writes; the App's release-only Packages and Attestations permissions
-do not reach this job. The synchronization script verifies that GraphQL reports
-the exact viewer `chores-dumb[bot]` before any write. A missing secret, human
-token, or token for another App fails closed. The workflow checkout uses
-`persist-credentials: false`, and its built-in `GITHUB_TOKEN` has read-only
-contents permission.
+A manual `--apply` uses the same credential boundary every privileged
+`chores-dumb` consumer in the
+[governed CI rollout checklist](governed-ci-rollout.md) uses: a short-lived
+installation token for that App, scoped to contents and pull-request writes.
+The script verifies that GraphQL reports the exact viewer `chores-dumb[bot]`
+before any write; a human token or a token for another App fails closed.

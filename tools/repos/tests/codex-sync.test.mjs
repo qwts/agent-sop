@@ -38,33 +38,6 @@ function canonical(path, content = 'canonical\n', mode = '100644') {
   return { path, content: bytes, sha: gitBlobSha(bytes), mode };
 }
 
-test('governed harness workflow mints a least-privilege chores-dumb token', () => {
-  const workflow = readFileSync('.github/workflows/codex-sync.yml', 'utf8');
-
-  assert.match(workflow, /name: Governed harness sync/u);
-  assert.match(workflow, /uses: actions\/create-github-app-token@[0-9a-f]{40} # v3\.2\.0/u);
-  assert.match(workflow, /client-id: \$\{\{ secrets\.CHORES_DUMB_CLIENT_ID \}\}/u);
-  assert.match(workflow, /private-key: \$\{\{ secrets\.CHORES_DUMB_PRIVATE_KEY \}\}/u);
-  assert.match(workflow, /permission-contents: write/u);
-  assert.match(workflow, /permission-pull-requests: write/u);
-  assert.match(workflow, /GH_TOKEN: \$\{\{ steps\.chores\.outputs\.token \}\}/u);
-  assert.doesNotMatch(workflow, /CODEX_AGENT_|\bapp-id:|permission-(?:attestations|packages):/u);
-});
-
-test('the push trigger covers every governed harness path, so no fix ships only on the weekly run', () => {
-  const workflow = readFileSync('.github/workflows/codex-sync.yml', 'utf8');
-  // The `paths:` list under `on.push`, up to the next top-level trigger key.
-  const pushBlock = workflow.slice(workflow.indexOf('push:'), workflow.indexOf('workflow_dispatch:'));
-  const patterns = [...pushBlock.matchAll(/^\s+-\s+'([^']+)'$/gmu)].map((m) => m[1]);
-  const covers = (pattern, file) => {
-    if (pattern === file) return true;
-    if (pattern.endsWith('/**')) return file.startsWith(pattern.slice(0, -2));
-    return false;
-  };
-  const uncovered = GOVERNED_HARNESS_FILES.filter((file) => !patterns.some((pattern) => covers(pattern, file)));
-  assert.deepEqual(uncovered, [], `governed paths with no push-trigger glob will not propagate until the weekly run: ${uncovered.join(', ')}`);
-});
-
 test('apply requires an explicit chores-dumb token while dry-run may mint read credentials', async () => {
   await assert.rejects(
     installationToken({ apply: true, env: {} }),
