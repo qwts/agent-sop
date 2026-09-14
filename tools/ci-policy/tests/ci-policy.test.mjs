@@ -694,7 +694,7 @@ test('merge-evidence selects the canonical workflow by immutable path', () => {
 });
 
 test('every direct non-CI workflow entrypoint enforces authorization first', () => {
-  for (const path of ['codex-sync.yml', 'inventory-catalog.yml']) {
+  for (const path of ['inventory-catalog.yml']) {
     const workflow = readFileSync(new URL(`../../../.github/workflows/${path}`, import.meta.url), 'utf8');
     assert.match(workflow, /^  policy:$/m);
     assert.match(workflow, /authorization-only: 'true'/);

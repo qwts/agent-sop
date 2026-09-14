@@ -27,7 +27,7 @@
       {
         "path": "docs/reference/governed-repos-operations.md",
         "budget": 2800,
-        "reason": "the harness-sync lane gained the retraction contract (#287) — the operational half of the durable retired-paths record that lets the sync delete files it stopped managing. 2800 is the post-addition size plus minimal headroom; the doc is the fleet's single runbook, so growth tracks new operational lanes, not loosening prose. The next breach should split the harness-sync lane into its own doc, not raise again"
+        "reason": "the harness-sync lane gained the retraction contract (#287) — the operational half of the durable retired-paths record that lets the sync delete files it stopped managing. 2800 is the post-addition size plus minimal headroom; the doc is the fleet's single runbook, so growth tracks new operational lanes, not loosening prose. The scheduled sync workflow was retired 2026-09-14 (#355); the lane now documents the local read-only comparison and manual recovery apply. The next breach should split the harness-sync lane into its own doc, not raise again"
       },
       {
         "path": "docs/reference/agent-bot-identity.md",
