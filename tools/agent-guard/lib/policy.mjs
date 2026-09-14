@@ -177,6 +177,6 @@ export function evaluateLanePolicy({ label, command }) {
       'Push the branch and let GitHub CI verify — the workflow invokes its underlying CI entrypoint directly. ' +
       'If a local run is genuinely required, the owner makes that exceptional decision in their own non-agent terminal. ' +
       'Running the underlying lane directly is outside this wrapper and therefore outside its lease, admission, ceiling, and timeout protections; same-user grant files are not authorization. ' +
-      'See https://github.com/qwts/playbook-engineering/blob/main/docs/reference/agent-memory-guard.md.',
+      'See https://github.com/qwts/dev-steward/blob/main/docs/reference/agent-memory-guard.md.',
   };
 }

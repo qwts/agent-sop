@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: qwts/playbook-engineering/.github/actions/ci-policy@4e70c773155c2c804e52a487352627010bea1897
+      - uses: qwts/dev-steward/.github/actions/ci-policy@4e70c773155c2c804e52a487352627010bea1897
         with:
           authorization-only: 'true'
 

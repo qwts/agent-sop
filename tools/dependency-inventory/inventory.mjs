@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // dependency-inventory — inventory the dependencies and tooling a governed repo
-// uses (qwts/playbook-engineering, ENG-0015).
+// uses (qwts/dev-steward, ENG-0015).
 //
 // Two goals: a license/compliance record of what is used, and a reuse signal so
 // a new project can adopt the stack the fleet already runs rather than

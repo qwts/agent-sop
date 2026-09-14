@@ -40,7 +40,7 @@ secret scanning + push protection and Dependabot security updates **on**
 (the ENG-0005 baseline); CodeQL **on** once the repo has code. Private
 repositories skip vulnerability reporting and CodeQL: a personal account
 cannot enable either there, and governed CI skips the CodeQL lane while the
-repository is private ([#355](https://github.com/qwts/playbook-engineering/issues/355)). Configure the
+repository is private ([#355](https://github.com/qwts/dev-steward/issues/355)). Configure the
 repository Actions Policy and CI/branch-protection settings from the shared
 [CI execution policy](../reference/ci-execution-policy.md). Use CodeQL advanced
 setup so the same coverage runs through governed CI; default setup's internal

@@ -333,11 +333,11 @@ test('mixed paths, renamed product files, and invalid source provenance fail clo
     ['product path', harnessPullRequest(), [...managedHarnessFiles, { filename: 'src/product.mjs' }]],
     ['renamed product path', harnessPullRequest(), [{ filename: '.codex/config.toml', previous_filename: 'src/product.mjs' }]],
     ['missing source', harnessPullRequest({ body: '' }), managedHarnessFiles],
-    ['short source SHA', harnessPullRequest({ body: 'https://github.com/qwts/playbook-engineering/commit/abc123' }), managedHarnessFiles],
+    ['short source SHA', harnessPullRequest({ body: 'https://github.com/qwts/dev-steward/commit/abc123' }), managedHarnessFiles],
     ['wrong source repository', harnessPullRequest({ body: `https://github.com/qwts/other/commit/${harnessSource}` }), managedHarnessFiles],
     ['ambiguous source', harnessPullRequest({ body: [
-      `https://github.com/qwts/playbook-engineering/commit/${harnessSource}`,
-      `https://github.com/qwts/playbook-engineering/commit/${'a'.repeat(40)}`,
+      `https://github.com/qwts/dev-steward/commit/${harnessSource}`,
+      `https://github.com/qwts/dev-steward/commit/${'a'.repeat(40)}`,
     ].join('\n') }), managedHarnessFiles],
   ]) {
     const options = releaseRun({ pullRequests: [pullRequest], changedFiles });
@@ -403,7 +403,7 @@ test('ordinary automation and unconfigured repositories get no generated-release
   }).pull_request;
   assert.equal(releaseOutputs(releaseRun({ pullRequests: [dependabot] })).release_gate_mode, 'source-policy');
 
-  const unversioned = releaseLifecycleFor(releaseCatalog, 'qwts/playbook-engineering');
+  const unversioned = releaseLifecycleFor(releaseCatalog, 'qwts/dev-steward');
   const outputs = releaseOutputs(releaseRun({ lifecycle: unversioned, pullRequests: [source] }));
   assert.equal(outputs.generated_release_projection, 'false');
   assert.equal(outputs.release_gate_mode, 'not-applicable');
@@ -583,7 +583,7 @@ test('the reference workflow preserves governed gates and skips draft jobs', () 
   assert.match(workflow, /github\.event\.pull_request\.draft == false/);
   assert.match(
     workflow,
-    /uses: qwts\/playbook-engineering\/\.github\/actions\/ci-policy@[0-9a-f]{40}/,
+    /uses: qwts\/dev-steward\/\.github\/actions\/ci-policy@[0-9a-f]{40}/,
   );
   assert.doesNotMatch(workflow, /uses: \.\/\.github\/actions\/ci-policy/);
   assert.match(workflow, /^  merge_group:\n    types: \[checks_requested\]$/m);
@@ -698,7 +698,7 @@ test('every direct non-CI workflow entrypoint enforces authorization first', () 
     const workflow = readFileSync(new URL(`../../../.github/workflows/${path}`, import.meta.url), 'utf8');
     assert.match(workflow, /^  policy:$/m);
     assert.match(workflow, /authorization-only: 'true'/);
-    assert.match(workflow, /uses: qwts\/playbook-engineering\/\.github\/actions\/ci-policy@[0-9a-f]{40}/);
+    assert.match(workflow, /uses: qwts\/dev-steward\/\.github\/actions\/ci-policy@[0-9a-f]{40}/);
     assert.match(workflow, /needs: policy/);
   }
 });
