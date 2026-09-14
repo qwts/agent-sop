@@ -192,7 +192,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Install browsers
-        uses: qwts/playbook-engineering/.github/actions/bounded-command@4e70c773155c2c804e52a487352627010bea1897
+        uses: qwts/dev-steward/.github/actions/bounded-command@4e70c773155c2c804e52a487352627010bea1897
         with:
           task: Install browsers
           executable: npx
@@ -319,7 +319,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:
-      - uses: qwts/playbook-engineering/.github/actions/bounded-command@4e70c773155c2c804e52a487352627010bea1897 # v1
+      - uses: qwts/dev-steward/.github/actions/bounded-command@4e70c773155c2c804e52a487352627010bea1897 # v1
         with:
           timeout-seconds: '300'
 `);

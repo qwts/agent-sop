@@ -39,7 +39,7 @@ An agent that addresses a review comment — a reply plus a change — resolves
 the thread in the same pass. Reply → fix → resolve is one unit of work: an
 addressed-but-open thread forces the reviewer to chase state before they can
 approve. A thread stays open only when the agent neither replied nor made a
-change for it (qwts/playbook-engineering#28).
+change for it (qwts/dev-steward#28).
 
 ## Clarify before large efforts
 
@@ -47,7 +47,7 @@ Before significant exploration, multi-tool work, or a fan-out of subagents,
 an agent states the objective as it understands it and its recommendation,
 then asks how to proceed. Quick single-fact lookups are exempt — the rule
 exists so that large token spends follow confirmed intent, not guessed
-intent (qwts/playbook-engineering#28).
+intent (qwts/dev-steward#28).
 
 ## Supply chain and permissions
 

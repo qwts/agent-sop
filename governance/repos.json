@@ -2,7 +2,7 @@
   "account": "qwts",
   "repos": [
     {
-      "name": "playbook-engineering",
+      "name": "dev-steward",
       "visibility": "private",
       "publish": false,
       "status": "active",
@@ -12,7 +12,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "This repository — source of the governance it describes. Private since 2026-09-14 (#355)."
+      "note": "This repository — source of the governance it describes. Private since 2026-09-14 and renamed from playbook-engineering the same day (#355); historical ENG records and SOP changelogs keep the old name (supersede-don't-rewrite)."
     },
     {
       "name": "overlook",

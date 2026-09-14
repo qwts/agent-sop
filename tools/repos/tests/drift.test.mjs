@@ -12,7 +12,7 @@ const defaultSetup = () => ({ analysis_key: 'dynamic/github-code-scanning/codeql
 const otherTool = (name = 'Semgrep') => ({ analysis_key: '.github/workflows/semgrep.yml:scan', tool: { name } });
 
 test('the setup is read from the marker GitHub stamps on each analysis', () => {
-  // Both strings are verbatim from live analyses: playbook-engineering (advanced)
+  // Both strings are verbatim from live analyses: dev-steward (advanced)
   // and bookmarkit before it went dark (default). The `dynamic/` prefix is
   // GitHub's own default-setup marker; anything else is a workflow path.
   assert.equal(codeqlSetupFrom([advanced()]), 'advanced');

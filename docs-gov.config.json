@@ -36,8 +36,8 @@
       },
       {
         "path": "docs/decisions/ENG-0004-centralize-shared-cicd.md",
-        "budget": 3150,
-        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md"
+        "budget": 3250,
+        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 on 2026-09-14 for the dev-steward rename amendment (#355), which is the second rename this record must carry"
       },
       {
         "path": "docs/reference/ci-execution-policy.md",
@@ -119,7 +119,8 @@
   "decisionSeries": {
     "glob": "docs/decisions/ENG-*.md",
     "issueField": "Issue",
-    "homeRepo": "qwts/playbook-engineering",
+    "homeRepo": "qwts/dev-steward",
+    "homeRepoAliases": ["qwts/playbook-engineering"],
     "grandfathered": [
       "docs/decisions/ENG-000?-*.md",
       "docs/decisions/ENG-001?-*.md"

@@ -1,4 +1,4 @@
-// The Phase 1 deterministic checks (qwts/playbook-engineering#2).
+// The Phase 1 deterministic checks (qwts/dev-steward#2).
 //
 // Every rule exists because it prevents a specific, nameable agent failure —
 // the `prevents` field below is normative, not decoration. A rule that cannot
@@ -640,7 +640,7 @@ function checkTerminology(docs, terms, findings) {
 }
 
 // Two invariants on a decision series whose numbers are allocated from the
-// GitHub issue counter (qwts/playbook-engineering#35):
+// GitHub issue counter (qwts/dev-steward#35):
 //   1. Uniqueness — no two records share a number (holds for every record,
 //      grandfathered or not; an ambiguous citation is the failure).
 //   2. Provenance — a record's number equals its originating issue number, so
@@ -689,6 +689,9 @@ function checkDecisionSeries(docs, spec, findings) {
   }
 
   const homeRepo = spec.homeRepo ?? null;
+  // Former names of the home repo (a rename keeps the same issue counter, and
+  // supersede-don't-rewrite keeps the old name in existing records).
+  const homeRepos = new Set([homeRepo, ...(spec.homeRepoAliases ?? [])].filter(Boolean));
   const searchLines = spec.searchLines ?? 30;
   for (const { rel, prefix, number, doc } of matched) {
     if (spec.grandfathered && matchesAny(rel, spec.grandfathered)) continue;
@@ -708,7 +711,7 @@ function checkDecisionSeries(docs, spec, findings) {
     const ref = value.match(/^([\w.-]+\/[\w.-]+)#(\d+)$/);
     if (!ref) continue;
     const [, repo, issueNum] = ref;
-    if (homeRepo && repo !== homeRepo) {
+    if (homeRepo && !homeRepos.has(repo)) {
       findings.push({
         rule: 'decision-number',
         file: rel,
