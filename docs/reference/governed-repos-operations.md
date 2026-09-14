@@ -152,8 +152,9 @@ interfaces, not identity boundaries.
 
 Fleet snapshots: [hook composition audits](hook-composition-audits.md).
 
-After the source change is reviewed and merged, approve the generated pull
-requests from a normal human checkout:
+After the source change is reviewed and merged, open the synchronization pull
+requests with the manual apply (there is no scheduled run any more), then
+approve them from a normal human checkout:
 
 ```bash
 npm run codex:approve                         # dry-run and validate every PR
