@@ -32,12 +32,17 @@ concurrency:
   group: ci-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.event_name == 'merge_group' && format('merge-group-{0}', github.event.merge_group.head_ref) || github.sha }}
   cancel-in-progress: ${{ github.event_name != 'push' }}
 
-# Runner placement (ENG-0269 amendment, 2026-09-14): this repository's own
-# jobs run on the owner's self-hosted Mac (labels self-hosted/macOS/ARM64).
-# The one Windows job stays on a hosted runner because the shim it verifies
-# only exists on Windows. Reusable workflows called below are told the same
-# labels through their `runs-on` input; their default stays `ubuntu-latest`
-# so external consumers are unaffected.
+# Runner placement (ENG-0269 amendment, 2026-09-14): every job in this
+# repository runs on the owner's self-hosted runners — hosted minutes are
+# metered on a private repository, so no job may fall back to a GitHub-hosted
+# label. The Mac carries the general jobs (labels self-hosted/macOS/ARM64). The
+# Windows shim job needs a self-hosted Windows runner; until one is registered
+# and the repository variable CI_WINDOWS_RUNNER is set to `true`, that job is
+# skipped and the gate accepts the skip. The CodeQL lane never runs while the
+# repository is private, so its hosted default costs nothing. Reusable
+# workflows called below are told the Mac labels through their `runs-on`
+# input; their default stays `ubuntu-latest` so external consumers are
+# unaffected.
 jobs:
   policy:
     name: Action Policy
@@ -174,8 +179,10 @@ jobs:
   bounded-command-windows:
     name: Bounded command / Windows npm
     needs: policy
-    if: needs.policy.outputs.run_full == 'true' || needs.policy.outputs.run_post_merge == 'true'
-    runs-on: windows-latest
+    if: >-
+      vars.CI_WINDOWS_RUNNER == 'true' &&
+      (needs.policy.outputs.run_full == 'true' || needs.policy.outputs.run_post_merge == 'true')
+    runs-on: [self-hosted, Windows]
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -271,9 +278,16 @@ jobs:
           MERGE_VALIDATED: ${{ needs.merge-evidence.outputs.validated }}
           POST_MERGE: ${{ needs.post-merge.result }}
           PRIVATE: ${{ github.event.repository.private }}
+          WINDOWS_RUNNER: ${{ vars.CI_WINDOWS_RUNNER }}
         run: |
           test "$POLICY" = success
-          test "$BOUNDED_WINDOWS" = success
+          # The Windows shim job runs only on a registered self-hosted Windows
+          # runner; without one it must have been skipped, never failed.
+          if [ "$WINDOWS_RUNNER" = true ]; then
+            test "$BOUNDED_WINDOWS" = success
+          else
+            test "$BOUNDED_WINDOWS" = skipped
+          fi
           # A private repository has no code scanning (#355): the CodeQL lane
           # must have been skipped, never failed, and then counts as satisfied.
           if [ "$PRIVATE" = true ]; then

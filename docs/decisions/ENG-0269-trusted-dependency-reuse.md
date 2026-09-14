@@ -99,3 +99,16 @@ owner's registered agent Apps — identities that already execute on this
 machine, so a pull request they open runs nothing on the runner they cannot
 run locally. The ephemeral self-hosted image above remains the upgrade path
 if that boundary changes.
+
+## Amendment — 2026-09-14: no hosted fallback for this repository
+
+The amendment above left the Windows shim job on a hosted runner. That is
+withdrawn the same day ([#355](https://github.com/qwts/dev-steward/issues/355)):
+hosted minutes are metered on a private repository, so every job in this
+repository runs on the owner's runners and none falls back to a hosted label.
+The Mac carries the general jobs. The Windows shim job needs a self-hosted
+Windows runner and is skipped, with the gate accepting the skip and refusing
+any other result, until one is registered and the repository variable
+`CI_WINDOWS_RUNNER` is set to `true`. The CodeQL lane never runs while the
+repository is private, so its hosted default is inert. The fleet default and
+the accepted-risk paragraph above are unchanged.
