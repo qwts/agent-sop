@@ -80,10 +80,12 @@ been accepted and public-repository isolation was unresolved. Both premises
 changed for this repository on 2026-09-14
 ([#355](https://github.com/qwts/dev-steward/issues/355)): it is private, so
 no fork can reach the runner, and the owner registered a self-hosted macOS
-ARM64 runner on a managed machine. This repository's own jobs — CI, the
-harness sync, and the fleet inventory catalog — now run there. The one
-Windows job stays hosted because the npm shim it verifies exists only on
-Windows.
+ARM64 runner on a managed machine. Hosted minutes are metered on a private
+repository, so every job in this repository runs on the owner's runners and
+none falls back to a hosted label. The Mac carries the general jobs; the one
+Windows shim job needs a self-hosted Windows runner and is skipped, with the
+gate accepting the skip, until one is registered and `CI_WINDOWS_RUNNER` is
+set. The CodeQL lane never runs while the repository is private.
 
 The reusable workflows keep `ubuntu-latest` as their default and gain a
 `runs-on` input, so a consumer's placement is unchanged unless it opts in.
