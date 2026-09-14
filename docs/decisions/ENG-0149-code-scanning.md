@@ -98,3 +98,17 @@ a file exists, not whether scanning happens.
 - The same `analysis_key` discriminator is the basis for the fleet dashboard's
   setup detection (qwts/playbook-dashboard#55), so governance and the dashboard
   agree by construction rather than by coincidence.
+
+## Amendment — 2026-09-14: private repositories are out of scope
+
+Code scanning on a private repository requires GitHub Advanced Security, which
+a personal account cannot enable; private vulnerability reporting is
+public-only by definition. With this repository private
+([#355](https://github.com/qwts/playbook-engineering/issues/355)), and
+`managed-machine` and `managed-machine-config` private already, the drift
+detector records both checks as *not applicable* for a repository whose live
+metadata says `private: true`, rather than failing a gate for a feature the
+repo cannot turn on. Governed CI's `codeql` job is skipped on the same
+condition and the `CI` gate accepts that skip only while the repository is
+private. Every other check in the decision is unchanged, and a repository that
+returns to public is measured again in full on the next run.

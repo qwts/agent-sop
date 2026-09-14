@@ -178,8 +178,12 @@ jobs:
 
   codeql:
     needs: [policy, merge-evidence, preflight-evidence]
+    # Code scanning needs GitHub Advanced Security, which a private repository
+    # on a personal account cannot enable (#355). The lane is skipped there and
+    # the gate below accepts the skip only while the repository is private.
     if: >-
       always() && needs.policy.result == 'success' &&
+      github.event.repository.private == false &&
       (needs.policy.outputs.run_post_merge == 'true' ||
       (needs.policy.outputs.run_full == 'true' && needs.preflight-evidence.outputs.validated != 'true'))
     permissions:
@@ -249,9 +253,16 @@ jobs:
           PREFLIGHT_VALIDATED: ${{ needs.preflight-evidence.outputs.validated }}
           MERGE_VALIDATED: ${{ needs.merge-evidence.outputs.validated }}
           POST_MERGE: ${{ needs.post-merge.result }}
+          PRIVATE: ${{ github.event.repository.private }}
         run: |
           test "$POLICY" = success
           test "$BOUNDED_WINDOWS" = success
+          # A private repository has no code scanning (#355): the CodeQL lane
+          # must have been skipped, never failed, and then counts as satisfied.
+          if [ "$PRIVATE" = true ]; then
+            test "$CODEQL" = skipped
+            CODEQL=success
+          fi
           case "$MODE" in
             full)
               if [ "$PREFLIGHT_VALIDATED" = true ]; then

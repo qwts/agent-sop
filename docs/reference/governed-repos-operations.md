@@ -32,8 +32,8 @@ npm run repos:bootstrap -- --code-dir /path/to/Code
 
 ## Drift detection
 
-The manifest is checked against **live GitHub**, not just against this repo's
-docs, by `tools/repos/drift.mjs` (read-only; issue #38 phase 1):
+The manifest is checked against **live GitHub** by `tools/repos/drift.mjs`
+(read-only, #38):
 
 ```bash
 node tools/repos/drift.mjs
@@ -45,10 +45,11 @@ requiring at least one approving review, private vulnerability reporting,
 CodeQL run by the repo's own workflow
 ([ENG-0149](../decisions/ENG-0149-code-scanning.md)), and the installation of every active agent App in
 [`governance/agents.json`](../../governance/agents.json)
-([ENG-0079](../decisions/ENG-0079-per-agent-identity.md)). Repos with
+([ENG-0079](../decisions/ENG-0079-per-agent-identity.md)); private repos
+skip the two public-only checks (#355). Repos with
 `status: active` are expected to conform — their drift sets a non-zero exit
 code so CI can gate on it; `status: onboarding` repos report drift without
-failing, so migrating an old repo is a declared state, not a surprise.
+failing: migration is a declared state.
 The marked shared agent-context discovery block is also checked against the
 canonical baseline: a missing or stale block is active drift, while the same
 gap appears as a tracked onboarding migration state.

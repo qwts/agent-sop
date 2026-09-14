@@ -37,7 +37,10 @@ duplicate of the default.
 
 Private vulnerability reporting **enabled** (SECURITY.md depends on it);
 secret scanning + push protection and Dependabot security updates **on**
-(the ENG-0005 baseline); CodeQL **on** once the repo has code. Configure the
+(the ENG-0005 baseline); CodeQL **on** once the repo has code. Private
+repositories skip vulnerability reporting and CodeQL: a personal account
+cannot enable either there, and governed CI skips the CodeQL lane while the
+repository is private ([#355](https://github.com/qwts/playbook-engineering/issues/355)). Configure the
 repository Actions Policy and CI/branch-protection settings from the shared
 [CI execution policy](../reference/ci-execution-policy.md). Use CodeQL advanced
 setup so the same coverage runs through governed CI; default setup's internal
@@ -50,6 +53,8 @@ the repository's enabled merge methods.
 
 ## Changelog
 
+- 2026-09-14 — private repositories skip vulnerability reporting and CodeQL;
+  governed CI skips the CodeQL lane while private (#355).
 - 2026-08-27 — retract the machine memory guard from the synced baseline
   (#331): ENG-0138 is still Proposed, and only accepted decisions ship. The
   guard files move to the retired inventory so the sync deletes consumer
