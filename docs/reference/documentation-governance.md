@@ -41,7 +41,7 @@ In this repository, `npm run docs:gov` does the same. Use `--root <dir>` to chec
 ```yaml
 jobs:
   docs-gov:
-    uses: qwts/dev-steward/.github/workflows/docs-governance.yml@v1
+    uses: qwts/agent-sop/.github/workflows/docs-governance.yml@v1
 ```
 
 The reusable workflow checks out the caller's repo, fetches this repo's tooling, runs the gate against the caller's `docs-gov.config.json`, and uploads the JSON report as an artifact so token totals and finding counts are comparable across runs. The `v1` tag only moves after this repo's own CI has exercised the workflow (the ENG-0004 safety condition).

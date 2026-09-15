@@ -91,9 +91,9 @@ GitHub to create an unavailable queue is not a valid reconciliation plan.
 ## Harness synchronization (workflow retired)
 
 The scheduled *Governed harness sync* workflow was retired on 2026-09-14
-([#355](https://github.com/qwts/dev-steward/issues/355)): shared agent
+([#355](https://github.com/qwts/agent-sop/issues/355)): shared agent
 tooling is moving to the machine — `~/.agents/skills` and the user-level
-harness configuration installed by `dev-steward` — instead of being pushed
+harness configuration installed by `agent-sop` — instead of being pushed
 into every repository's `.codex/` and `.claude/settings.json`. Until that
 lands, the comparison stays available locally, read-only:
 

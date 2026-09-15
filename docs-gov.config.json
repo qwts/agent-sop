@@ -7,9 +7,7 @@
     "usage.md",
     "AGENTS.md"
   ],
-  "indexes": [
-    "README.md"
-  ],
+  "indexes": ["README.md"],
   "tokenBudgets": {
     "perDoc": 2600,
     "bankSlack": 0.25,
@@ -36,8 +34,8 @@
       },
       {
         "path": "docs/decisions/ENG-0004-centralize-shared-cicd.md",
-        "budget": 3250,
-        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 on 2026-09-14 for the dev-steward rename amendment (#355), which is the second rename this record must carry"
+        "budget": 3400,
+        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 and then → 3400 on 2026-09-14 for the dev-steward and agent-sop rename amendments (#355), the second and third renames this record must carry"
       },
       {
         "path": "docs/reference/ci-execution-policy.md",
@@ -110,17 +108,14 @@
     "links": true,
     "orphans": true,
     "stalePaths": {
-      "roots": [
-        "docs",
-        "tools"
-      ]
+      "roots": ["docs", "tools"]
     }
   },
   "decisionSeries": {
     "glob": "docs/decisions/ENG-*.md",
     "issueField": "Issue",
-    "homeRepo": "qwts/dev-steward",
-    "homeRepoAliases": ["qwts/playbook-engineering"],
+    "homeRepo": "qwts/agent-sop",
+    "homeRepoAliases": ["qwts/playbook-engineering", "qwts/dev-steward"],
     "grandfathered": [
       "docs/decisions/ENG-000?-*.md",
       "docs/decisions/ENG-001?-*.md"

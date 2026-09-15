@@ -2,7 +2,7 @@
   "account": "qwts",
   "repos": [
     {
-      "name": "dev-steward",
+      "name": "agent-sop",
       "visibility": "private",
       "publish": false,
       "status": "active",
@@ -12,7 +12,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "This repository — source of the governance it describes. Private since 2026-09-14 and renamed from playbook-engineering the same day (#355); historical ENG records and SOP changelogs keep the old name (supersede-don't-rewrite)."
+      "note": "This repository \u2014 source of the governance it describes. Private since 2026-09-14; renamed the same day from playbook-engineering to dev-steward and then to agent-sop, matching the project domain agentsop.ai (#355). Historical ENG records and SOP changelogs keep the earlier names (supersede-don't-rewrite)."
     },
     {
       "name": "overlook",
@@ -37,12 +37,8 @@
             "scripts/guard-session-context.mjs",
             "scripts/guard-agent-command.mjs"
           ],
-          ".codex/hooks.json": [
-            "scripts/guard-agent-command.mjs"
-          ],
-          ".cursor/hooks.json": [
-            "scripts/guard-agent-command.mjs"
-          ]
+          ".codex/hooks.json": ["scripts/guard-agent-command.mjs"],
+          ".cursor/hooks.json": ["scripts/guard-agent-command.mjs"]
         }
       },
       "delta": "Coverage floor 71% lines / 80% branches; acceptance coverage-map update for UI/content changes.",
@@ -64,7 +60,7 @@
       "status": "active",
       "sharedCi": false,
       "delta": "",
-      "note": "Pure consumer — inherits every baseline, proving the inheritance model."
+      "note": "Pure consumer \u2014 inherits every baseline, proving the inheritance model."
     },
     {
       "name": "quorum",
@@ -88,21 +84,13 @@
           "tools/models/registry.mjs"
         ],
         "preserveJsonArrayEntries": {
-          ".claude/settings.json": [
-            "agent-bot agent-hook"
-          ],
-          ".codex/hooks.json": [
-            "agent-bot agent-hook"
-          ],
-          ".cursor/hooks.json": [
-            "agent-bot agent-hook"
-          ],
-          ".windsurf/hooks.json": [
-            "agent-bot agent-hook"
-          ]
+          ".claude/settings.json": ["agent-bot agent-hook"],
+          ".codex/hooks.json": ["agent-bot agent-hook"],
+          ".cursor/hooks.json": ["agent-bot agent-hook"],
+          ".windsurf/hooks.json": ["agent-bot agent-hook"]
         }
       },
-      "delta": "Canonical ENG-0151 home of the model registry pair, so the retired registry paths are excluded from sync retraction — deleting them here would delete the originals.",
+      "delta": "Canonical ENG-0151 home of the model registry pair, so the retired registry paths are excluded from sync retraction \u2014 deleting them here would delete the originals.",
       "note": "Standalone source of truth for agent identity runtime code and operational mechanics (ENG-0128)."
     },
     {
@@ -188,7 +176,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "Machine setup and orchestration layer: self-tapped Homebrew formula, app catalog installs, and account provisioning. Recorded 2026-09-11 per #336. codexSync disabled — manifest records governed state only; harness-file distribution stays off until adopted."
+      "note": "Machine setup and orchestration layer: self-tapped Homebrew formula, app catalog installs, and account provisioning. Recorded 2026-09-11 per #336. codexSync disabled \u2014 manifest records governed state only; harness-file distribution stays off until adopted."
     },
     {
       "name": "managed-machine-config",
@@ -201,7 +189,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "Centralized portable dotfiles, app catalog, config scripts, and versioned fleet state consumed by managed-machine; private because it holds fleet records. Recorded 2026-09-11 per #336. codexSync disabled — records governed state only."
+      "note": "Centralized portable dotfiles, app catalog, config scripts, and versioned fleet state consumed by managed-machine; private because it holds fleet records. Recorded 2026-09-11 per #336. codexSync disabled \u2014 records governed state only."
     }
   ]
 }

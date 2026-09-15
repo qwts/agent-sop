@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// docs-gov — deterministic documentation governance (qwts/dev-steward#2).
+// docs-gov — deterministic documentation governance (qwts/agent-sop#2).
 //
 // Gates docs the way code is gated, on the premise that the primary reader is
 // an agent: the metric is task success per token of context, so the checks

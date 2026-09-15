@@ -1,4 +1,4 @@
-// The Phase 1 deterministic checks (qwts/dev-steward#2).
+// The Phase 1 deterministic checks (qwts/agent-sop#2).
 //
 // Every rule exists because it prevents a specific, nameable agent failure —
 // the `prevents` field below is normative, not decoration. A rule that cannot
@@ -640,7 +640,7 @@ function checkTerminology(docs, terms, findings) {
 }
 
 // Two invariants on a decision series whose numbers are allocated from the
-// GitHub issue counter (qwts/dev-steward#35):
+// GitHub issue counter (qwts/agent-sop#35):
 //   1. Uniqueness — no two records share a number (holds for every record,
 //      grandfathered or not; an ambiguous citation is the failure).
 //   2. Provenance — a record's number equals its originating issue number, so

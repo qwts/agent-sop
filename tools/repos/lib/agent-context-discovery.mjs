@@ -61,15 +61,18 @@ function replaceLegacySection(source, block) {
 }
 
 export const LEGACY_PLAYBOOK_LINK_PREFIXES = [
-  ['https://github.com/qwts/playbook-engineering/blob/master/', 'https://github.com/qwts/dev-steward/blob/main/'],
-  ['https://github.com/qwts/playbook-engineering/blob/main/', 'https://github.com/qwts/dev-steward/blob/main/'],
-  ['https://github.com/qwts/dev-steward/blob/master/', 'https://github.com/qwts/dev-steward/blob/main/'],
+  ['https://github.com/qwts/playbook-engineering/blob/master/', 'https://github.com/qwts/agent-sop/blob/main/'],
+  ['https://github.com/qwts/playbook-engineering/blob/main/', 'https://github.com/qwts/agent-sop/blob/main/'],
+  ['https://github.com/qwts/dev-steward/blob/master/', 'https://github.com/qwts/agent-sop/blob/main/'],
+  ['https://github.com/qwts/dev-steward/blob/main/', 'https://github.com/qwts/agent-sop/blob/main/'],
+  ['https://github.com/qwts/agent-sop/blob/master/', 'https://github.com/qwts/agent-sop/blob/main/'],
 ];
 
 export function projectDiscoveryBlock(source, canonicalBlock) {
   // A repository whose context is being reconciled is already being touched;
   // retain the playbook link target but retire its old branch name and its
-  // former repository name (playbook-engineering → dev-steward, #355; GitHub
+  // former repository names (playbook-engineering → dev-steward → agent-sop,
+  // #355; GitHub
   // redirects web links but Actions `uses:` and byte-compared blocks do not
   // follow redirects). Never rewrite a repository-owned link: another project
   // may still use master.

@@ -48,7 +48,7 @@ JSON catalog and a Markdown rendering sorted by fleet reach.
 ```yaml
 jobs:
   dependency-inventory:
-    uses: qwts/dev-steward/.github/workflows/dependency-inventory.yml@v1
+    uses: qwts/agent-sop/.github/workflows/dependency-inventory.yml@v1
 ```
 
 The reusable workflow checks out the caller, runs Syft, fetches this repo's

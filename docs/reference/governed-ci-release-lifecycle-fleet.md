@@ -7,7 +7,7 @@ repository has to do once that policy merges. The policy itself is in the
 page does not restate it.
 
 Captured on 2026-08-02 for
-[#134](https://github.com/qwts/dev-steward/issues/134). Refresh live
+[#134](https://github.com/qwts/agent-sop/issues/134). Refresh live
 state before executing a handoff — a green workflow is not evidence of
 compliance.
 
@@ -25,7 +25,7 @@ generated-projection identity of each. Coverage is a contract test.
 | `image-trail` | Changesets plus version policy | Repair required. |
 | `cartograph` | Changesets plus synchronized npm, Cargo, and Tauri versions | Repair required. |
 | `bookmarkit` | Changesets plus Chrome version synchronization | Repair required, plus credential cleanup. |
-| `dev-steward` | None | Not applicable. |
+| `agent-sop` | None | Not applicable. |
 | `quorum` | None | Not applicable. |
 | `agent-bot-identity` | None | Not applicable. |
 | `codex-rules-editor` | None | Not applicable. |
@@ -81,7 +81,7 @@ Repository-specific notes:
 
 ## Repositories without a release metadata system
 
-`dev-steward`, `quorum`, `agent-bot-identity`, `codex-rules-editor`,
+`agent-sop`, `quorum`, `agent-bot-identity`, `codex-rules-editor`,
 `playbook-dashboard`, `agentic-code-analysis`, `localnotes`,
 `universal-agentic-workflow`, `diagram-dreamer`, `jwt-decoder`, `moonsweeper`,
 `managed-machine`, and `managed-machine-config` carry `metadataSystem: "none"` and no generated
