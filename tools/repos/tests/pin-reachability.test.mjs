@@ -9,7 +9,7 @@ describe('first-party pin extraction', () => {
       'jobs:',
       '  a:',
       '    steps:',
-      '      - uses: qwts/dev-steward/.github/actions/ci-policy@4e70c773155c2c804e52a487352627010bea1897',
+      '      - uses: qwts/agent-sop/.github/actions/ci-policy@4e70c773155c2c804e52a487352627010bea1897',
       '      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683',
       '      - uses: qwts/other-repo/action@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa # comment',
       "      - uses: 'qwts/quoted/act@bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'",
@@ -18,7 +18,7 @@ describe('first-party pin extraction', () => {
     const pins = extractFirstPartyPins(workflow, { owner: 'qwts' });
     assert.deepEqual(
       pins.map((p) => `${p.repo}/${p.path}@${p.sha.slice(0, 8)}`),
-      ['dev-steward/.github/actions/ci-policy@4e70c773', 'other-repo/action@aaaaaaaa', 'quoted/act@bbbbbbbb'],
+      ['agent-sop/.github/actions/ci-policy@4e70c773', 'other-repo/action@aaaaaaaa', 'quoted/act@bbbbbbbb'],
     );
     // actions/checkout is third-party (owner 'actions'), the @v1 tag is not a SHA pin.
     assert.ok(!pins.some((p) => p.repo === 'checkout'));

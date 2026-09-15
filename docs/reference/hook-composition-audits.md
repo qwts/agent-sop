@@ -7,12 +7,12 @@ remains the machine-readable source of ownership declarations.
 
 ## 2026-08-18 — Image Trail process guard
 
-[Issue #233](https://github.com/qwts/dev-steward/issues/233)
+[Issue #233](https://github.com/qwts/agent-sop/issues/233)
 audited `.claude/settings.json`, `.codex/hooks.json`, and
 `.cursor/hooks.json` on the default branch of every active manifest repository:
 33 adapter files across 11 repositories. The audited heads were:
 
-- `dev-steward@68b920af61725d3107e9a7d4c151f7c06616bda4`
+- `agent-sop@68b920af61725d3107e9a7d4c151f7c06616bda4`
   and `overlook@c8e7e012a3ff9d86b29bc189436cb415a2785e11`;
 - `image-trail@5246642f372ee4153d1b709601807e1a2975338f`
   and `cartograph@2d27e5d7a38989ae9f9f818aafe2b5d2f5a282b9`;

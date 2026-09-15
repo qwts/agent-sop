@@ -20,7 +20,7 @@ No lane is unlimited merely because its runtime varies.
 
 The job limit is the final backstop, not the diagnostic boundary. External
 dependency and tool setup uses the shared `bounded-command` action from
-`dev-steward`, pinned by immutable commit SHA in consumers. It:
+`agent-sop`, pinned by immutable commit SHA in consumers. It:
 
 - launches an explicit executable and JSON arguments without a shell;
 - maps Windows `npm`/`npm.cmd` launchers to the active Node distribution's
@@ -37,7 +37,7 @@ the action does not print arguments or the environment.
 
 ```yaml
 - name: Install locked dependencies
-  uses: qwts/dev-steward/.github/actions/bounded-command@<reviewed-sha>
+  uses: qwts/agent-sop/.github/actions/bounded-command@<reviewed-sha>
   with:
     task: Install locked dependencies
     executable: npm

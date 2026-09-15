@@ -13,7 +13,7 @@ Machine bootstrap needs this repository's secret-free profile, not a local
 Playbook checkout and not a roster inferred from the current harness. Fetch
 the published projection of [`governance/agents.json`](../../governance/agents.json)
 through an authenticated `gh` — this repository is private
-([#355](https://github.com/qwts/dev-steward/issues/355)), so the
+([#355](https://github.com/qwts/agent-sop/issues/355)), so the
 anonymous `raw.githubusercontent.com` URL no longer resolves. `gh auth login`
 precedes this step on every durable host (`managed-machine` installs and
 authenticates `gh` before `setup-agent-bot`), so the credential is already
@@ -21,7 +21,7 @@ there:
 
 ```bash
 gh api -H "Accept: application/vnd.github.raw" \
-  repos/qwts/dev-steward/contents/governance/organization-profile.json
+  repos/qwts/agent-sop/contents/governance/organization-profile.json
 ```
 
 [ENG-0128](../decisions/ENG-0128-agent-bot-runtime-ownership.md) names two
@@ -41,7 +41,7 @@ owner's account, so it is human territory):
 
 ```bash
 gh api -H "Accept: application/vnd.github.raw" \
-  repos/qwts/dev-steward/contents/governance/organization-profile.json \
+  repos/qwts/agent-sop/contents/governance/organization-profile.json \
   | ./agent-bot bootstrap --profile - --with-gh-shim --machine-only
 ```
 

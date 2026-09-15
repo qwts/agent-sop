@@ -232,6 +232,15 @@ canonical consumption path is now
 2026-07-22, GitHub's redirect does not cover Actions, so a `uses:` naming the
 old repository fails. Existing records keep the old name.
 
+## Amendment — 2026-09-14: renamed to `qwts/agent-sop`
+
+Renamed a third time, the same day, to match the project's own name and
+domain (agentsop.ai) rather than a role word
+([#355](https://github.com/qwts/dev-steward/issues/355)); the canonical
+consumption path is now
+`uses: qwts/agent-sop/.github/actions/<name>@<reviewed-sha>`. The redirect
+rule above applies unchanged. Existing records keep their names.
+
 ## References
 
 - [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) established this repo as the cross-repo home for shared engineering assets; this extends that from documents to CI/CD.

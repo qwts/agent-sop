@@ -4,7 +4,7 @@
 #
 #   jobs:
 #     docs-gov:
-#       uses: qwts/dev-steward/.github/workflows/docs-governance.yml@v1
+#       uses: qwts/agent-sop/.github/workflows/docs-governance.yml@v1
 #
 # The caller repo provides its own docs-gov.config.json; the check
 # implementation is fetched from this repo, so a governance fix propagates to
@@ -20,7 +20,7 @@ on:
         type: string
         default: docs-gov.config.json
       tooling-ref:
-        description: Ref of qwts/dev-steward to take the checks from
+        description: Ref of qwts/agent-sop to take the checks from
         type: string
         default: v1
       runs-on:
@@ -46,7 +46,7 @@ jobs:
         if: ${{ !inputs.use-local-tooling }}
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: qwts/dev-steward
+          repository: qwts/agent-sop
           ref: ${{ inputs.tooling-ref }}
           path: .docs-gov/tooling
           persist-credentials: false

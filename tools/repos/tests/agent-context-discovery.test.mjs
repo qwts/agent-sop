@@ -54,10 +54,10 @@ test('a stale canonical link is not conformant', () => {
 });
 
 test('projection retires stale playbook master links without changing local links', () => {
-  const source = '# Context\n\nSee https://github.com/qwts/dev-steward/blob/master/docs/decisions/ENG-0006-agentic-primitives-governance.md and https://github.com/qwts/legacy/blob/master/README.md.\n';
+  const source = '# Context\n\nSee https://github.com/qwts/agent-sop/blob/master/docs/decisions/ENG-0006-agentic-primitives-governance.md and https://github.com/qwts/legacy/blob/master/README.md.\n';
   const projected = projectDiscoveryBlock(source, canonical);
-  assert.doesNotMatch(projected, /dev-steward\/blob\/master\//);
-  assert.match(projected, /dev-steward\/blob\/main\//);
+  assert.doesNotMatch(projected, /agent-sop\/blob\/master\//);
+  assert.match(projected, /agent-sop\/blob\/main\//);
   assert.match(projected, /qwts\/legacy\/blob\/master\//);
 });
 
@@ -108,15 +108,18 @@ test('projection rewrites links to the former repository name and branch (#355)'
     '',
     'See https://github.com/qwts/playbook-engineering/blob/master/docs/sop/README.md',
     'and https://github.com/qwts/playbook-engineering/blob/main/docs/decisions/README.md',
-    'and https://github.com/qwts/dev-steward/blob/master/README.md.',
+    'and https://github.com/qwts/agent-sop/blob/master/README.md.',
     'Repo-owned: https://github.com/qwts/overlook/blob/master/README.md',
     '',
     block,
   ].join('\n');
   const projected = projectDiscoveryBlock(source, block);
   assert.doesNotMatch(projected, /playbook-engineering/);
-  assert.doesNotMatch(projected, /dev-steward\/blob\/master/);
-  assert.match(projected, /qwts\/dev-steward\/blob\/main\/docs\/sop\/README\.md/);
+  assert.doesNotMatch(projected, /agent-sop\/blob\/master/);
+  assert.match(projected, /qwts\/agent-sop\/blob\/main\/docs\/sop\/README\.md/);
+  const interim = projectDiscoveryBlock('See https://github.com/qwts/dev-steward/blob/main/docs/sop/README.md.', block);
+  assert.doesNotMatch(interim, /dev-steward/);
+  assert.match(interim, /qwts\/agent-sop\/blob\/main\/docs\/sop\/README\.md/);
   assert.match(projected, /qwts\/overlook\/blob\/master\/README\.md/, 'a repo-owned link is never rewritten');
   assert.ok(LEGACY_PLAYBOOK_LINK_PREFIXES.every(([from, to]) => from !== to && to.endsWith('/blob/main/')));
 });

@@ -4,7 +4,7 @@
 #
 #   jobs:
 #     dependency-inventory:
-#       uses: qwts/dev-steward/.github/workflows/dependency-inventory.yml@v1
+#       uses: qwts/agent-sop/.github/workflows/dependency-inventory.yml@v1
 #
 # The caller repo provides its own dependency-inventory.config.json; Syft
 # produces a CycloneDX SBOM (license detection lives there, not in our code),
@@ -22,7 +22,7 @@ on:
         type: string
         default: dependency-inventory.config.json
       tooling-ref:
-        description: Ref of qwts/dev-steward to take the normalizer from
+        description: Ref of qwts/agent-sop to take the normalizer from
         type: string
         default: v1
       runs-on:
@@ -68,7 +68,7 @@ jobs:
         if: ${{ !inputs.use-local-tooling }}
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: qwts/dev-steward
+          repository: qwts/agent-sop
           ref: ${{ inputs.tooling-ref }}
           path: .dep-inventory/tooling
           persist-credentials: false

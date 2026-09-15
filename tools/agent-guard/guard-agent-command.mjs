@@ -38,7 +38,7 @@ import { fileURLToPath } from 'node:url';
 
 import { HEAVY_LANES } from './lib/policy.mjs';
 
-const GUARD_GUIDE = 'https://github.com/qwts/dev-steward/blob/main/docs/reference/agent-memory-guard.md';
+const GUARD_GUIDE = 'https://github.com/qwts/agent-sop/blob/main/docs/reference/agent-memory-guard.md';
 
 // Two different blocks need two different next steps, and a refusal whose
 // advice does not fit is one an agent argues with instead of following.

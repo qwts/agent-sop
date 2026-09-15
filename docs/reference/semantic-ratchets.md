@@ -85,7 +85,7 @@ Face model/provider route, and maps its repository secret:
 ```yaml
 jobs:
   semantic-ratchet:
-    uses: qwts/dev-steward/.github/workflows/semantic-ratchet.yml@v1
+    uses: qwts/agent-sop/.github/workflows/semantic-ratchet.yml@v1
     with:
       model: '<exact-hf-model-and-provider-route>'
     secrets:

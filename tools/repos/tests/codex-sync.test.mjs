@@ -1118,8 +1118,8 @@ test('pull body records source provenance and every managed path', () => {
     sourceSha: 'a'.repeat(40),
     paths: GOVERNED_HARNESS_FILES,
   });
-  assert.match(body, /dev-steward\/commit\/a{40}/);
-  assert.match(body, /dev-steward#60/);
+  assert.match(body, /agent-sop\/commit\/a{40}/);
+  assert.match(body, /agent-sop#60/);
   for (const path of GOVERNED_HARNESS_FILES) assert.match(body, new RegExp(path.replaceAll('.', '\\.')));
   assert.doesNotMatch(body, /Retired files removed/u, 'no retraction section without removals');
 
@@ -1138,7 +1138,7 @@ function approvalFixture(overrides = {}) {
   const pull = {
     number: 7,
     title: CODEX_SYNC_TITLE,
-    body: `Source: https://github.com/qwts/dev-steward/commit/${'a'.repeat(40)}`,
+    body: `Source: https://github.com/qwts/agent-sop/commit/${'a'.repeat(40)}`,
     html_url: 'https://github.com/qwts/target/pull/7',
     draft: false,
     auto_merge: null,
