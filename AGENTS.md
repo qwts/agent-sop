@@ -4,7 +4,7 @@ Canonical, vendor-neutral agent context for this repository, per [ENG-0006](docs
 
 ## What this repository is
 
-The org's cross-repo home for engineering decisions (ENG records), shared SOPs, shared CI/CD, and the docs-governance tooling every `qwts` repo consumes. Full map: [README.md](README.md).
+The public Agent SOP framework. The legacy `qwts` operating environment remains here during its migration to [qwts-agent-sop](https://github.com/qwts/qwts-agent-sop). The contributor conventions below govern work on this repository; they do not enroll framework users in `qwts` governance. Full map: [README.md](README.md).
 
 <!-- governed:shared-agent-discovery:start -->
 

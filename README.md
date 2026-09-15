@@ -1,8 +1,29 @@
-# agent-sop
+# Agent SOP
 
-The steward of the `qwts` engineering fleet: the governance manifest and its drift and reconcile tooling, shared CI, the docs-governance gate, the agent-harness seeds and skills catalog, the ENG decision series, shared SOPs, and the SDLC guides. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/agent-sop/issues/355)); historical records keep the old name.
+Agent SOP is a public, configurable framework for agentic development and other
+tasks. It publishes shared scaffolding; users own their organization
+configuration and select the procedures, skills, repositories, and tools used
+for their work. Website: [agentsop.ai](https://agentsop.ai).
 
-It is also the home for **cross-repo engineering decisions** — see the [decision index](docs/decisions/README.md) — and for the org-wide agent conventions every repo's [AGENTS.md](AGENTS.md) points to; see [AGENTS.md](AGENTS.md) for this repo's own agent context.
+## Framework and organization ownership
+
+- [Framework architecture](docs/reference/agent-sop-framework.md) records the
+  agreed routing model and the configuration choices that remain open.
+- [agent-org](https://github.com/qwts/agent-org) is the organization template;
+  [qwts-agent-org](https://github.com/qwts/qwts-agent-org) is the maintainer's
+  organization instance.
+- [qwts-agent-sop](https://github.com/qwts/qwts-agent-sop) holds the maintainer's
+  existing procedures, engineering decisions, fleet governance, and tooling.
+
+The organization repository was initialized with this repository's unchanged
+`main` history and `v1` tag. Historical issues, PRs, and discussions stay here.
+Existing operational files remain available during the reviewed consumer
+cutover; they are the legacy `qwts` environment, not automatic defaults for
+Agent SOP users. The setup form and static routers are not implemented yet.
+
+[Migration tracking](https://github.com/qwts/qwts-agent-sop/issues/1) covers
+ownership references, consumers, and CI provisioning. The sections below index
+retained material for compatibility and future reuse.
 
 ## Engineering decisions (ENG series)
 

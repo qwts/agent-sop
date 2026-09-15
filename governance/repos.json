@@ -3,8 +3,8 @@
   "repos": [
     {
       "name": "agent-sop",
-      "visibility": "private",
-      "publish": false,
+      "visibility": "public",
+      "publish": true,
       "status": "active",
       "sharedCi": true,
       "codexSync": {
@@ -12,7 +12,7 @@
         "exclude": []
       },
       "delta": "",
-      "note": "This repository \u2014 source of the governance it describes. Private since 2026-09-14; renamed the same day from playbook-engineering to dev-steward and then to agent-sop, matching the project domain agentsop.ai (#355). Historical ENG records and SOP changelogs keep the earlier names (supersede-don't-rewrite)."
+      "note": "Public Agent SOP framework. The qwts operating environment was imported into qwts-agent-sop with unchanged main history and v1; source paths remain during the reviewed cutover (qwts/qwts-agent-sop#1)."
     },
     {
       "name": "overlook",
