@@ -1,8 +1,17 @@
 # ENG-0353: Delegate writes in the owner account require an explicit marker
 
-**Status:** Proposed
+**Status:** Superseded by ENG-0375
 **Date:** 2026-09-11
 **Issue:** qwts/playbook-engineering#353
+
+> **Superseded 2026-09-15 by
+> [ENG-0375](ENG-0375-owner-account-agent-context-is-the-delegate.md).** Agent
+> context in the owner's account is the delegate with no marker and no
+> undelegable operation set. Decisions 2 and 3 (the marker and the shim/guard
+> check with a fixed undelegable set) and decision 6 (the review bar is
+> undelegable) are struck; decisions 1 and 4 survive as ENG-0339 and ENG-0375
+> restate them; decision 5 is moot. The owner-approval mint gate of
+> agent-bot-identity#204 stands. The marker was never implemented.
 
 ## Context
 
