@@ -26,6 +26,7 @@ generated-projection identity of each. Coverage is a contract test.
 | `cartograph` | Changesets plus synchronized npm, Cargo, and Tauri versions | Repair required. |
 | `bookmarkit` | Changesets plus Chrome version synchronization | Repair required, plus credential cleanup. |
 | `agent-sop` | None | Not applicable. |
+| `qwts-agent-sop` | None | Imported organization source; self-hosted CI runners still require provisioning. |
 | `quorum` | None | Not applicable. |
 | `agent-bot-identity` | None | Not applicable. |
 | `codex-rules-editor` | None | Not applicable. |
@@ -81,7 +82,7 @@ Repository-specific notes:
 
 ## Repositories without a release metadata system
 
-`agent-sop`, `quorum`, `agent-bot-identity`, `codex-rules-editor`,
+`agent-sop`, `qwts-agent-sop`, `quorum`, `agent-bot-identity`, `codex-rules-editor`,
 `playbook-dashboard`, `agentic-code-analysis`, `localnotes`,
 `universal-agentic-workflow`, `diagram-dreamer`, `jwt-decoder`, `moonsweeper`,
 `managed-machine`, and `managed-machine-config` carry `metadataSystem: "none"` and no generated

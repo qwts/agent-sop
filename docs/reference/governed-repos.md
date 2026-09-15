@@ -74,6 +74,7 @@ Cloning, drift detection, reconciliation, and harness synchronization are in
 | Repo | Visibility | Status | Shared CI | Codex sync | Delta from baseline |
 | --- | --- | --- | --- | --- | --- |
 | `agent-sop` | public | active | yes | disabled | — |
+| `qwts-agent-sop` | public | active | yes | disabled | — |
 | `overlook` | public | active | no | managed | Version-consistency gate in CI. |
 | `image-trail` | public | active | no | managed | Coverage floor 71% lines / 80% branches; acceptance coverage-map update for UI/content changes. |
 | `cartograph` | public | active | no | managed | Branch prefixes feat/ fix/ chore/ docs/; issue-before-branch; Rust gate (fmt, clippy -D warnings, test); spec/traceability artifacts in the same PR. |

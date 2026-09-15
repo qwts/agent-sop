@@ -15,6 +15,19 @@
       "note": "Public Agent SOP framework. The qwts operating environment was imported into qwts-agent-sop with unchanged main history and v1; source paths remain during the reviewed cutover (qwts/qwts-agent-sop#1)."
     },
     {
+      "name": "qwts-agent-sop",
+      "visibility": "public",
+      "publish": true,
+      "status": "active",
+      "sharedCi": true,
+      "codexSync": {
+        "enabled": false,
+        "exclude": []
+      },
+      "delta": "",
+      "note": "Organization-specific governance and SOP home, imported with unchanged main history and v1 from agent-sop. Historical issues and discussions remain in agent-sop (qwts/qwts-agent-sop#1)."
+    },
+    {
       "name": "overlook",
       "visibility": "public",
       "publish": true,

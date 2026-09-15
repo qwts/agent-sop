@@ -9,6 +9,13 @@
       "harnessProjection": null
     },
     {
+      "repository": "qwts/qwts-agent-sop",
+      "metadataSystem": "none",
+      "sourceInputPolicy": "not-applicable",
+      "generatedProjection": null,
+      "harnessProjection": null
+    },
+    {
       "repository": "qwts/overlook",
       "metadataSystem": "changesets",
       "sourceInputPolicy": "behavior-change-changeset-or-reviewed-rationale",
