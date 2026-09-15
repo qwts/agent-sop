@@ -53,6 +53,9 @@ the repository's enabled merge methods.
 
 ## Changelog
 
+- 2026-09-15 — retire the remaining guard implementation and empty Copilot
+  adapter (agent-sop discussion #370); keep downstream removal paths
+  and identity-hook coverage.
 - 2026-09-14 — private repositories skip vulnerability reporting and CodeQL;
   governed CI skips the CodeQL lane while private (#355).
 - 2026-08-27 — retract the machine memory guard from the synced baseline

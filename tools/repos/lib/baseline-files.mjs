@@ -18,9 +18,9 @@ export const GOVERNED_CURSOR_FILES = ['.cursor/hooks.json'];
 
 // Copilot (CLI and coding agent) loads repository hooks from .github/hooks/;
 // Windsurf (Devin desktop) loads Cascade hooks from .windsurf/hooks.json.
-// Both exist so the guard reaches every harness that can run shell commands
-// in a governed checkout, not only the three original ones (#290).
-export const GOVERNED_COPILOT_FILES = ['.github/hooks/agent-guard.json'];
+// Copilot's guard-only adapter is retired (agent-sop discussion #370).
+// Windsurf retains its empty baseline so repo-owned identity entries compose.
+export const GOVERNED_COPILOT_FILES = [];
 
 export const GOVERNED_WINDSURF_FILES = ['.windsurf/hooks.json'];
 
@@ -90,8 +90,9 @@ export const RETIRED_HARNESS_FILES = [
   // replayable CI exemption"; any sync in that window shipped it downstream.
   'tools/agent-guard/lib/hosted-ci.mjs',
   // #331: the machine memory guard shipped while its decision (ENG-0138) was
-  // still Proposed. Only accepted decisions ship — the implementation stays in
-  // this repo, and the sync retracts every consumer copy it distributed.
+  // still Proposed. Discussion #370 later retired the implementation itself.
+  // Keep these paths so manual recovery still retracts old consumer copies.
+  '.github/hooks/agent-guard.json',
   'tools/agent-guard/arbiter.mjs',
   'tools/agent-guard/guard-agent-command.mjs',
   'tools/agent-guard/run-guarded.mjs',

@@ -8,6 +8,5 @@
 .codex/hooks.json
 .claude/settings.json
 .cursor/hooks.json
-.github/hooks/agent-guard.json
 .windsurf/hooks.json
 # governed:agent-harness-format:end
