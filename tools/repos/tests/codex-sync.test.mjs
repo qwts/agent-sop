@@ -196,8 +196,7 @@ test('managed JSON overlays preserve repository-owned agent harness configuratio
   const source = canonical(path, JSON.stringify({
     $schema: 'https://json.schemastore.org/claude-code-settings.json',
     hooks: {
-      // Governance-owned since ENG-0138: the memory guard is only a fleet
-      // control if every repo's hook wiring comes from here.
+      // Identity hooks remain governance-owned after memory-guard retirement.
       PreToolUse: [{ matcher: 'Bash', hooks: [{ type: 'command', command: 'managed-guard' }] }],
       WorktreeCreate: [{ hooks: [{ type: 'command', command: 'managed' }] }],
     },
@@ -604,14 +603,14 @@ test('retirement stays a durable record of every path the sync stopped managing'
   // The stranded copies from #284 and #286 — and hosted-ci.mjs, managed for a
   // window between two agent-guard fixes — must never silently leave the list;
   // dropping an entry would orphan downstream copies again. The #331 guard
-  // retraction rides the same mechanism: while ENG-0138 stays Proposed, these
-  // entries are what deletes the consumer copies the sync should not have
-  // shipped.
+  // retraction and final retirement use the same mechanism: these entries
+  // still remove previously distributed copies, including guard-only adapters.
   for (const path of [
     '.codex/scripts/setup.sh',
     '.codex/scripts/gh.zsh',
     'governance/agent-models.json',
     'tools/models/registry.mjs',
+    '.github/hooks/agent-guard.json',
     'tools/agent-guard/lib/hosted-ci.mjs',
     'tools/agent-guard/guard-agent-command.mjs',
     'tools/agent-guard/run-guarded.mjs',

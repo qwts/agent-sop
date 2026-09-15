@@ -4,6 +4,9 @@
 **Date:** 2026-08-02
 **Issue:** qwts/playbook-engineering#138
 
+Retired 2026-09-15; [decision and history](../reference/agent-memory-guard.md).
+Original proposal follows.
+
 ## Context
 
 Local machines are a finite resource shared by concurrent agent sessions across
@@ -159,7 +162,7 @@ remove the enforcement point the way one already did once.
 ## References
 
 - qwts/playbook-engineering#138 — the originating issue and the incident evidence
-- [Machine memory guard](../reference/agent-memory-guard.md) — the operational reference: budget formula, lanes, legacy-grant cleanup, and what to do when a run is refused
+- [Machine memory guard](../reference/agent-memory-guard.md) — retirement record
 - qwts/playbook-engineering#235 — same-user owner-grant minting through unmarked package scripts
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md) — agent primitives are code, one canonical source; this record's distribution choice is that rule applied to an executable primitive
 - [ENG-0004](ENG-0004-centralize-shared-cicd.md) — centralize shared tooling here rather than per repo

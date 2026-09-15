@@ -30,8 +30,8 @@ path marker is declared for `.claude/settings.json`, so synchronization
 composes it with the centrally owned identity `SessionStart` hook.
 
 Image Trail's `check:agent-env` also checks the `PreToolUse` command
-`tools/agent-guard/guard-agent-command.mjs`. That hook is centrally owned and
-already propagates from the canonical Claude settings, so it needs no
+[the historical memory-guard command](https://github.com/qwts/agent-sop/blob/41af9d7917a418810b3277f2cec969e4e003b0b3/tools/agent-guard/guard-agent-command.mjs). At the time of this audit, that hook was centrally owned and
+already propagated from the canonical Claude settings, so it needed no
 preservation declaration. The existing `agent-bot-identity` declarations
 remain necessary because that repository generates its own
 `agent-bot agent-hook` entries. No other repository-specific command or new

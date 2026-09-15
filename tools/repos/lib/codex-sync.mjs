@@ -29,11 +29,10 @@ export const MANAGED_TEXT_BLOCKS = new Map([
 ]);
 // Paths governance owns inside a downstream JSON file; everything else in that
 // file belongs to the repo and survives a sync untouched. `hooks.PreToolUse`
-// joined the list with ENG-0138: the memory guard is only a fleet control if
-// every repo's hook wiring is governed, and a repo that quietly edited it back
-// out would be the one machine-scoped budgeting cannot see. The remaining
-// Claude hook events joined with ENG-0128 so uninstalled identity adapters
-// propagate; a missing ownership row fails closed rather than dropping them.
+// originally joined with ENG-0138. The memory guard is retired; PreToolUse
+// remains managed for the ENG-0128 uninstalled identity adapters, alongside
+// the other Claude events. A missing ownership row fails closed rather than
+// dropping those identity hooks.
 export const MANAGED_JSON_OVERLAYS = new Map([
   ['.claude/settings.json', [
     ['$schema'],
