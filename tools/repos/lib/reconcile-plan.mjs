@@ -83,8 +83,9 @@ export function promotionPlan(result) {
 }
 
 // The transformation applied to an existing ruleset: bump the pull_request
-// rule's review count to at least 1, changing nothing else. Returns the PUT
-// payload, or null when the ruleset has no pull_request rule to bump.
+// rule's review count to at least 1 and require code-owner review (#100 —
+// CODEOWNERS is decorative without it), changing nothing else. Returns the
+// PUT payload, or null when the ruleset has no pull_request rule to bump.
 export function bumpReviewCount(ruleset) {
   const rules = ruleset.rules ?? [];
   if (!rules.some((r) => r.type === 'pull_request')) return null;
@@ -101,6 +102,7 @@ export function bumpReviewCount(ruleset) {
             parameters: {
               ...r.parameters,
               required_approving_review_count: Math.max(1, r.parameters?.required_approving_review_count ?? 0),
+              require_code_owner_review: true,
             },
           }
         : r,
@@ -151,7 +153,7 @@ export function defaultRuleset({ mergeQueueAvailable = false, allowedMergeMethod
           required_approving_review_count: 1,
           dismiss_stale_reviews_on_push: true,
           required_reviewers: [],
-          require_code_owner_review: false,
+          require_code_owner_review: true,
           require_last_push_approval: false,
           required_review_thread_resolution: true,
           allowed_merge_methods: allowedMergeMethods,

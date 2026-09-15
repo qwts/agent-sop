@@ -4,8 +4,8 @@
 //
 //   - baseline files per the repo-baseline-files SOP
 //   - absence of retired harness files the sync no longer manages (#287)
-//   - a default-branch rule requiring at least one approving review
-//     (rulesets or classic branch protection)
+//   - a default-branch rule requiring at least one approving review and
+//     code-owner review (rulesets or classic branch protection, #100)
 //   - private vulnerability reporting enabled (public repos only)
 //   - CodeQL running from the repo's own workflow, not GitHub's default setup
 //     (public repos only — a private repo on a personal account cannot enable
@@ -195,12 +195,17 @@ export function retiredDriftChecks(entry) {
   return entry.status === 'active' ? retiredCodexPaths(entry) : [];
 }
 
+// Both halves are required: a review count without code-owner review lets an
+// agent approve an agent's edit to AGENTS.md (#100, requirement 4).
 async function reviewRequired(owner, name, branch, token) {
   const rules = (await api(`/repos/${owner}/${name}/rules/branches/${branch}`, token)) ?? [];
   const rule = rules.find((r) => r.type === 'pull_request');
-  if ((rule?.parameters?.required_approving_review_count ?? 0) >= 1) return true;
+  if ((rule?.parameters?.required_approving_review_count ?? 0) >= 1) {
+    return rule.parameters.require_code_owner_review === true;
+  }
   const classic = await api(`/repos/${owner}/${name}/branches/${branch}/protection`, token);
-  return (classic?.required_pull_request_reviews?.required_approving_review_count ?? 0) >= 1;
+  const reviews = classic?.required_pull_request_reviews;
+  return (reviews?.required_approving_review_count ?? 0) >= 1 && reviews.require_code_owner_reviews === true;
 }
 
 export async function checkRepo(owner, entry, coverage, token, {

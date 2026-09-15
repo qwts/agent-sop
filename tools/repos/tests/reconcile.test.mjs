@@ -106,6 +106,7 @@ test('bumpReviewCount raises only the pull_request rule, preserving the rest', (
   const out = bumpReviewCount(rs);
   const pr = out.rules.find((r) => r.type === 'pull_request');
   assert.equal(pr.parameters.required_approving_review_count, 1);
+  assert.equal(pr.parameters.require_code_owner_review, true); // CODEOWNERS binds only with this (#100)
   assert.equal(pr.parameters.allowed_merge_methods[0], 'merge'); // sibling params survive
   assert.deepEqual(out.rules[0], { type: 'deletion' }); // other rules untouched
   assert.equal(out.bypass_actors[0].actor_id, 5);
@@ -117,6 +118,7 @@ test('bumpReviewCount never lowers an already-stricter count', () => {
     rules: [{ type: 'pull_request', parameters: { required_approving_review_count: 2 } }],
   });
   assert.equal(out.rules[0].parameters.required_approving_review_count, 2);
+  assert.equal(out.rules[0].parameters.require_code_owner_review, true);
 });
 
 test('a ruleset without a pull_request rule is not bumpable', () => {
@@ -139,6 +141,7 @@ test('the user-owned default ruleset preserves merge methods without an unavaila
   const pr = rs.rules.find((r) => r.type === 'pull_request');
   const queue = rs.rules.find((r) => r.type === 'merge_queue');
   assert.equal(pr.parameters.required_approving_review_count, 1);
+  assert.equal(pr.parameters.require_code_owner_review, true);
   assert.deepEqual(pr.parameters.allowed_merge_methods, ['merge', 'rebase']);
   assert.equal(queue, undefined);
   assert.equal(rs.bypass_actors[0].actor_type, 'RepositoryRole');

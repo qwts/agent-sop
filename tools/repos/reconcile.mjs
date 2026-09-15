@@ -74,7 +74,7 @@ async function applySettings(owner, name, actions, token) {
         const payload = rs && bumpReviewCount(rs);
         if (payload) {
           await call('PUT', `/repos/${owner}/${name}/rulesets/${rs.id}`, token, payload);
-          done.push(`ruleset "${rs.name}": review count >= 1`);
+          done.push(`ruleset "${rs.name}": review count >= 1, code-owner review required`);
           updated = true;
           break;
         }
