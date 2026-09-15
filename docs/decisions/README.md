@@ -92,7 +92,8 @@ principles; it does not waive the lower priorities.
 | [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md) | Playbook updates ship as immutable releases; repos align by lockfile | Proposed |
 | [ENG-0313](ENG-0313-ci-fan-out-backpressure.md) | Install lanes carry fan-out backpressure, and evidence lanes never queue behind them | Proposed |
 | [ENG-0339](ENG-0339-os-account-determines-persona.md) | The macOS account determines the persona | Proposed |
-| [ENG-0353](ENG-0353-delegate-writes-require-an-explicit-marker.md) | Delegate writes in the owner account require an explicit marker | Proposed |
+| [ENG-0353](ENG-0353-delegate-writes-require-an-explicit-marker.md) | Delegate writes in the owner account require an explicit marker | Superseded by ENG-0375 |
+| [ENG-0375](ENG-0375-owner-account-agent-context-is-the-delegate.md) | Agent context in the owner's account is the delegate — no marker, no undelegable set | Proposed |
 
 ## Related
 
