@@ -17,8 +17,8 @@
 //
 //   node tools/repos/pin-reachability.mjs [--json] [--owner qwts]
 //
-// Auth for cross-repo checks: GH_DRIFT_TOKEN or the ambient `gh auth token`
-// (same as drift.mjs). Zero-dependency (ENG-0004).
+// Auth for cross-repo checks: GH_DRIFT_TOKEN or the ambient `gh auth token`.
+// Zero-dependency (ENG-0004).
 
 import process from 'node:process';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -26,9 +26,30 @@ import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { api, userToken } from './drift.mjs';
-
 const DEFAULT_OWNER = 'qwts';
+
+function userToken() {
+  if (process.env.GH_DRIFT_TOKEN) return process.env.GH_DRIFT_TOKEN;
+  try {
+    return execFileSync('gh', ['auth', 'token'], { encoding: 'utf8' }).trim();
+  } catch {
+    throw new Error('no GitHub token — set GH_DRIFT_TOKEN, or install and authenticate the gh CLI (gh auth login)');
+  }
+}
+
+async function api(path, token) {
+  const res = await fetch(`https://api.github.com${path}`, {
+    headers: {
+      authorization: `Bearer ${token}`,
+      accept: 'application/vnd.github+json',
+      'x-github-api-version': '2022-11-28',
+      'user-agent': 'qwts-pin-reachability',
+    },
+  });
+  if (res.status === 404 || res.status === 403) return null; // absent or not visible — callers treat null as unverifiable
+  if (!res.ok) throw new Error(`${path} -> ${res.status}`);
+  return res.json();
+}
 
 // A `uses:` line pinning a first-party action to a full commit SHA. Only 40-hex
 // pins are first-party-audited here: a tag or branch ref is a different policy

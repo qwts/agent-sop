@@ -5,7 +5,6 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { activeAgentSlugs, loadAgents, validateAgents } from '../lib/agents.mjs';
-import { apps } from '../drift.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
@@ -18,15 +17,6 @@ test('the checked-in roster is valid, and every entry has its App config shape',
   const checkedIn = loadAgents(join(ROOT, 'governance', 'agents.json'));
   assert.deepEqual(validateAgents(checkedIn), []);
   assert.ok(checkedIn.agents.length > 0);
-});
-
-test('drift verifies exactly the active roster — no hardcoded list', () => {
-  const checkedIn = loadAgents(join(ROOT, 'governance', 'agents.json'));
-  assert.deepEqual(apps(ROOT), activeAgentSlugs(checkedIn));
-  assert.ok(
-    apps(ROOT).includes('qwts-aider-agent'),
-    'an agent added to the roster is checked without touching drift',
-  );
 });
 
 test('a retired identity keeps its row but stops being checked', () => {

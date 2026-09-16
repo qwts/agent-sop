@@ -12,12 +12,12 @@ nothing drifts. Migrating an old repo had no defined process. A template repo
 cannot fix this: templates only seed, cannot express settings, cannot
 retroactively fix drift ([ENG-0006](ENG-0006-agentic-primitives-governance.md)
 no-grandfathering), and would be a third source of truth. Phase 1
-(`tools/repos/drift.mjs`, read-only) detects the gaps; this record governs
+([tools/repos/drift.mjs](https://github.com/qwts/agent-sop/blob/ed5c5d8/tools/repos/drift.mjs), read-only) detects the gaps; this record governs
 the phase that closes them.
 
 ## Decision
 
-1. **One operation.** `tools/repos/reconcile.mjs` converges a repo — new,
+1. **One operation.** [tools/repos/reconcile.mjs](https://github.com/qwts/agent-sop/blob/ed5c5d8/tools/repos/reconcile.mjs) converges a repo — new,
    existing, or migrating — toward `governance/repos.json`. An empty repo is
    just a migration with zero conflicts. Dry-run by default; `--apply`
    executes.

@@ -147,7 +147,7 @@ jobs:
           attempts: '2'
           retry-delay-seconds: '5'
       - name: Lint and configuration checks
-        run: npm run lint:markdown && npm run lint:synced && npm run docs:gov && npm run repos:check && npm run ci-runtime:check && npm run pins:check
+        run: npm run lint:markdown && npm run docs:gov && npm run repos:check && npm run ci-runtime:check && npm run pins:check
         env:
           GH_DRIFT_TOKEN: ${{ github.token }}
       - name: Unit and workflow-tooling tests

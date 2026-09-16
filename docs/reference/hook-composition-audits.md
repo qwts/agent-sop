@@ -1,9 +1,9 @@
 # Hook composition audits
 
 This record captures active-fleet surveys for repository-owned commands inside
-the managed hook adapters. It supplements the composition contract in
-[governed repository operations](governed-repos-operations.md); the manifest
-remains the machine-readable source of ownership declarations.
+the managed hook adapters. It supplements the `codexSync` declarations in
+[governed repositories](governed-repos.md); the manifest remains the
+machine-readable source of ownership declarations.
 
 ## 2026-08-18 — Image Trail process guard
 
