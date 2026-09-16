@@ -69,14 +69,6 @@ The forcing function for an org remains adding collaborators, which has not
 happened. Recorded because the original reasoning weighed the org option
 without stating the maintained tier it was being compared against.
 
-## Amendment — 2026-09-16: the account reference moved
-
-The GitHub account reference cited by the 2026-07-19 amendment left this
-template with [#380](https://github.com/qwts/agent-sop/pull/380); the link
-above is the permalink to its last revision here, and the maintained copy is
-organization data in the org repository (ENG-0355). The 2026-07-19 text is
-unchanged.
-
 ## Amendment — 2026-07-22: repository renamed to `playbook-engineering`
 
 The decision home named above as `qwts/playbook-software-engineering` is now
@@ -86,3 +78,11 @@ the decision changes — this repository remains the cross-repo decision home.
 The original name stays in the text per the no-rewrite rule, and GitHub's
 rename redirect keeps old citations resolving. Use the new name in anything
 written from here on.
+
+## Amendment — 2026-09-16: the account reference moved
+
+The GitHub account reference cited by the 2026-07-19 amendment left this
+template with [#380](https://github.com/qwts/agent-sop/pull/380); the link
+above is the permalink to its last revision here, and the maintained copy is
+organization data in the org repository (ENG-0355). The 2026-07-19 text is
+unchanged.

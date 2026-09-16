@@ -78,12 +78,19 @@ Decision points 1 and 2 name "the router's sources" and `routes.json` as a
 place where commits are pinned and recorded. Per the owner's specification in
 [#372](https://github.com/qwts/agent-sop/discussions/372) and the ENG-0355
 amendment of the same date, the site names no repository, organization, or
-commit; the only references it consumes are its own zone files. The two
-places a consumed reference is pinned and recorded are therefore the
-consumer's workflow file and the org repository's `org.json` (plus the
-`[repos]` table of `~/.config/agent-sop/config.toml`, which names
-repositories at a ref the agent resolves to a commit and records in its
-work). Points 1 and 2 read without the router; nothing else changes.
+commit. The pin locations are therefore:
+
+1. The consumer's workflow file, for actions (unchanged).
+2. The org repository's `org.json`, for the SOP source and every capability
+   (unchanged).
+3. The agent's work record. `~/.config/agent-sop/config.toml` is the one
+   pointer of ENG-0355, not a pin: its `[repos]` table names the org
+   repository at a ref, and the agent resolves that ref to a 40-hex commit
+   before reading anything and records that commit in the work it produces.
+   The selection is recorded where it is consumed, and the commit it names
+   cannot move.
+
+Points 1 and 2 read without the router; nothing else changes.
 
 ## References
 
