@@ -1,6 +1,6 @@
 # ENG-0038: Governance reconciler — one operation converges any repo to the manifest
 
-**Status:** Proposed
+**Status:** Superseded by ENG-0355
 **Date:** 2026-07-23
 **Issue:** qwts/playbook-engineering#38
 

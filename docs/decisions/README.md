@@ -76,7 +76,7 @@ principles; it does not waive the lower priorities.
 | [ENG-0015](ENG-0015-dependency-inventory.md) | Inventory dependencies and tooling across the fleet — report-only, Syft SBOM plus a shared normalizer | Proposed |
 | [ENG-0016](ENG-0016-agent-pr-bot-identity.md) | Agent-authored PRs come from dedicated bot identities (GitHub Apps, one per harness) | Proposed |
 | [ENG-0035](ENG-0035-issue-derived-record-numbers.md) | ENG record numbers are the originating issue number — allocation cannot collide | Proposed |
-| [ENG-0038](ENG-0038-governance-reconciler.md) | Governance reconciler — one operation converges any repo to the manifest | Proposed |
+| [ENG-0038](ENG-0038-governance-reconciler.md) | Governance reconciler — one operation converges any repo to the manifest | Superseded by ENG-0355 |
 | [ENG-0045](ENG-0045-agent-environments-are-bot-territory.md) | Agent coding environments are bot territory; installed tooling is commit-pinned | Superseded by ENG-0339 |
 | [ENG-0079](ENG-0079-per-agent-identity.md) | Agent identity is per agent — the harness is detected, the agent is pinned | Proposed |
 | [ENG-0081](ENG-0081-transcript-bound-agent-execution-identities.md) | Agent execution identities bind bot actions to provider transcripts | Proposed |
@@ -89,10 +89,12 @@ principles; it does not waive the lower priorities.
 | [ENG-0178](ENG-0178-evidence-bound-harness-projections.md) | Governed harness projections are evidence-bound no-release inputs | Accepted |
 | [ENG-0267](ENG-0267-bounded-ci-runtime.md) | Bound CI jobs and external setup tasks centrally | Proposed |
 | [ENG-0269](ENG-0269-trusted-dependency-reuse.md) | Reuse immutable dependency downloads on standard hosted runners | Accepted |
-| [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md) | Playbook updates ship as immutable releases; repos align by lockfile | Proposed |
+| [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md) | Playbook updates ship as immutable releases; repos align by lockfile | Superseded by ENG-0282 |
+| [ENG-0282](ENG-0282-immutable-pins-recorded-selection-no-aligner.md) | Versioning is immutable pins with recorded selection; there is no aligner | Proposed |
 | [ENG-0313](ENG-0313-ci-fan-out-backpressure.md) | Install lanes carry fan-out backpressure, and evidence lanes never queue behind them | Proposed |
 | [ENG-0339](ENG-0339-os-account-determines-persona.md) | The macOS account determines the persona | Proposed |
 | [ENG-0353](ENG-0353-delegate-writes-require-an-explicit-marker.md) | Delegate writes in the owner account require an explicit marker | Superseded by ENG-0375 |
+| [ENG-0355](ENG-0355-static-router-one-pointer-pinned-capabilities.md) | Distribution is a static router, one local pointer, and pinned capabilities | Proposed |
 | [ENG-0375](ENG-0375-owner-account-agent-context-is-the-delegate.md) | Agent context in the owner's account is the delegate — no marker, no undelegable set | Proposed |
 
 ## Related
