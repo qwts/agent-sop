@@ -1,6 +1,6 @@
 # ENG-0279: Playbook updates ship as immutable releases; repos align by lockfile
 
-**Status:** Proposed
+**Status:** Superseded by ENG-0282
 **Date:** 2026-08-22
 **Issue:** qwts/playbook-engineering#279
 

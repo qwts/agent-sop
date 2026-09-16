@@ -241,6 +241,19 @@ consumption path is now
 `uses: qwts/agent-sop/.github/actions/<name>@<reviewed-sha>`. The redirect
 rule above applies unchanged. Existing records keep their names.
 
+## Amendment — 2026-09-15: home moves to `qwts-agent-ci`; pins are commits
+
+[ENG-0355](ENG-0355-static-router-one-pointer-pinned-capabilities.md) moves
+the shared CI mechanism out of this repository into `qwts/qwts-agent-ci`:
+the composite actions, the CI policy classifier, the runtime budgets, the
+pin-reachability check, and `release-lifecycles.json`. The canonical
+consumption path is now
+`uses: qwts/qwts-agent-ci/.github/actions/<name>@<commit>`, and the
+"this repository's CI passes first" rule applies in that repository.
+[ENG-0282](ENG-0282-immutable-pins-recorded-selection-no-aligner.md)
+replaces the 2026-08-22 amendment above: consumers pin exact commits
+directly, with no release and no aligner. Everything else stands.
+
 ## References
 
 - [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) established this repo as the cross-repo home for shared engineering assets; this extends that from documents to CI/CD.
