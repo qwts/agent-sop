@@ -114,3 +114,25 @@ private-looking data (its roster, its manifest, its account notes).
   [ENG-0038](ENG-0038-governance-reconciler.md), [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md),
   [ENG-0282](ENG-0282-immutable-pins-recorded-selection-no-aligner.md).
 - Discussions #365, #367, #371, #372, and qwts/agent-org#2, linked above.
+
+## Amendment, 2026-09-16
+
+The owner's specification in [#372](https://github.com/qwts/agent-sop/discussions/372)
+(the opening description and the comment of 2026-09-16 with the arrival
+flow and the start text) corrects two decision points as recorded above.
+The recorded text stays as history; what applies is:
+
+- **Point 2.** The local file is `~/.config/agent-sop/config.toml`. Its
+  `[repos]` table names the agent's repositories: `org` (required), `sop`
+  (optional when `org.json` in the org repository pins it), and `comms`
+  (optional). Nothing else is local.
+- **Point 4.** The zones are `root`, `start`, `org`, `sop`, and `comms`;
+  the catalog is the third layer of `sop`, not a zone. The site names no
+  repository, organization, or commit, template or otherwise: each zone
+  lists files as paths inside the repositories the config file names, and
+  the only absolute links are to the site itself. `start` is the owner's
+  three steps verbatim. Every `llms.txt` stays under 1600 bytes and every
+  `llms-full.txt` under 3200.
+
+Pins by commit (ENG-0282) still apply to what the config file and
+`org.json` name; the site itself carries none.
