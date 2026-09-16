@@ -45,24 +45,21 @@ generated table below by hand.
 - `status` — `active`, `onboarding`, or `retired`.
 - `sharedCi` — whether the repo consumes the reusable docs-governance workflow
   (`.github/workflows/docs-governance.yml`) at `@v1`.
-- `codexSync` — optional exceptions to the managed harness baseline (`.codex/`
-  and `.claude/settings.json`; the field keeps its original name). Set
-  `enabled: false` to skip a repository, or list managed paths under
+- `codexSync` — optional record of a repository's exceptions to the managed
+  harness baseline (`.codex/` and `.claude/settings.json`; the field keeps its
+  original name and its validation, although nothing is pushed into
+  repositories any more — consumers pin what they use, qwts/agent-sop#371).
+  Set `enabled: false` to opt a repository out, or list managed paths under
   `exclude`. A repository that owns generated entries inside a managed JSON
   hook adapter declares their stable markers under
-  `preserveJsonArrayEntries`. Composition is restricted to
-  `.claude/settings.json`, `.codex/hooks.json`, and `.cursor/hooks.json`;
-  synchronization composes those entries as data and never executes target
-  code. Other paths, empty markers, and duplicates fail validation.
+  `preserveJsonArrayEntries`, restricted to `.claude/settings.json`,
+  `.codex/hooks.json`, and `.cursor/hooks.json`. Other paths, empty markers,
+  and duplicates fail validation. Fleet snapshots of those adapters:
+  [hook composition audits](hook-composition-audits.md).
 - `delta` — the one-line variance this repo carries from the shared baseline, or
   empty for a pure consumer. Deltas are surveyed in
   [the SOP inventory](../sop/inventory.md).
 - `note` — optional free-text context.
-
-## Operations
-
-Cloning, drift detection, reconciliation, and harness synchronization are in
-[governed repository operations](governed-repos-operations.md).
 
 ## Governed repositories
 

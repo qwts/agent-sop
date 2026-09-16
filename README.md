@@ -1,6 +1,6 @@
 # agent-sop
 
-The steward of the `qwts` engineering fleet: the governance manifest and its drift and reconcile tooling, shared CI, the docs-governance gate, the agent-harness seeds and skills catalog, the ENG decision series, shared SOPs, and the SDLC guides. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/agent-sop/issues/355)); historical records keep the old name.
+The steward of the `qwts` engineering fleet: the governance manifest and its validators, shared CI, the docs-governance gate, the agent-harness seeds and skills catalog, the ENG decision series, shared SOPs, and the SDLC guides. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/agent-sop/issues/355)); historical records keep the old name.
 
 It is also the home for **cross-repo engineering decisions** — see the [decision index](docs/decisions/README.md) — and for the org-wide agent conventions every repo's [AGENTS.md](AGENTS.md) points to; see [AGENTS.md](AGENTS.md) for this repo's own agent context.
 
@@ -53,7 +53,6 @@ Each document includes navigation links, prerequisites, and cross-references to 
 ## Shared standards and tooling
 
 - [Governed repositories](docs/reference/governed-repos.md) — which repos this playbook governs, and how to add or remove one; generated from the `governance/repos.json` manifest (ENG-0011).
-- [Governed repository operations](docs/reference/governed-repos-operations.md) — the lanes you run against those repos: local bootstrap, drift detection, reconciliation, and harness synchronization.
 - [Shared SOPs](docs/sop/README.md) — org-wide standard operating procedures for how work moves, inherited by every repo (ENG-0008).
 - [Org-wide agent conventions](docs/reference/agent-conventions.md) — the shared agent working agreement every repo's `AGENTS.md` links to (ENG-0006).
 - [Agent bot identity governance](docs/reference/agent-bot-identity.md) — the qwts App roster, permissions, coverage, and integration contract (ENG-0016, ENG-0128).

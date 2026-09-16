@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { GOVERNED_HOOK_ADAPTER_FILES } from '../lib/baseline-files.mjs';
+import { GOVERNED_HOOK_ADAPTER_FILES } from '../lib/manifest.mjs';
 
 function json(relative) {
   return JSON.parse(readFileSync(relative, 'utf8'));

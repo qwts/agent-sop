@@ -23,11 +23,6 @@
         "reason": "the generated fleet table grows by one row per onboarded repo, so this doc gets monotonically longer for reasons prose tightening cannot offset. The previous 3000 bought roughly ten repos of headroom and was spent exactly there, at localnotes; as that override said it should, the breach was absorbed by a split rather than another raise — the bootstrap, drift, reconcile and codex-sync runbook lanes moved to governed-repos-operations.md, leaving this doc as what it claims to be, the manifest's human-readable view. 1400 is the post-split size plus room for roughly ten more rows. The next breach should be re-examined, not reflexively raised"
       },
       {
-        "path": "docs/reference/governed-repos-operations.md",
-        "budget": 2800,
-        "reason": "the harness-sync lane gained the retraction contract (#287) — the operational half of the durable retired-paths record that lets the sync delete files it stopped managing. 2800 is the post-addition size plus minimal headroom; the doc is the fleet's single runbook, so growth tracks new operational lanes, not loosening prose. The scheduled sync workflow was retired 2026-09-14 (#355); the lane now documents the local read-only comparison and manual recovery apply. The next breach should split the harness-sync lane into its own doc, not raise again"
-      },
-      {
         "path": "docs/reference/agent-bot-identity.md",
         "budget": 1100,
         "reason": "qwts roster, permissions, and the installed CLI boundary are one governance contract; runtime setup and troubleshooting moved to agent-bot-identity under ENG-0128"
@@ -36,6 +31,11 @@
         "path": "docs/decisions/ENG-0004-centralize-shared-cicd.md",
         "budget": 3400,
         "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 and then → 3400 on 2026-09-14 for the dev-steward and agent-sop rename amendments (#355), the second and third renames this record must carry"
+      },
+      {
+        "path": "docs/decisions/ENG-0081-transcript-bound-agent-execution-identities.md",
+        "budget": 2650,
+        "reason": "accepted ENG records are amended or superseded rather than rewritten; retiring the push lanes (qwts/agent-sop#371) turned this record's reference to the deleted agent-bot client module into a permalink, which is the only growth past the 2600 default. The next breach should be re-examined, not reflexively raised"
       },
       {
         "path": "docs/reference/ci-execution-policy.md",

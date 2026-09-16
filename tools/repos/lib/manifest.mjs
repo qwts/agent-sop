@@ -8,11 +8,54 @@
 // hand, so a bare checkout can run the check with no install.
 
 import { readFileSync } from 'node:fs';
-import {
-  GOVERNED_HARNESS_FILES,
-  GOVERNED_HOOK_ADAPTER_FILES,
-  RETIRED_HARNESS_FILES,
-} from './baseline-files.mjs';
+
+// The harness inventories the `codexSync` validation below is written against.
+// They were the shared inventory of the retired push lanes (reconcile, drift,
+// codex sync — qwts/agent-sop#371: nothing is pushed into governed repos any
+// more; consumers pin what they use) and now exist only so the manifest field
+// keeps validating until the manifest and its validators move (later PR).
+//
+// JSON composition was narrower than the governed harness: only hook adapters
+// could retain repository-generated entries.
+export const GOVERNED_HOOK_ADAPTER_FILES = [
+  '.codex/hooks.json',
+  '.claude/settings.json',
+  '.cursor/hooks.json',
+  '.windsurf/hooks.json',
+];
+
+export const GOVERNED_HARNESS_FILES = [
+  '.codex/config.toml',
+  '.codex/environments/environment.toml',
+  '.codex/rules/environment.rules',
+  ...GOVERNED_HOOK_ADAPTER_FILES,
+  '.prettierignore',
+];
+
+// Paths the sync managed and then stopped managing (#287). A retired path is a
+// valid `codexSync.exclude` entry — the retraction opt-out — so the record
+// stays with the validator. Disjoint from GOVERNED_HARNESS_FILES.
+export const RETIRED_HARNESS_FILES = [
+  '.codex/scripts/cleanup.sh',
+  '.codex/scripts/ensure-identity.sh',
+  '.codex/scripts/gh.zsh',
+  '.codex/scripts/git-with-nvm.zsh',
+  '.codex/scripts/nvm.zsh',
+  '.codex/scripts/setup.sh',
+  'tools/agent-guard/lib/hosted-ci.mjs',
+  '.github/hooks/agent-guard.json',
+  'tools/agent-guard/arbiter.mjs',
+  'tools/agent-guard/guard-agent-command.mjs',
+  'tools/agent-guard/run-guarded.mjs',
+  'tools/agent-guard/lib/budget.mjs',
+  'tools/agent-guard/lib/leases.mjs',
+  'tools/agent-guard/lib/policy.mjs',
+  'tools/agent-guard/lib/protocol.mjs',
+  'tools/agent-guard/lib/system-memory.mjs',
+  'tools/agent-guard/tests/conformance.test.mjs',
+  'governance/agent-models.json',
+  'tools/models/registry.mjs',
+];
 
 export const VALID_VISIBILITY = ['public', 'private'];
 export const VALID_STATUS = ['active', 'onboarding', 'retired'];

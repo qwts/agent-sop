@@ -96,8 +96,7 @@ another workflow requires both `CHORES_DUMB_CLIENT_ID` and
 - the governed ready-branch updater;
 - Version packages PR creation and refresh;
 - tag creation;
-- release-recovery dispatch;
-- governed harness synchronization; and
+- release-recovery dispatch; and
 - any future privileged write or downstream-workflow initiator.
 
 Do not substitute an App ID variable for `CHORES_DUMB_CLIENT_ID`. Do not add

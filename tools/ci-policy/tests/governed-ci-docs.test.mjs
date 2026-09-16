@@ -118,7 +118,6 @@ test('every privileged chores-dumb consumer uses the Client ID and private key b
     'Version packages PR',
     'tag creation',
     'release-recovery dispatch',
-    'harness synchronization',
   ]) {
     assert.match(`${policy}\n${rollout}`, new RegExp(consumer, 'u'));
   }

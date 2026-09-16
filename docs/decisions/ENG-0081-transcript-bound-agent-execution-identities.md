@@ -141,7 +141,7 @@ authorization scope.
    decision. `status: active` keeps its stated meaning: not finalized.
 
 The `schema_version` 1 mint grant JSON that
-`tools/repos/lib/agent-bot-client.mjs` parses is unchanged; receipts and
+[tools/repos/lib/agent-bot-client.mjs](https://github.com/qwts/agent-sop/blob/ed5c5d8/tools/repos/lib/agent-bot-client.mjs) parses is unchanged; receipts and
 presence sit beside it, and a bump is a separately reviewed change. The
 amendment is harness-neutral. Runtime lands in
 [agent-bot-identity#107](https://github.com/qwts/agent-bot-identity/issues/107)

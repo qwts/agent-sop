@@ -22,7 +22,7 @@ The pin already worked: a worktree with `qwts.agentApp` set authored, pushed,
 and opened PRs as the pinned App with no code change, because
 `setup-worktree.mjs` reads the pin ahead of detection and the `gh` shim reads
 its slug back out of the credential helper. What did not work was *knowing*:
-`tools/repos/drift.mjs` verified four hardcoded Apps, so an identity outside
+[tools/repos/drift.mjs](https://github.com/qwts/agent-sop/blob/ed5c5d8/tools/repos/drift.mjs) verified four hardcoded Apps, so an identity outside
 that list was never checked against any repository. An App can therefore be in
 daily use while nothing verifies it is installed where it will push, and the
 drift report stays green until a push fails mid-task.

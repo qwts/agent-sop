@@ -22,12 +22,12 @@ import {
   mergeGroupHeadPullRequest,
   resolveReleaseOrigins,
 } from '../../../.github/actions/ci-policy/release-origin.mjs';
-import {
-  CODEX_SOURCE_REPO,
-  CODEX_SYNC_BOT,
-  CODEX_SYNC_BRANCH,
-  syncPullBody,
-} from '../../repos/lib/codex-sync.mjs';
+// The identity the retired harness-sync lane stamped on its pull requests
+// (qwts/agent-sop#371). The release-lifecycle catalog still records it as
+// `harnessProjection`, so the classifier keeps recognizing it.
+const CODEX_SOURCE_REPO = 'agent-sop';
+const CODEX_SYNC_BOT = 'chores-dumb';
+const CODEX_SYNC_BRANCH = 'governance/harness-sync';
 
 const pullRequest = (draft, fork = false) => ({ pull_request: { draft, head: { repo: { fork } } } });
 const roster = JSON.parse(readFileSync(new URL('../../../governance/agents.json', import.meta.url), 'utf8'));
@@ -273,11 +273,13 @@ const managedHarnessFiles = [
 const harnessPullRequest = (overrides = {}) => releasePullRequest({
   author: 'chores-dumb[bot]',
   headRef: 'governance/harness-sync',
-  body: syncPullBody({
-    owner: 'qwts',
-    sourceSha: harnessSource,
-    paths: managedHarnessFiles.map((file) => file.filename),
-  }),
+  body: [
+    `Synchronizes the centrally managed agent-harness environment from [\`${harnessSource.slice(0, 12)}\`](https://github.com/qwts/${CODEX_SOURCE_REPO}/commit/${harnessSource}).`,
+    '',
+    'Managed files:',
+    '',
+    managedHarnessFiles.map((file) => `- \`${file.filename}\``).join('\n'),
+  ].join('\n'),
   ...overrides,
 }).pull_request;
 

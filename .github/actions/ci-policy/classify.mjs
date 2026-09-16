@@ -1,6 +1,6 @@
 import { appendFileSync, readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import { GOVERNED_HARNESS_FILES } from '../../../tools/repos/lib/baseline-files.mjs';
+import { GOVERNED_HARNESS_FILES } from '../../../tools/repos/lib/manifest.mjs';
 import { listPullRequestFiles, resolveReleaseOrigins } from './release-origin.mjs';
 
 const ROSTER_URL = new URL('../../../governance/agents.json', import.meta.url);
