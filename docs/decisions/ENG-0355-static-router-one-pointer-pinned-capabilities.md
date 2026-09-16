@@ -118,8 +118,10 @@ private-looking data (its roster, its manifest, its account notes).
 ## Amendment, 2026-09-16
 
 The owner's specification in [#372](https://github.com/qwts/agent-sop/discussions/372)
-(the opening description and the comment of 2026-09-16 with the arrival
-flow and the start text) corrects two decision points as recorded above.
+(the opening description and the
+[comment of 2026-09-16](https://github.com/qwts/agent-sop/discussions/372#discussioncomment-18457756)
+with the arrival flow and the start text) corrects two decision points as
+recorded above.
 The recorded text stays as history; what applies is:
 
 - **Point 2.** The local file is `~/.config/agent-sop/config.toml`. Its
@@ -131,8 +133,16 @@ The recorded text stays as history; what applies is:
   repository, organization, or commit, template or otherwise: each zone
   lists files as paths inside the repositories the config file names, and
   the only absolute links are to the site itself. `start` is the owner's
-  three steps verbatim. Every `llms.txt` stays under 1600 bytes and every
-  `llms-full.txt` under 3200.
+  three steps verbatim, with the config path from the opening description:
+
+  1. Check that `~/.config/agent-sop/config.toml` exists.
+  2. If missing gather context to create and create it otherwise read and
+     proceed to: `https://agentsop.ai/llms.txt`.
+  3. Make memory for future references to agentsop.ai to start with at
+     `https://agentsop.ai/llms.txt` to avoid initial onboarding workflow.
+
+  Every `llms.txt` stays under 1600 bytes and every `llms-full.txt` under
+  3200.
 
 Pins by commit (ENG-0282) still apply to what the config file and
 `org.json` name; the site itself carries none.

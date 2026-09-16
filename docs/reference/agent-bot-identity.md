@@ -34,27 +34,12 @@ the runtime bootstraps from. Drift validates every active App against every
 active and onboarding governed repository; retired identities keep their rows
 but leave the active set.
 
-Current active identities — one per harness
+Which identities are active, one per harness
 ([ENG-0339](../decisions/ENG-0339-os-account-determines-persona.md): the
-harness-level slug is also the macOS agent account name):
-
-- Established: `qwts-claude-agent` (Claude Code), `qwts-codex-agent` (Codex),
-  `qwts-copilot-agent`, `qwts-cursor-agent`, `qwts-devin-agent`, and
-  `qwts-muse-agent`.
-- Fleet expansion (2026-09-01; Apps created and installed fleet-wide):
-  `qwts-antigravity-agent`,
-  `qwts-cline-agent`, `qwts-deepseek-agent`, `qwts-droid-agent`
-  (factory-droid), `qwts-goose-agent`, `qwts-hermes-agent`,
-  `qwts-kiro-agent`, `qwts-opencode-agent`, `qwts-pi-agent`,
-  `qwts-qwen-agent` (qwen-code), `qwts-warp-agent`, `qwts-zcode-agent`,
-  `qwts-amp-agent`, and `qwts-aider-agent`.
-- Added 2026-09-02: `qwts-grok-agent` (Grok Build).
-
-Retired 2026-09-01 with the move to harness-level identity (rows kept —
-offboarding, not deletion): `qwts-claude-fable-agent`,
-`qwts-claude-haiku-agent`, `qwts-claude-opus-agent`,
-`qwts-claude-sonnet-agent`, `qwts-codex-luna-agent`, `qwts-codex-sol-agent`,
-`qwts-codex-terra-agent`, and `qwts-vscode-agent`.
+harness-level slug is also the macOS agent account name), and which are
+retired is read from `governance/agents.json` in the org repository, never
+from this document: a copy here would go stale on the next roster change and
+would put one organization's data in a template every organization consumes.
 
 Adding an App requires one roster row with its exact slug, harness, and active
 status. Removing access means retiring the row, revoking or narrowing the App,
