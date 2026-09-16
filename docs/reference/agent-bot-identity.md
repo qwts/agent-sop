@@ -2,8 +2,9 @@
 
 The `qwts` organization uses one GitHub App per agent so bot-authored pull
 requests remain eligible for the human approval required by the
-[branch, PR, and review SOP](../sop/branch-pr-review.md). This repository owns
-the roster and policy; the standalone
+[branch, PR, and review SOP](../sop/branch-pr-review.md). This document owns
+the policy; the roster is data in the organization's org repository, under the
+[agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/README.md) contract; the standalone
 [`agent-bot-identity`](https://github.com/qwts/agent-bot-identity/tree/9ff7ce00b6a6945c7f249cf7a6ebf37cf58e86ee)
 repository owns runtime code, installation, hooks, token minting, and
 troubleshooting ([ENG-0128](../decisions/ENG-0128-agent-bot-runtime-ownership.md)).
@@ -27,10 +28,11 @@ troubleshooting ([ENG-0128](../decisions/ENG-0128-agent-bot-runtime-ownership.md
 
 ## Roster
 
-[`governance/agents.json`](../../governance/agents.json) is the source of
-truth. Drift validates every active App against every active and onboarding
-governed repository; retired identities keep their rows but leave the active
-set.
+`governance/agents.json` in the org repository is the source of truth, and
+`governance/organization-profile.json` beside it is the secret-free projection
+the runtime bootstraps from. Drift validates every active App against every
+active and onboarding governed repository; retired identities keep their rows
+but leave the active set.
 
 Current active identities — one per harness
 ([ENG-0339](../decisions/ENG-0339-os-account-determines-persona.md): the
@@ -69,8 +71,8 @@ Each App is owned by `qwts`, installed only on selected repositories, and has:
 
 No App receives approval authority, org-wide installation, user-to-server
 OAuth, or unrelated permissions. Every active App must be installed on every
-active and onboarding repository in `governance/repos.json`; a narrower scope
-is drift, not a per-agent exception.
+active and onboarding repository in the org repository's `governance/repos.json`;
+a narrower scope is drift, not a per-agent exception.
 
 ## Runtime contract
 

@@ -43,11 +43,12 @@ drift report stays green until a push fails mid-task.
    <slug>` answers *which agent inside that tool*, which the environment cannot
    know without being taught a model name it has no reason to carry. Explicit
    `--app` and `GH_AGENT_APP` outrank both, unchanged.
-4. **The roster is data.** [`governance/agents.json`](../../governance/agents.json)
+4. **The roster is data.** [`governance/agents.json`](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/governance/agents.json)
    lists every identity with its harness and status. Drift verifies exactly the
    active roster, so registering an agent is what makes it checked, and a
    retired agent keeps its row — offboarding, not deletion, matching the repo
-   manifest.
+   manifest. The roster has since moved to the organization's org repository
+   (contract: [qwts/agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/README.md)).
 5. **This amends, and does not rewrite, ENG-0016 and ENG-0045.** ENG-0016's
    "one App per harness" and ENG-0045's "the directory dictates the App" remain
    correct at the level they describe: the directory still dictates the

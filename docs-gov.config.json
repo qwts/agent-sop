@@ -12,19 +12,19 @@
     "bankSlack": 0.25,
     "overrides": [
       {
-        "path": "docs/reference/governed-repos.md",
-        "budget": 1400,
-        "reason": "the generated fleet table grows by one row per onboarded repo, so this doc gets monotonically longer for reasons prose tightening cannot offset. The previous 3000 bought roughly ten repos of headroom and was spent exactly there, at localnotes; as that override said it should, the breach was absorbed by a split rather than another raise — the bootstrap, drift, reconcile and codex-sync runbook lanes moved to governed-repos-operations.md, leaving this doc as what it claims to be, the manifest's human-readable view. 1400 is the post-split size plus room for roughly ten more rows. The next breach should be re-examined, not reflexively raised"
-      },
-      {
         "path": "docs/reference/agent-bot-identity.md",
-        "budget": 1100,
-        "reason": "qwts roster, permissions, and the installed CLI boundary are one governance contract; runtime setup and troubleshooting moved to agent-bot-identity under ENG-0128"
+        "budget": 1200,
+        "reason": "the identity model, permissions, and the installed CLI boundary are one governance contract; runtime setup and troubleshooting moved to agent-bot-identity under ENG-0128. Raised 1100 → 1200 on 2026-09-16 when the roster left for the organization's org repository (agent-org, qwts/agent-sop#372): the doc now says where the roster and profile live instead of holding them, which is a few more words, not a longer roster"
       },
       {
         "path": "docs/decisions/ENG-0004-centralize-shared-cicd.md",
         "budget": 3650,
         "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 and then → 3400 on 2026-09-14 for the dev-steward and agent-sop rename amendments (#355), the second and third renames this record must carry; raised 3400 → 3550 on 2026-09-15 for the ENG-0355 / ENG-0282 amendment (the shared-CI home moves to qwts-agent-ci and pins become commits), the fourth amendment this record carries; raised 3550 → 3650 on 2026-09-15 when the CI reference documents left for qwts-agent-ci (#372) and this record's five links to them became ed5c5d8 permalinks — no prose was added, only longer link targets"
+      },
+      {
+        "path": "docs/decisions/ENG-0339-os-account-determines-persona.md",
+        "budget": 2650,
+        "reason": "accepted ENG records are amended or superseded rather than rewritten; moving the App roster to the organization's org repository (qwts/agent-sop#372) turned this record's roster link into a bf072f7 permalink with a one-line note, which is the only growth past the 2600 default. The next breach should be re-examined, not reflexively raised"
       },
       {
         "path": "docs/decisions/ENG-0081-transcript-bound-agent-execution-identities.md",
@@ -97,7 +97,7 @@
     "links": true,
     "orphans": true,
     "stalePaths": {
-      "roots": ["docs", "tools"]
+      "roots": ["docs"]
     }
   },
   "decisionSeries": {

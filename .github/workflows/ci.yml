@@ -144,12 +144,8 @@ jobs:
           retry-delay-seconds: '5'
       - name: Workflow runtime policy
         uses: qwts/qwts-agent-ci/.github/actions/ci-runtime-check@3a5617b287d922e37f262210a1d8750d8217b56d
-      - name: Lint and configuration checks
-        run: npm run lint:markdown && npm run repos:check && npm run pins:check
-        env:
-          GH_DRIFT_TOKEN: ${{ github.token }}
-      - name: Manifest tooling tests
-        run: npm test
+      - name: Markdown lint
+        run: npm run lint:markdown
 
   docs-gov:
     needs: [policy, merge-evidence]
@@ -218,8 +214,6 @@ jobs:
           attempts: '2'
           retry-delay-seconds: '5'
           termination-grace-seconds: '10'
-      - name: Manifest and reconciler smoke
-        run: node tools/repos/repos.mjs check && node --test tools/repos/tests/repos.test.mjs
 
   gate:
     name: CI

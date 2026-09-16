@@ -1,9 +1,9 @@
 # Hook composition audits
 
 This record captures active-fleet surveys for repository-owned commands inside
-the managed hook adapters. It supplements the `codexSync` declarations in
-[governed repositories](governed-repos.md); the manifest remains the
-machine-readable source of ownership declarations.
+the managed hook adapters. It supplements the `codexSync` declarations in the
+organization's org repository manifest ([the governed-repos manifest](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md));
+the manifest remains the machine-readable source of ownership declarations.
 
 ## 2026-08-18 — Image Trail process guard
 

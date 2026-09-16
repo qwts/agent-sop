@@ -141,5 +141,5 @@ Consequences of this amendment:
 ## References
 
 - [Agent bot identity governance](../reference/agent-bot-identity.md)
-- [Agent bot organization operations](../reference/agent-bot-operations.md)
+- [Agent bot organization operations](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/agent-bot-operations.md) — last revision here; the runbook now lives in the organization's org repository beside the roster it operates on
 - [`agent-bot-identity` runtime](https://github.com/qwts/agent-bot-identity/tree/9ff7ce00b6a6945c7f249cf7a6ebf37cf58e86ee)

@@ -47,7 +47,7 @@ missing workflow step.
   than it looks: a second credential-and-email set to custody, GitHub's
   one-free-machine-account ToS limit, and a collaborator seat — the exact
   forcing function on which the
-  [GitHub account reference](../reference/github-account.md) defers the
+  [GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md) defers the
   organization decision. It is also indistinguishable from a human in the UI,
   which defeats the audit purpose of a distinct identity.
 - **`github-actions[bot]`** exists only inside Actions runners. Local agent
@@ -162,4 +162,4 @@ Consequences:
 
 - [Agent bot identity reference](../reference/agent-bot-identity.md) — setup and per-task usage
 - [Branch, PR, and review workflow](../sop/branch-pr-review.md) — the merge bar this record makes satisfiable
-- [GitHub account reference](../reference/github-account.md) — account baseline; why no second user account
+- [GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md) — account baseline; why no second user account (organization data, since moved to the organization's org repository)

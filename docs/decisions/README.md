@@ -100,5 +100,5 @@ principles; it does not waive the lower priorities.
 ## Related
 
 - [Shared SOPs index](../sop/README.md) — the standard operating procedures ENG-0008 governs (how work moves: branch → PR → review → release)
-- [GitHub account reference](../reference/github-account.md) — account tier (Pro) and what decisions assume about it
+- GitHub account reference — the account tier and what decisions assume about it; organization data, so it now lives in the organization's org repository (an [agent-org](https://github.com/qwts/agent-org/tree/de1a4ecfb86b652e246a3d56cf358b035ce39be4) instance). Last revision here: [github-account.md at `bf072f7`](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md)
 - [`qwts/photos` wiki](https://github.com/qwts/photos/wiki) — photos' own `ADR-NNNN` series and SOPs
