@@ -19,7 +19,7 @@ train/validation split), a runner that stages any git revision of the docs
 and asks a fresh headless agent each question, and a comparator that accepts
 a revision only if the held-out validation score strictly improves. Measured
 on two real revisions with a haiku-class executor
-([results](../../tools/docs-eval/results/)):
+([results](https://github.com/qwts/agent-sop/tree/ed5c5d8/tools/docs-eval/results)):
 
 - pre-Phase-1 docs: 50% overall (train 60%, validation 33%)
 - with Phase 1 landed: 100% overall — comparator verdict ACCEPT, 8 tasks
@@ -31,7 +31,7 @@ on two real revisions with a haiku-class executor
 ## Decision
 
 1. **Adopt the loop, bounded.** The benchmark, runner, and validation-gate
-   comparator live in `tools/docs-eval/` and are run **on demand**: after a
+   comparator live in [tools/docs-eval/](https://github.com/qwts/agent-sop/tree/ed5c5d8/tools/docs-eval) and are run **on demand**: after a
    new ENG record, a doc restructure, or a repo adopting the governance
    gate. Never scheduled, never per-PR, never a merge gate — that remains
    docs-gov's job ([ENG-0009](ENG-0009-documentation-governance-gate.md)).
@@ -67,6 +67,6 @@ on two real revisions with a haiku-class executor
 
 ## References
 
-- [Docs evaluation reference](../reference/docs-evaluation.md) — how to run, baseline evidence, cost
+- [Docs evaluation reference](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/docs-evaluation.md) — how to run, baseline evidence, cost
 - [ENG-0009](ENG-0009-documentation-governance-gate.md) — the deterministic gate this complements, and the deferral this record resolves
 - [microsoft/SkillOpt](https://github.com/microsoft/SkillOpt) — the validation-gated shape adopted here

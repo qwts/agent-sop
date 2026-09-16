@@ -1,7 +1,9 @@
 # Contributing
 
 This repository is the org's cross-repo home for engineering decisions (ENG
-records), shared SOPs, and reusable CI. How work moves here:
+records), shared SOPs, and guides; the mechanisms it used to host live in
+capability repositories consumed at pinned commits (see [README.md](README.md)).
+How work moves here:
 
 - **Decisions**: new or changed cross-repo direction is issue-first
   ([ENG-0013](docs/decisions/ENG-0013-issue-first-provenance.md)): open a
@@ -20,9 +22,15 @@ records), shared SOPs, and reusable CI. How work moves here:
   additionally follow the [feature-lifecycle SOP](docs/sop/feature-lifecycle.md)
   ([ENG-0007](docs/decisions/ENG-0007-feature-lifecycle-convention.md)):
   problem, requirements, design, proposed patterns at open; closeout at close.
-- **Shared CI** ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md)):
-  reusable workflows are consumed by other repos at `@v1`; never move the tag
-  without the playbook-side CI gate green.
+  Before opening or updating a PR, run the local gates listed in
+  [AGENTS.md](AGENTS.md): the docs-gov check from the pinned capability and
+  `npm run lint:markdown`.
+- **Shared CI** ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md),
+  amended by [ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)):
+  the composite actions and reusable workflows live in `qwts-agent-ci` and
+  `qwts-agent-docs-gov` and are consumed at a 40-hex commit; a pin bump in
+  this repository is a reviewed PR, and the capability repository's own CI
+  passes on a change before any consumer pins it.
 - **Agent primitives**: `AGENTS.md`, skills, prompts, and MCP config move
   through the same PR review as source code — see
   [AGENTS.md](AGENTS.md) and [ENG-0006](docs/decisions/ENG-0006-agentic-primitives-governance.md).

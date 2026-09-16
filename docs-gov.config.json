@@ -4,7 +4,6 @@
     "skills/**/*.md",
     "README.md",
     "CONTRIBUTING.md",
-    "usage.md",
     "AGENTS.md"
   ],
   "indexes": ["README.md"],
@@ -12,11 +11,6 @@
     "perDoc": 2600,
     "bankSlack": 0.25,
     "overrides": [
-      {
-        "path": "usage.md",
-        "budget": 4000,
-        "reason": "walkthrough of the full playbook flow; splitting it would break the single narrative it exists to provide"
-      },
       {
         "path": "docs/reference/governed-repos.md",
         "budget": 1400,
@@ -29,18 +23,13 @@
       },
       {
         "path": "docs/decisions/ENG-0004-centralize-shared-cicd.md",
-        "budget": 3550,
-        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 and then → 3400 on 2026-09-14 for the dev-steward and agent-sop rename amendments (#355), the second and third renames this record must carry; raised 3400 → 3550 on 2026-09-15 for the ENG-0355 / ENG-0282 amendment (the shared-CI home moves to qwts-agent-ci and pins become commits), the fourth amendment this record carries"
+        "budget": 3650,
+        "reason": "accepted ENG records are amended or superseded rather than rewritten, so each amendment must remain with the original lifecycle decision; amendments carry the decision and its evidence only, and every operational contract is split into governed-ci-rollout.md and governed-ci-release-lifecycle-fleet.md; raised 3150 → 3250 and then → 3400 on 2026-09-14 for the dev-steward and agent-sop rename amendments (#355), the second and third renames this record must carry; raised 3400 → 3550 on 2026-09-15 for the ENG-0355 / ENG-0282 amendment (the shared-CI home moves to qwts-agent-ci and pins become commits), the fourth amendment this record carries; raised 3550 → 3650 on 2026-09-15 when the CI reference documents left for qwts-agent-ci (#372) and this record's five links to them became ed5c5d8 permalinks — no prose was added, only longer link targets"
       },
       {
         "path": "docs/decisions/ENG-0081-transcript-bound-agent-execution-identities.md",
         "budget": 2650,
         "reason": "accepted ENG records are amended or superseded rather than rewritten; retiring the push lanes (qwts/agent-sop#371) turned this record's reference to the deleted agent-bot client module into a permalink, which is the only growth past the 2600 default. The next breach should be re-examined, not reflexively raised"
-      },
-      {
-        "path": "docs/reference/ci-execution-policy.md",
-        "budget": 3200,
-        "reason": "this is the single authoritative event-to-gate contract, so the fleet's other CI docs link here rather than restating it — growth here buys deletions elsewhere. What should absorb the next breach is a split, not another raise"
       }
     ],
     "contextSets": []

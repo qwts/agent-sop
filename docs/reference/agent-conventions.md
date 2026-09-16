@@ -12,7 +12,7 @@ No direct pushes to instruction files, skills, slash commands, MCP config, or ho
 
 ## Validation before push
 
-Run the repo's cheap gates locally before opening or updating a PR: lint, typecheck, unit tests, and the repo's `docs-gov` check if its docs are enrolled (see [documentation governance](documentation-governance.md)). A change whose cheap gates have not been run is not ready for review.
+Run the repo's cheap gates locally before opening or updating a PR: lint, typecheck, unit tests, and the repo's `docs-gov` check if its docs are enrolled (see [documentation governance](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/documentation-governance.md)). A change whose cheap gates have not been run is not ready for review.
 
 **Agents do not run the heavy suites on a local machine.** End-to-end, Storybook, performance, coverage and whole-`ci` lanes fan out to many workers — an end-to-end worker boots a full application — and several agent sessions doing that at once across repos and worktrees is what exhausts a developer's memory ([ENG-0138](../decisions/ENG-0138-machine-scoped-agent-memory-budget.md)). Push the branch and let GitHub verify: CI is the authoritative lane, its workflow invokes the underlying CI entrypoint directly, and nothing is lost but latency. The [machine memory guard is retired](agent-memory-guard.md); no guard wrapper or admission workflow is required. The local heavy-suite policy above remains unchanged.
 

@@ -1,10 +1,10 @@
 # AGENTS.md
 
-Canonical, vendor-neutral agent context for this repository, per [ENG-0006](docs/decisions/ENG-0006-agentic-primitives-governance.md). Vendor files — [.github/copilot-instructions.md](.github/copilot-instructions.md) and this repo's Copilot custom-agent/prompt suite — are thin adapters onto this file: they add vendor-specific orientation and never restate what is here.
+Canonical, vendor-neutral agent context for this repository, per [ENG-0006](docs/decisions/ENG-0006-agentic-primitives-governance.md). This repository carries no vendor instruction file of its own: the Copilot custom-agent/prompt suite that walks the SDLC guides, and the Copilot instructions file that routes to it, live in [qwts-agent-sdlc](https://github.com/qwts/qwts-agent-sdlc/tree/9168b22ad2a7c71938ae12c1c412753773887f04) as thin adapters that add vendor-specific orientation and never restate what is here.
 
 ## What this repository is
 
-The org's cross-repo home for engineering decisions (ENG records), shared SOPs, shared CI/CD, and the docs-governance tooling every `qwts` repo consumes. Full map: [README.md](README.md).
+The org's cross-repo home for engineering decisions (ENG records), shared SOPs, the org-wide agent conventions, and the SDLC guides. The mechanisms every `qwts` repo consumes — shared CI, the docs-governance gate, the dependency inventory, the Copilot SDLC chain — live in capability repositories, each pinned to a commit. Full map: [README.md](README.md).
 
 <!-- governed:shared-agent-discovery:start -->
 
@@ -31,10 +31,16 @@ inherit by default, vary by explicit delta).
 - **ENG records:** format, numbering, and the supersede-don't-rewrite rule are in [docs/decisions/README.md](docs/decisions/README.md). Adding or changing a record updates its row in that index table in the same PR — an unindexed record fails docs-gov's `orphan-doc` check.
 - **SOPs:** baselines under [docs/sop/](docs/sop/) propagate to every repo per [ENG-0008](docs/decisions/ENG-0008-shared-sop-inheritance.md); edits need the changelog at the bottom of the SOP updated.
 - **Governed scope:** the set of governed repos is the manifest `governance/repos.json` ([ENG-0011](docs/decisions/ENG-0011-governed-scope-manifest.md)). Editing it requires regenerating the table with `node tools/repos/repos.mjs --write` and passing `node tools/repos/repos.mjs check` — CI runs the check, so an un-regenerated edit fails.
-- **Docs-gov gate:** every change under `docs/` or `skills/`, plus this file, must pass `node tools/docs-gov/docs-gov.mjs` and `npm run lint:markdown` before a PR is opened or updated. See [documentation governance](docs/reference/documentation-governance.md) for what each rule catches. New files must be reachable by link from [README.md](README.md), or the `orphan-doc` rule fails them.
+- **Docs-gov gate:** every change under `docs/` or `skills/`, plus this file, must pass the docs-gov check and `npm run lint:markdown` before a PR is opened or updated. The check runs from the pinned `qwts-agent-docs-gov` capability — the same commit `.github/workflows/ci.yml` calls — against this repository's `docs-gov.config.json`:
+
+  ```bash
+  git clone -q https://github.com/qwts/qwts-agent-docs-gov.git /tmp/docs-gov && git -C /tmp/docs-gov checkout -q 67db7dc9c20bc29222fb605b7ff9432fd58a2a3f && node /tmp/docs-gov/tools/docs-gov/docs-gov.mjs --root .
+  ```
+
+  See [documentation governance](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/documentation-governance.md) for what each rule catches. New files must be reachable by link from [README.md](README.md), or the `orphan-doc` rule fails them.
 - **Machine memory guard:** retired by the owner. The [retirement record](docs/reference/agent-memory-guard.md) preserves the decision, issue dispositions, and historical source; downstream removal paths remain recorded.
 - **Shared skills:** [skills/](skills/README.md) holds skills installed into every agent's harness, not just this repo's. They are ENG-0006 primitives owned in `.github/CODEOWNERS` and subject to the same gates as docs; adding one means linking it from the skills index.
-- **Shared CI:** reusable workflows are consumed by other repos at `@v1`; the tag never moves without this repo's own CI (`test`, `docs-gov / docs-gov`) passing on the change first ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md)).
+- **Shared CI:** this repository hosts no reusable workflows or composite actions any more. Its own `.github/workflows/ci.yml` consumes `qwts-agent-ci` (Action Policy, bounded installer, runtime-policy check) and `qwts-agent-docs-gov` (the docs gate) at the 40-hex commits listed in [README.md](README.md) ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md) as amended by [ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)). A pin bump is a reviewed PR here; `npm run pins:check` verifies each pin is reachable from the capability repository's default branch.
 
 ## ENG-0006 conformance
 

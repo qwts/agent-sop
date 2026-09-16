@@ -1,16 +1,19 @@
-# Reference implementation of the governed CI lifecycle in
-# docs/reference/ci-execution-policy.md. The repository-level Actions Policy is
-# the primary actor/fork enforcement. The Action Policy job is an additional
-# fail-closed check loaded from an immutable trusted revision.
+# This repository's own CI: a consumer of the governed CI lifecycle it used to
+# host. The lifecycle contract is the CI execution policy in qwts-agent-ci
+# (docs/ci-execution-policy.md at the pinned commit). The Action Policy step,
+# the bounded installer, and the runtime-policy check are that repository's
+# composite actions; the docs gate is qwts-agent-docs-gov's reusable workflow.
+# Every capability is pinned to a 40-hex commit, never a branch or tag
+# (ENG-0355, ENG-0282). The repository-level Actions Policy is the primary
+# actor/fork enforcement; the Action Policy job is an additional fail-closed
+# check loaded from the pinned revision.
 #
-# Placement (ENG-0269, 2026-09-14 amendment): this repository's own jobs run on
-# the owner's persistent self-hosted Mac, pull-request events included. That is
-# an accepted risk, not an oversight: the repository is private, so no fork can
-# reach the runner, and the actor policy admits only the owner, dependabot, and
-# the owner's registered agent Apps — identities that already execute on this
-# machine, so a PR they open runs nothing here they cannot run locally. An
-# ephemeral runner remains the recorded upgrade path; standard hosted runners
-# remain the default for every other governed repository.
+# Placement (ENG-0269, 2026-09-15 amendment): every job runs on standard
+# GitHub-hosted runners. The repository is public and no self-hosted runner is
+# registered for it, so the 2026-09-14 amendments that moved this repository
+# to self-hosted labels (private repository, metered hosted minutes) no longer
+# apply. The Windows npm-shim job left with the bounded-command action it
+# exercised; qwts-agent-ci tests its own actions.
 name: CI
 
 on:
@@ -32,22 +35,11 @@ concurrency:
   group: ci-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.event_name == 'merge_group' && format('merge-group-{0}', github.event.merge_group.head_ref) || github.sha }}
   cancel-in-progress: ${{ github.event_name != 'push' }}
 
-# Runner placement (ENG-0269 amendment, 2026-09-14): every job in this
-# repository runs on the owner's self-hosted runners — hosted minutes are
-# metered on a private repository, so no job may fall back to a GitHub-hosted
-# label. The Mac carries the general jobs (labels self-hosted/macOS/ARM64). The
-# Windows shim job needs a self-hosted Windows runner; until one is registered
-# and the repository variable CI_WINDOWS_RUNNER is set to `true`, that job is
-# skipped and the gate accepts the skip. The CodeQL lane never runs while the
-# repository is private, so its hosted default costs nothing. Reusable
-# workflows called below are told the Mac labels through their `runs-on`
-# input; their default stays `ubuntu-latest` so external consumers are
-# unaffected.
 jobs:
   policy:
     name: Action Policy
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       mode: ${{ steps.policy.outputs.mode }}
@@ -61,13 +53,13 @@ jobs:
       release_gate_mode: ${{ steps.policy.outputs.release_gate_mode }}
     steps:
       - id: policy
-        uses: qwts/dev-steward/.github/actions/ci-policy@bed29090d8eaff29a75b983e94a50957c3ac9a42
+        uses: qwts/qwts-agent-ci/.github/actions/ci-policy@3a5617b287d922e37f262210a1d8750d8217b56d
 
   merge-evidence:
     name: Verify merged commit evidence
     needs: policy
     if: needs.policy.outputs.run_post_merge == 'true'
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       validated: ${{ steps.evidence.outputs.validated }}
@@ -85,7 +77,7 @@ jobs:
     name: Verify preflight evidence
     needs: policy
     if: github.event_name == 'pull_request' && needs.policy.outputs.run_full == 'true'
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       validated: ${{ steps.evidence.outputs.validated }}
@@ -112,7 +104,7 @@ jobs:
       always() && needs.policy.result == 'success' &&
       ((needs.policy.outputs.run_full == 'true' && needs.preflight-evidence.outputs.validated != 'true') ||
       (needs.policy.outputs.run_post_merge == 'true' && needs.merge-evidence.outputs.validated != 'true'))
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     # ENG-0313 fan-out backpressure. Pull-request installs share one repo-wide
     # lane, so a `main` push that retargets every open PR queues its complete
@@ -131,8 +123,12 @@ jobs:
         with:
           node-version: 22
           package-manager-cache: false
+      # ENG-0269: the installer runs through qwts-agent-ci's bounded
+      # dependency-install action, which restores the exact lockfile-bound
+      # cache and launches npm through the bounded-command runner at the same
+      # pinned commit.
       - name: Install locked dependencies
-        uses: ./.github/actions/bounded-dependency-install
+        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
         env:
           NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
         with:
@@ -146,11 +142,13 @@ jobs:
           timeout-seconds: '300'
           attempts: '2'
           retry-delay-seconds: '5'
+      - name: Workflow runtime policy
+        uses: qwts/qwts-agent-ci/.github/actions/ci-runtime-check@3a5617b287d922e37f262210a1d8750d8217b56d
       - name: Lint and configuration checks
-        run: npm run lint:markdown && npm run docs:gov && npm run repos:check && npm run ci-runtime:check && npm run pins:check
+        run: npm run lint:markdown && npm run repos:check && npm run pins:check
         env:
           GH_DRIFT_TOKEN: ${{ github.token }}
-      - name: Unit and workflow-tooling tests
+      - name: Manifest tooling tests
         run: npm test
 
   docs-gov:
@@ -159,46 +157,12 @@ jobs:
       always() && needs.policy.result == 'success' &&
       (needs.policy.outputs.run_full == 'true' ||
       (needs.policy.outputs.run_post_merge == 'true' && needs.merge-evidence.outputs.validated != 'true'))
-    uses: ./.github/workflows/docs-governance.yml
+    # The pinned commit is written twice on purpose: a called workflow cannot
+    # read its own commit from the github context, so tooling-ref names the
+    # revision the checks are fetched from and the job fails closed if empty.
+    uses: qwts/qwts-agent-docs-gov/.github/workflows/docs-governance.yml@67db7dc9c20bc29222fb605b7ff9432fd58a2a3f
     with:
-      use-local-tooling: true
-      runs-on: '["self-hosted", "macOS", "ARM64"]'
-
-  dependency-inventory:
-    needs: [policy, merge-evidence, preflight-evidence]
-    if: >-
-      always() && needs.policy.result == 'success' &&
-      ((needs.policy.outputs.run_full == 'true' && needs.preflight-evidence.outputs.validated != 'true') ||
-      (needs.policy.outputs.run_post_merge == 'true' && needs.merge-evidence.outputs.validated != 'true'))
-    uses: ./.github/workflows/dependency-inventory.yml
-    with:
-      use-local-tooling: true
-      fail-on-error: true
-      runs-on: '["self-hosted", "macOS", "ARM64"]'
-
-  bounded-command-windows:
-    name: Bounded command / Windows npm
-    needs: policy
-    if: >-
-      vars.CI_WINDOWS_RUNNER == 'true' &&
-      (needs.policy.outputs.run_full == 'true' || needs.policy.outputs.run_post_merge == 'true')
-    runs-on: [self-hosted, Windows]
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: 22
-          package-manager-cache: false
-      - name: Launch npm command shim through the bounded runner
-        uses: ./.github/actions/bounded-command
-        with:
-          task: Verify Windows npm command shim
-          executable: npm.cmd
-          arguments-json: '["--version"]'
-          timeout-seconds: '30'
+      tooling-ref: 67db7dc9c20bc29222fb605b7ff9432fd58a2a3f
 
   codeql:
     needs: [policy, merge-evidence, preflight-evidence]
@@ -221,7 +185,7 @@ jobs:
     name: Post-merge smoke
     needs: [policy, merge-evidence]
     if: needs.policy.outputs.run_post_merge == 'true' && needs.merge-evidence.outputs.validated == 'true'
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 12
     # This lane runs only on a default-branch push and is the trusted cache
     # writer, so it takes the per-run group: seeding evidence is never dropped
@@ -239,7 +203,7 @@ jobs:
           node-version: 22
           package-manager-cache: false
       - name: Seed trusted default-branch dependency cache
-        uses: ./.github/actions/bounded-dependency-install
+        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
         env:
           NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
         with:
@@ -259,9 +223,9 @@ jobs:
 
   gate:
     name: CI
-    needs: [policy, merge-evidence, preflight-evidence, full, docs-gov, dependency-inventory, bounded-command-windows, codeql, post-merge]
+    needs: [policy, merge-evidence, preflight-evidence, full, docs-gov, codeql, post-merge]
     if: always() && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Enforce the selected lifecycle lane
@@ -270,24 +234,14 @@ jobs:
           POLICY: ${{ needs.policy.result }}
           FULL: ${{ needs.full.result }}
           DOCS_GOV: ${{ needs.docs-gov.result }}
-          INVENTORY: ${{ needs.dependency-inventory.result }}
-          BOUNDED_WINDOWS: ${{ needs.bounded-command-windows.result }}
           CODEQL: ${{ needs.codeql.result }}
           PREFLIGHT: ${{ needs.preflight-evidence.result }}
           PREFLIGHT_VALIDATED: ${{ needs.preflight-evidence.outputs.validated }}
           MERGE_VALIDATED: ${{ needs.merge-evidence.outputs.validated }}
           POST_MERGE: ${{ needs.post-merge.result }}
           PRIVATE: ${{ github.event.repository.private }}
-          WINDOWS_RUNNER: ${{ vars.CI_WINDOWS_RUNNER }}
         run: |
           test "$POLICY" = success
-          # The Windows shim job runs only on a registered self-hosted Windows
-          # runner; without one it must have been skipped, never failed.
-          if [ "$WINDOWS_RUNNER" = true ]; then
-            test "$BOUNDED_WINDOWS" = success
-          else
-            test "$BOUNDED_WINDOWS" = skipped
-          fi
           # A private repository has no code scanning (#355): the CodeQL lane
           # must have been skipped, never failed, and then counts as satisfied.
           if [ "$PRIVATE" = true ]; then
@@ -301,14 +255,12 @@ jobs:
               else
                 test "$FULL" = success
                 test "$DOCS_GOV" = success
-                test "$INVENTORY" = success
                 test "$CODEQL" = success
               fi
               ;;
             queue|manual)
               test "$FULL" = success
               test "$DOCS_GOV" = success
-              test "$INVENTORY" = success
               test "$CODEQL" = success
               ;;
             post-merge)
@@ -318,7 +270,6 @@ jobs:
               else
                 test "$FULL" = success
                 test "$DOCS_GOV" = success
-                test "$INVENTORY" = success
               fi
               ;;
             *) exit 1 ;;

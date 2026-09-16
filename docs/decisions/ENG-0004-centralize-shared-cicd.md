@@ -104,7 +104,7 @@ written, per the rule that accepted records are amended, not rewritten.
 
 Shared CI now includes the execution contract, not only reusable implementation
 pieces. Every governed repository follows the
-[CI execution policy](../reference/ci-execution-policy.md): draft PRs start no
+[CI execution policy](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/ci-execution-policy.md): draft PRs start no
 Actions jobs and agents run lint/format/type/unit checks locally before marking
 ready; an agent may manually run the complete suite for the final feature SHA;
 ready PRs and ready updates reuse that evidence only for the exact SHA and
@@ -190,8 +190,8 @@ updates, and exact-SHA fallback validation without changing their merge methods.
 Required contexts bind to their actual publishers. Release lanes share semantic
 Changesets output, and privileged writes share the Client ID/private-key
 credential boundary. The existing PR concurrency contract remains unchanged.
-The [CI policy](../reference/ci-execution-policy.md) and
-[rollout checklist](../reference/governed-ci-rollout.md) define these controls.
+The [CI policy](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/ci-execution-policy.md) and
+[rollout checklist](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/governed-ci-rollout.md) define these controls.
 
 ## Amendment — 2026-08-02: source inputs and generated release projections
 
@@ -213,9 +213,9 @@ CodeQL, reviews, version consistency, packaging, signing, provenance, and
 release integrity, applies to it unchanged.
 
 The operational contract is in the
-[CI policy](../reference/ci-execution-policy.md); per-repository dispositions
+[CI policy](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/ci-execution-policy.md); per-repository dispositions
 are in the
-[release-lifecycle fleet handoff](../reference/governed-ci-release-lifecycle-fleet.md).
+[release-lifecycle fleet handoff](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/governed-ci-release-lifecycle-fleet.md).
 
 ## Amendment — 2026-08-22: pinning superseded by immutable releases
 
