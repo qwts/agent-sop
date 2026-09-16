@@ -61,7 +61,8 @@ Per-repo decisions do not move. Photos keeps its `ADR-NNNN` series in its wiki.
 ## Amendment — 2026-07-19: account tier
 
 The account is on **GitHub Pro**, not Free (see
-[GitHub account reference](../reference/github-account.md)). This does not
+[GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md),
+since moved to the organization's org repository). This does not
 change the decision, but sharpens the org analysis above: Pro already provides
 protected branches and rulesets on **personal private** repos, so private-repo
 branch protection is *not* among the things forming an organization would buy.

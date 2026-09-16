@@ -34,10 +34,11 @@ unattended, rather than sessions launched by hand from the owner's desktop.
    every layer above it is untouched.
 2. **One standard macOS account per harness, named by convention.** The
    account's short name *is* the harness-level slug from
-   [`governance/agents.json`](../../governance/agents.json) — account
+   [`governance/agents.json`](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/governance/agents.json) — account
    `qwts-devin-agent`, full name "Devin". The roster gains no new field and no
    second file exists: drift derives the account mapping from the active
-   roster plus this rule.
+   roster plus this rule. (The roster has since moved to the organization's
+   org repository.)
 3. **The owner's account resolves to the human persona by default.** Unpinned
    work from the `user` account (christopher kane) is authored as the human
    `qwts` GitHub account; a harness run there is a **delegate** operating

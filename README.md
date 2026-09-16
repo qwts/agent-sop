@@ -52,13 +52,13 @@ Each document includes navigation links, prerequisites, and cross-references to 
 
 ## Shared standards and tooling
 
-- [Governed repositories](docs/reference/governed-repos.md) — which repos this playbook governs, and how to add or remove one; generated from the `governance/repos.json` manifest (ENG-0011).
+- Organization data — the governed-repos manifest, the agent App roster and its secret-free profile, and the pinned capability map are not in this template. They live in an organization's own org repository, created from the [agent-org](https://github.com/qwts/agent-org/tree/de1a4ecfb86b652e246a3d56cf358b035ce39be4) template, whose contract is [the governed-repos manifest](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md) and its generated [governed repositories](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/governed-repos.md) table (ENG-0011); the agent-bot organization operations runbook (registration, verification, and incident expectations) lives there too.
 - [Shared SOPs](docs/sop/README.md) — org-wide standard operating procedures for how work moves, inherited by every repo (ENG-0008).
 - [Org-wide agent conventions](docs/reference/agent-conventions.md) — the shared agent working agreement every repo's `AGENTS.md` links to (ENG-0006).
 - [Agent bot identity governance](docs/reference/agent-bot-identity.md) — the qwts App roster, permissions, coverage, and integration contract (ENG-0016, ENG-0128).
-- [Agent bot organization operations](docs/reference/agent-bot-operations.md) — registration, verification, and incident expectations without duplicating the standalone runtime.
 - [Agent execution identity policy](docs/reference/agent-execution-identity.md) — the private transcript-bound identity and audit boundary behind each agent conversation (ENG-0081).
 - [Agentic primitives conformance checklist](docs/reference/agentic-primitives-conformance-checklist.md) — the ENG-0006 §6 checklist per-repo alignment issues link to.
+- [Hook composition audits](docs/reference/hook-composition-audits.md) — active-fleet surveys of repository-owned commands inside the managed hook adapters, supplementing the manifest's `codexSync` declarations.
 - [Machine memory guard retirement](docs/reference/agent-memory-guard.md) — historical decision and source; the implementation and dormant backlog are retired.
 - [Shared agent skills](skills/README.md) — skills centralized here and installed into every agent harness, rather than copied per repo (ENG-0004, ENG-0006).
 - [Dependency reuse policy](docs/reference/dependency-reuse-policy.md) — the ENG-0269 cache contract every consumer of the shared `bounded-dependency-install` action follows.

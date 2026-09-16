@@ -12,7 +12,7 @@ model is settled — [ENG-0008](ENG-0008-shared-sop-inheritance.md) makes every
 only as prose, restated across at least four documents that already disagree:
 
 - [the SOP inventory](../sop/inventory.md) lists photos, cartograph, image-trail, bookmarkit, quorum;
-- [the GitHub account reference](../reference/github-account.md) adds private repos;
+- [the GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md) adds private repos;
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md) enumerates a fifth, overlapping set;
 - [the conformance checklist](../reference/agentic-primitives-conformance-checklist.md) hardcodes per-repo alignment issue numbers.
 
@@ -31,7 +31,7 @@ govern" has no answerable home.
    the same reason ENG-0009's tooling ships none.
 2. **The human table is generated, not authored.** `tools/repos/repos.mjs`
    validates the manifest and renders the table into
-   [governed-repos.md](../reference/governed-repos.md) between fixed markers; CI
+   [governed-repos.md](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/governed-repos.md) between fixed markers; CI
    fails on an invalid manifest or a table that drifts from it. This follows
    ENG-0004's delivery shape: a zero-dependency CLI, gated in this repo's CI.
 3. **Add and remove are manifest edits.** Onboard by adding a row
@@ -70,4 +70,4 @@ govern" has no answerable home.
 - qwts/playbook-engineering#20 — the originating issue (opened retroactively, pre-ENG-0013)
 - [ENG-0008](ENG-0008-shared-sop-inheritance.md) — inherit-by-default, the model this registry records against
 - [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0009](ENG-0009-documentation-governance-gate.md) — the zero-dependency, CI-gated tooling shape reused here
-- [governed-repos.md](../reference/governed-repos.md) — the generated view and the add/remove process
+- [governed-repos.md](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/governed-repos.md) — the generated view and the add/remove process, at their last revision here; the manifest, its tooling, and the generated view now live in the organization's org repository (contract: [qwts/agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md))

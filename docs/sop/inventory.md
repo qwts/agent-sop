@@ -6,8 +6,8 @@ baseline or a repo-local concern, and the delta each repo carries once it
 re-points at the [shared SOPs](README.md). This is a migration record, not a
 procedure — the SOPs themselves are the authority.
 
-The authoritative list of governed repos is the manifest behind
-[governed-repos.md](../reference/governed-repos.md) ([ENG-0011](../decisions/ENG-0011-governed-scope-manifest.md));
+The authoritative list of governed repos is the manifest in the organization's
+org repository ([governed repositories](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/governed-repos.md), [ENG-0011](../decisions/ENG-0011-governed-scope-manifest.md));
 the repo names below are a point-in-time snapshot of this migration survey, not
 the source of truth.
 
