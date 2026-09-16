@@ -72,6 +72,26 @@ and auditable, still needs a home. Issue #282 is that home.
 - **Fleet-wide latest as a gate:** rejected. It turns every upstream commit
   into a fleet-wide obligation, which is the propagation model ENG-0355 ended.
 
+## Amendment — 2026-09-16: the router carries no pins
+
+Decision points 1 and 2 name "the router's sources" and `routes.json` as a
+place where commits are pinned and recorded. Per the owner's specification in
+[#372](https://github.com/qwts/agent-sop/discussions/372) and the ENG-0355
+amendment of the same date, the site names no repository, organization, or
+commit. The pin locations are therefore:
+
+1. The consumer's workflow file, for actions (unchanged).
+2. The org repository's `org.json`, for the SOP source and every capability
+   (unchanged).
+3. The agent's work record. `~/.config/agent-sop/config.toml` is the one
+   pointer of ENG-0355, not a pin: its `[repos]` table names the org
+   repository at a ref, and the agent resolves that ref to a 40-hex commit
+   before reading anything and records that commit in the work it produces.
+   The selection is recorded where it is consumed, and the commit it names
+   cannot move.
+
+Points 1 and 2 read without the router; nothing else changes.
+
 ## References
 
 - [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md),

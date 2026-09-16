@@ -61,8 +61,7 @@ Per-repo decisions do not move. Photos keeps its `ADR-NNNN` series in its wiki.
 ## Amendment — 2026-07-19: account tier
 
 The account is on **GitHub Pro**, not Free (see
-[GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md),
-since moved to the organization's org repository). This does not
+[GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md)). This does not
 change the decision, but sharpens the org analysis above: Pro already provides
 protected branches and rulesets on **personal private** repos, so private-repo
 branch protection is *not* among the things forming an organization would buy.
@@ -79,3 +78,11 @@ the decision changes — this repository remains the cross-repo decision home.
 The original name stays in the text per the no-rewrite rule, and GitHub's
 rename redirect keeps old citations resolving. Use the new name in anything
 written from here on.
+
+## Amendment — 2026-09-16: the account reference moved
+
+The GitHub account reference cited by the 2026-07-19 amendment left this
+template with [#380](https://github.com/qwts/agent-sop/pull/380); the link
+above is the permalink to its last revision here, and the maintained copy is
+organization data in the org repository (ENG-0355). The 2026-07-19 text is
+unchanged.
