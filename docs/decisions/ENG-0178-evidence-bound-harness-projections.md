@@ -68,5 +68,5 @@ mixed into the branch.
 
 - [Issue #178](https://github.com/qwts/playbook-engineering/issues/178) — problem, downstream incident, and implementation design
 - [ENG-0004](ENG-0004-centralize-shared-cicd.md) — shared CI/CD ownership and generated release projections
-- [CI execution policy](../reference/ci-execution-policy.md) — operational classifier contract
-- [Release lifecycle fleet handoff](../reference/governed-ci-release-lifecycle-fleet.md) — per-repository adoption state
+- [CI execution policy](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/ci-execution-policy.md) — operational classifier contract
+- [Release lifecycle fleet handoff](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/governed-ci-release-lifecycle-fleet.md) — per-repository adoption state

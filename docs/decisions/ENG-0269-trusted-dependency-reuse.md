@@ -112,3 +112,16 @@ any other result, until one is registered and the repository variable
 `CI_WINDOWS_RUNNER` is set to `true`. The CodeQL lane never runs while the
 repository is private, so its hosted default is inert. The fleet default and
 the accepted-risk paragraph above are unchanged.
+
+## Amendment — 2026-09-15: hosted runners return with the capability split
+
+The two amendments above rested on this repository being private and its
+hosted minutes being metered. Neither holds after the capability split
+([ENG-0355](ENG-0355-static-router-one-pointer-pinned-capabilities.md)): the
+repository is public, and no self-hosted runner is registered for it, so
+every job in its own CI runs on standard hosted runners (`ubuntu-latest`)
+again — the fleet default the decision above records. The Windows shim job
+is retired with the bounded-command action it exercised, which is now tested
+in `qwts-agent-ci`; `CI_WINDOWS_RUNNER` no longer applies. The accepted-risk
+paragraph of 2026-09-14 describes a runner this repository no longer uses;
+the fleet default is unchanged.

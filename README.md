@@ -1,6 +1,6 @@
 # agent-sop
 
-The steward of the `qwts` engineering fleet: the governance manifest and its validators, shared CI, the docs-governance gate, the agent-harness seeds and skills catalog, the ENG decision series, shared SOPs, and the SDLC guides. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/agent-sop/issues/355)); historical records keep the old name.
+The rules, procedures, and guides of the `qwts` engineering fleet: the ENG decision series, the shared SOPs, the org-wide agent conventions, the shared skills catalog, and the SDLC guides. The mechanisms this repository used to host — shared CI, the docs-governance gate, the dependency inventory, and the Copilot SDLC chain — live in [capability repositories](#capability-repositories), each consumed at a pinned commit ([ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)); the qwts instance repositories [qwts-agent-org](https://github.com/qwts/qwts-agent-org) and [qwts-agent-sop](https://github.com/qwts/qwts-agent-sop) hold the account's own state. Formerly `playbook-engineering` (renamed 2026-09-14, [#355](https://github.com/qwts/agent-sop/issues/355)); historical records keep the old name.
 
 It is also the home for **cross-repo engineering decisions** — see the [decision index](docs/decisions/README.md) — and for the org-wide agent conventions every repo's [AGENTS.md](AGENTS.md) points to; see [AGENTS.md](AGENTS.md) for this repo's own agent context.
 
@@ -61,17 +61,22 @@ Each document includes navigation links, prerequisites, and cross-references to 
 - [Agentic primitives conformance checklist](docs/reference/agentic-primitives-conformance-checklist.md) — the ENG-0006 §6 checklist per-repo alignment issues link to.
 - [Machine memory guard retirement](docs/reference/agent-memory-guard.md) — historical decision and source; the implementation and dormant backlog are retired.
 - [Shared agent skills](skills/README.md) — skills centralized here and installed into every agent harness, rather than copied per repo (ENG-0004, ENG-0006).
-- [Documentation governance](docs/reference/documentation-governance.md) — the `docs-gov` gate: deterministic checks that keep docs agent-readable, consumable by other repos as a reusable workflow.
-- [CI execution policy](docs/reference/ci-execution-policy.md) — lifecycle scheduling and deduplication without removing agreed validation gates.
-- [Governed CI rollout checklist](docs/reference/governed-ci-rollout.md) — exact-SHA rollout evidence, user-owned fallback, check publishers, credentials, and manual settings.
-- [Release-lifecycle fleet handoff](docs/reference/governed-ci-release-lifecycle-fleet.md) — manifest-wide release mechanism inventory, generated-projection identities, and executable repair or verified dispositions.
-- [Dependency & tooling inventory](docs/reference/dependency-inventory.md) — the report-only inventory of dependencies, licenses, and tooling across governed repos, consumed as a reusable workflow (ENG-0015).
-- [Semantic ratchets](docs/reference/semantic-ratchets.md) — combine deterministic size ratchets with calibrated semantic screening and rare authoritative exception adjudication (ENG-0160).
+- [Dependency reuse policy](docs/reference/dependency-reuse-policy.md) — the ENG-0269 cache contract every consumer of the shared `bounded-dependency-install` action follows.
 - [Documentation style guide](docs/23-documentation_style_guide.md) — conventions for writing docs in this playbook.
 - [Contributing](CONTRIBUTING.md) — how changes to this repository land.
 
+## Capability repositories
+
+Each mechanism lives in its own repository and is consumed at a 40-hex commit, never a branch or tag. The pins below are the ones this repository's own CI and docs use; the qwts account records the same pins in `qwts-agent-org`'s `org.json`. Every link goes to the pinned revision.
+
+- [qwts-agent-ci](https://github.com/qwts/qwts-agent-ci/tree/3a5617b287d922e37f262210a1d8750d8217b56d) at `3a5617b` — shared CI (ENG-0004, ENG-0267, ENG-0269): the composite actions `ci-policy`, `bounded-command`, `bounded-dependency-install`, `changeset-release-count`, and `ci-runtime-check`, the runtime-policy checker, and the [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md), [CI runtime budgets](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-runtime-policy.md), [governed CI rollout checklist](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/governed-ci-rollout.md), and [release-lifecycle fleet handoff](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/governed-ci-release-lifecycle-fleet.md).
+- [qwts-agent-docs-gov](https://github.com/qwts/qwts-agent-docs-gov/tree/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f) at `67db7dc` — the `docs-gov` gate and its reusable workflow, plus the on-demand `docs-eval` loop (ENG-0009, ENG-0010): [documentation governance](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/documentation-governance.md) and [docs evaluation](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/docs-evaluation.md).
+- [qwts-agent-inventory](https://github.com/qwts/qwts-agent-inventory/tree/d5746df21099c0394663b35dd16eacd171052a80) at `d5746df` — the report-only [dependency & tooling inventory](https://github.com/qwts/qwts-agent-inventory/blob/d5746df21099c0394663b35dd16eacd171052a80/docs/dependency-inventory.md), its reusable workflow, and the weekly fleet catalog (ENG-0015).
+- [qwts-agent-sdlc](https://github.com/qwts/qwts-agent-sdlc/tree/9168b22ad2a7c71938ae12c1c412753773887f04) at `9168b22` — the VS Code Copilot SDLC chain that walks the guides above: seven custom agents, 29 slash-command prompts, the Copilot instructions file, and the [usage guide](https://github.com/qwts/qwts-agent-sdlc/blob/9168b22ad2a7c71938ae12c1c412753773887f04/docs/usage.md).
+- [qwts/agentic-code-analysis](https://github.com/qwts/agentic-code-analysis) — the advisory semantic-ratchet workflow of ENG-0160 moves there; the last revision of its reference document in this repository is [semantic-ratchets.md at `ed5c5d8`](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/semantic-ratchets.md).
+
 ## Usage
-1. **[Usage Guide](usage.md)** — VS Code Copilot agents, slash commands, and workflows for interactive requirements gathering.
+1. **[Usage guide](https://github.com/qwts/qwts-agent-sdlc/blob/9168b22ad2a7c71938ae12c1c412753773887f04/docs/usage.md)** — VS Code Copilot agents, slash commands, and workflows for interactive requirements gathering, from `qwts-agent-sdlc`.
 2. Browse the `docs/` directory to find relevant sections of the SDLC.
 3. Share and adapt the workflows for your team or project.
 4. Keep the repository up to date with new insights and improvements.

@@ -2,11 +2,11 @@
 
 This is the operational cache contract selected by
 [ENG-0269](../decisions/ENG-0269-trusted-dependency-reuse.md). Runtime failure
-bounds remain in the [CI runtime policy](ci-runtime-policy.md).
+bounds remain in the [CI runtime policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-runtime-policy.md).
 
 ## Shared action
 
-Consumers pin `bounded-dependency-install` by immutable playbook commit SHA.
+Consumers pin `bounded-dependency-install` by immutable `qwts-agent-ci` commit SHA.
 The action performs one ordered transaction:
 
 1. derive an exact cache key from runner OS and architecture, ecosystem, exact
@@ -18,7 +18,7 @@ The action performs one ordered transaction:
    the default branch.
 
 ```yaml
-- uses: qwts/agent-sop/.github/actions/bounded-dependency-install@<reviewed-sha>
+- uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
   env:
     NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
   with:

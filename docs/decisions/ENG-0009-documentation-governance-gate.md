@@ -26,14 +26,14 @@ supplies the mechanism and extends it to `docs/` generally.
 
 ## Decision
 
-1. **Deterministic checks gate docs in CI** (`tools/docs-gov/` in this repo):
+1. **Deterministic checks gate docs in CI** ([tools/docs-gov/](https://github.com/qwts/agent-sop/tree/ed5c5d8/tools/docs-gov) in this repo):
    integrity (links, orphans, stale code paths), structure (chunkable
    headings, front-loaded summaries, machine-readable fields), context cost
    (token budgets per doc and per agent context set), and the anti-patterns
    that specifically break agents (positional references, placeholders,
    duplicated statements, terminology aliases). The rule catalog with each
    rule's justification lives in the
-   [governance reference](../reference/documentation-governance.md).
+   [governance reference](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/documentation-governance.md).
 2. **Admission test for rules:** a rule must name the agent failure it
    prevents, and must produce zero false positives on the docs of the repo
    adopting it — otherwise the rule is dropped, not tolerated. No rule exists
@@ -77,5 +77,5 @@ supplies the mechanism and extends it to `docs/` generally.
 ## References
 
 - [qwts/playbook-engineering#2](https://github.com/qwts/playbook-engineering/issues/2) — the issue this implements, including the Phase 2 sketch
-- [Documentation governance reference](../reference/documentation-governance.md) — rule catalog, conventions, adoption guide
+- [Documentation governance reference](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/documentation-governance.md) — rule catalog, conventions, adoption guide
 - [microsoft/SkillOpt](https://github.com/microsoft/SkillOpt) — the validation-gated optimization shape Phase 2 would take
