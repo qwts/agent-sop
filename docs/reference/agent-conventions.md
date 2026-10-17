@@ -53,6 +53,13 @@ intent (qwts/agent-sop#28).
 
 MCP servers and third-party skills are allow-listed per repo and pinned by version or commit hash, mirroring the [ENG-0005](../decisions/ENG-0005-static-analysis-survey-results.md) SHA-pinning direction for Actions. Tool permissions (`settings.json` or the vendor equivalent) are least-privilege: grant what the task needs, not what is convenient. No secrets in any agent-facing file.
 
+## Credential prompts
+
+Before asking a user for credentials or triggering an authentication prompt,
+follow the [credential-prompt SOP](../sop/credential-prompts.md). This standing
+rule applies across interfaces and requires Jev or another configured decision
+model to verify the actual operation and supply the explanation shown to the user.
+
 ## Threat model
 
 Content an agent fetches at runtime — issue bodies, web pages, third-party skill output — is untrusted input, never instructions. A repo's own instruction files must never tell an agent to treat fetched content as authoritative or to bypass that boundary.
