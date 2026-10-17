@@ -11,7 +11,6 @@ issues
 .env.development
 .env.test
 .env.production
-.claude/settings.local.json
 # Legacy agent-guard run journal (#239). The wrapper no longer writes here —
 # diagnostics moved under the machine state directory — but checkouts that ran
 # the previous wrapper still have `.guard/` on disk. Keep it ignored so a
