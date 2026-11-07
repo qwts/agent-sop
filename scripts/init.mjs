@@ -126,6 +126,9 @@ function substituteIdentity(root, owner, name) {
   replaceIn(root, [".github/CODEOWNERS"], /\@qwts\b/g, `@${owner}`, "codeowners");
   replaceIn(root, ["LICENSE"], /Copyright \(c\) \d{4} qwts/, `Copyright (c) ${year} ${owner}`, "license");
   replaceIn(root, ["package.json"], /"name": "agent-sop"/, `"name": "${name}"`, "package");
+  // The lockfile carries the same name twice (root and packages[""]).
+  replaceIn(root, ["package-lock.json"], /"name": "agent-sop"/g, `"name": "${name}"`, "lockfile");
+  JSON.parse(read(root, "package-lock.json")); // stays valid: the charset forbids quotes and escapes
   replaceIn(root, ["README.md"], /^# agent-sop$/m, `# ${name}`, "readme");
   replaceIn(
     root,
@@ -194,9 +197,12 @@ function renumberGenesis(root) {
 
 // --- genesis record --------------------------------------------------------
 
-function stampGenesis(root, owner, name) {
+function stampGenesis(root, owner, name, templateCommit) {
   const today = new Date().toISOString().slice(0, 10);
   const rel = "docs/decisions/ENG-0000-template-provenance.md";
+  const revision = templateCommit
+    ? `**Source revision:** \`${templateCommit}\` — [pinned tree](https://github.com/${TEMPLATE_REPO}/tree/${templateCommit})`
+    : "**Source revision:** unavailable (instantiated without git history)";
   const body = `# ENG-0000: This repository is instantiated from the agent-sop template
 
 **Status:** Accepted
@@ -206,7 +212,7 @@ function stampGenesis(root, owner, name) {
 ## Context
 
 This repository was created from the public [\`${TEMPLATE_REPO}\`](https://github.com/${TEMPLATE_REPO})
-template — the vendor-neutral agent SOP repository: the ENG decision series,
+template — ${revision} — the vendor-neutral agent SOP repository: the ENG decision series,
 the shared SOPs, the org-wide agent conventions, the shared skills catalog,
 and the SDLC guides. Mechanisms live in capability repositories consumed at
 pinned commits (ENG-9355).
@@ -336,6 +342,9 @@ function runGates(root) {
 export function planInstantiation(root, owner, name, args, { dry = false } = {}) {
   DRY = dry;
   log.length = 0;
+  // GitHub name charset; also keeps JSON/TOML interpolation safe.
+  if (!/^[a-zA-Z0-9][a-zA-Z0-9-]*$/.test(owner)) throw new Error(`invalid owner: ${owner}`);
+  if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(name)) throw new Error(`invalid repository name: ${name}`);
   const config = JSON.parse(read(root, "docs-gov.config.json"));
   if (config.decisionSeries?.homeRepo !== TEMPLATE_REPO) {
     throw new Error("this checkout is already instantiated (docs-gov homeRepo is not the template's) — refusing to run twice");
@@ -345,7 +354,11 @@ export function planInstantiation(root, owner, name, args, { dry = false } = {})
   // Disk-truthful list: the renumber renamed docs/decisions/ files.
   const files = currentFiles(root);
   rewriteDocsGovConfig(root, owner, name);
-  stampGenesis(root, owner, name);
+  let templateCommit = null;
+  try {
+    templateCommit = execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim();
+  } catch { /* no git history: record says so */ }
+  stampGenesis(root, owner, name, templateCommit);
   const forkOwner = args.options.get("capability-forks");
   if (forkOwner) repointCapabilityForks(root, files, forkOwner);
   if (args.flags.has("write-local-config")) writeLocalConfig(owner, name);

@@ -10,11 +10,41 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { planInstantiation, checkNeutrality, localConfigSnippet } from "./init.mjs";
 
+// The pristine template tree: the most recent commit in this checkout's
+// history whose docs-gov.config.json still names the template as homeRepo.
+// In this repository that is HEAD; in a derivative it is the pre-instantiation
+// commit the template shipped. Without one (squashed history), instantiation
+// tests skip instead of failing derivative CI.
+let TEMPLATE_COMMIT;
+function findTemplateCommit() {
+  const shas = execFileSync("git", ["log", "--format=%H", "-n", "60", "HEAD"], { encoding: "utf8" })
+    .trim()
+    .split("\n");
+  for (const sha of shas) {
+    let cfg;
+    try {
+      cfg = execFileSync("git", ["show", `${sha}:docs-gov.config.json`], { encoding: "utf8" });
+    } catch { continue; }
+    try {
+      if (JSON.parse(cfg).decisionSeries?.homeRepo === "qwts/agent-sop") return sha;
+    } catch { continue; }
+  }
+  return null;
+}
+
 function makeFixture(t) {
+  TEMPLATE_COMMIT ??= findTemplateCommit();
+  if (!TEMPLATE_COMMIT) return null;
   const dir = mkdtempSync(join(tmpdir(), "init-test-"));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
-  const archive = execFileSync("git", ["archive", "HEAD"], { encoding: "buffer", maxBuffer: 64 * 1024 * 1024 });
+  const archive = execFileSync("git", ["archive", TEMPLATE_COMMIT], { encoding: "buffer", maxBuffer: 64 * 1024 * 1024 });
   execFileSync("tar", ["-x", "-C", dir], { input: archive });
+  // A derivative checkout carries the template's git history — that is what
+  // the provenance capture reads — so give the fixture the same shape.
+  const git = (args) => execFileSync("git", args, { cwd: dir, stdio: "pipe" });
+  git(["init", "-q", "-b", "main"]);
+  git(["add", "-A"]);
+  git(["-c", "user.email=fixture@example.invalid", "-c", "user.name=fixture", "commit", "-q", "-m", "pristine template fixture"]);
   return dir;
 }
 
@@ -33,6 +63,7 @@ test("localConfigSnippet names the sop repo and leaves org commented", (t) => {
 
 test("planInstantiation renames inherited records into the ENG-9xxx block", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   assert.ok(existsSync(join(dir, "docs/decisions/ENG-9006-agentic-primitives-governance.md")));
   assert.ok(existsSync(join(dir, "docs/decisions/ENG-9355-static-router-one-pointer-pinned-capabilities.md")));
@@ -43,6 +74,7 @@ test("planInstantiation renames inherited records into the ENG-9xxx block", (t) 
 
 test("planInstantiation rewrites citations for inherited numbers only", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   const agents = readFileSync(join(dir, "AGENTS.md"), "utf8");
   assert.match(agents, /ENG-9006/);
@@ -57,6 +89,7 @@ test("planInstantiation rewrites citations for inherited numbers only", (t) => {
 
 test("planInstantiation rewrites identity surfaces", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   assert.match(readFileSync(join(dir, ".github/CODEOWNERS"), "utf8"), /@octocat/);
   assert.ok(!/@qwts\b/.test(readFileSync(join(dir, ".github/CODEOWNERS"), "utf8")));
@@ -71,6 +104,7 @@ test("planInstantiation rewrites identity surfaces", (t) => {
 
 test("planInstantiation rewrites the docs-gov config for the derivative", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   const config = JSON.parse(readFileSync(join(dir, "docs-gov.config.json"), "utf8"));
   assert.equal(config.decisionSeries.homeRepo, "octocat/octocat-agent-sop");
@@ -91,16 +125,20 @@ test("planInstantiation rewrites the docs-gov config for the derivative", (t) =>
 
 test("planInstantiation stamps the genesis record and its index row", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   const genesis = readFileSync(join(dir, "docs/decisions/ENG-0000-template-provenance.md"), "utf8");
   assert.match(genesis, /\*\*Issue:\*\* octocat\/octocat-agent-sop#0/);
   assert.match(genesis, /ENG-9008/); // genesis text cites renumbered records
+  // The provenance must pin the immutable template revision, not a mutable URL.
+  assert.match(genesis, /Source revision:\*\* `[0-9a-f]{40}`/);
   const index = readFileSync(join(dir, "docs/decisions/README.md"), "utf8");
   assert.match(index, /ENG-0000-template-provenance\.md/);
 });
 
 test("planInstantiation repoints capability pins with --capability-forks", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor([["capability-forks", "octocat"]]));
   const ci = readFileSync(join(dir, ".github/workflows/ci.yml"), "utf8");
   assert.match(ci, /octocat\/qwts-agent-ci\/\.github\/actions\/ci-policy@/);
@@ -109,6 +147,7 @@ test("planInstantiation repoints capability pins with --capability-forks", (t) =
 
 test("dry run leaves the tree untouched", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   const before = readFileSync(join(dir, "docs-gov.config.json"), "utf8");
   const codeowners = readFileSync(join(dir, ".github/CODEOWNERS"), "utf8");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor(), { dry: true });
@@ -119,15 +158,19 @@ test("dry run leaves the tree untouched", (t) => {
 
 test("planInstantiation refuses to run twice", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor());
   assert.throws(() => planInstantiation(dir, "octocat", "octocat-agent-sop", argsFor()), /already instantiated/);
 });
 
 test("checkNeutrality flags stray org identity but allows the allowlist", (t) => {
   const dir = makeFixture(t);
+  if (!dir) return t.skip("no pristine template commit in this checkout's history");
   mkdirSync(join(dir, "docs/tmp-check"), { recursive: true });
   writeFileSync(join(dir, "docs/tmp-check/a.md"), "contact the qwts administrators\n");
   writeFileSync(join(dir, "docs/tmp-check/b.md"), "pins live in qwts-agent-ci; see https://github.com/qwts/qwts-agent-ci\n");
+  // The scan reads git-tracked files; stage the probes so they are scanned.
+  execFileSync("git", ["add", "-A"], { cwd: dir, stdio: "pipe" });
   const findings = checkNeutrality(dir);
   const flagged = findings.map((f) => f.file);
   assert.ok(flagged.includes("docs/tmp-check/a.md"), "stray identity flagged");

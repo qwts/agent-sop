@@ -6,8 +6,7 @@
 
 ## Context
 
-Agents write most of the code in this org (the standing premise since
-[ENG-0002](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0002-static-analysis-direction.md)), and every repo now carries files whose only job is to steer them:
+Agents write most of the code in this org (the standing premise since [ENG-0002](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0002-static-analysis-direction.md)), and every repo now carries files whose only job is to steer them:
 instruction files, slash commands, tool settings, and soon skills and MCP
 servers. An agent-orchestration product raises the stakes — its agent
 configuration *is* product surface.
