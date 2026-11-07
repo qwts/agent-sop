@@ -11,11 +11,12 @@
 // record, and runs the validation gates. Nothing else changes: upstream
 // capability pins stay literal unless --capability-forks repoints them.
 
-import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, renameSync, existsSync, mkdirSync, readdirSync, statSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
+import { fileURLToPath } from "node:url";
 
 const DOCS_GOV_PIN = "67db7dc9c20bc29222fb605b7ff9432fd58a2a3f";
 const TEMPLATE_REPO = "qwts/agent-sop";
@@ -85,6 +86,17 @@ function listTrackedFiles(root) {
 }
 
 function read(root, rel) { return readFileSync(join(root, rel), "utf8"); }
+
+// Disk-truthful text file list: git's index goes stale the moment this script
+// renames docs/decisions/ files, so reconcile it with the directory itself.
+function currentFiles(root) {
+  const tracked = listTrackedFiles(root).filter((f) => existsSync(join(root, f)));
+  const dir = join(root, "docs", "decisions");
+  const decisions = existsSync(dir)
+    ? readdirSync(dir).filter((f) => f.endsWith(".md")).map((f) => `docs/decisions/${f}`)
+    : [];
+  return [...new Set([...tracked, ...decisions])];
+}
 
 function write(root, rel, text) {
   log.push(`  write: ${rel}`);
@@ -170,7 +182,7 @@ function renumberGenesis(root) {
   // The list is taken fresh: the renames above made the caller's list stale
   // for docs/decisions/.
   const re = /ENG-(\d{4})\b/g;
-  for (const rel of listTrackedFiles(root)) {
+  for (const rel of currentFiles(root)) {
     const before = read(root, rel);
     const after = before.replace(re, (m, n) => (set.has(n) ? to9(n) : m));
     if (after !== before) {
@@ -271,6 +283,10 @@ const ALLOW_PATTERNS = [
   /\bqwts instance\b/,                      // history prose
   /`qwts` account/,                         // README history note
   /qwts\/agent-sop/,                        // template provenance
+  /"pattern": ".*qwts/,                     // docs-gov Issue patterns cite provenance
+  /"homeRepoAliases"/,                      // alias list, rewritten by init
+  /`qwts\/` \(the inherited records/,       // instantiation doc: provenance prose
+  /public `qwts` capabilities/,             // instantiation doc: fork escape hatch
 ];
 
 const IDENTITY_FILES = ["CODEOWNERS", "LICENSE"];
@@ -288,6 +304,7 @@ export function checkNeutrality(root) {
     .concat(IDENTITY_FILES.filter((f) => existsSync(join(root, f))));
   for (const rel of [...new Set(files)]) {
     if (templateMode && IDENTITY_FILES.includes(rel)) continue;
+    if (templateMode && rel === "docs/reference/template-instantiation.md") continue; // documents the substitution
     const lines = read(root, rel).split("\n");
     for (let i = 0; i < lines.length; i++) {
       if (!/\bqwts\b/i.test(lines[i])) continue;
@@ -325,8 +342,8 @@ export function planInstantiation(root, owner, name, args, { dry = false } = {})
   }
   substituteIdentity(root, owner, name);
   renumberGenesis(root);
-  // Fresh list: the renumber renamed docs/decisions/ files.
-  const files = listTrackedFiles(root);
+  // Disk-truthful list: the renumber renamed docs/decisions/ files.
+  const files = currentFiles(root);
   rewriteDocsGovConfig(root, owner, name);
   stampGenesis(root, owner, name);
   const forkOwner = args.options.get("capability-forks");
@@ -366,4 +383,14 @@ function main() {
   console.log(`\nLocal pointer (~/.config/agent-sop/config.toml):\n${localConfigSnippet(owner, name)}`);
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.url)) main();
+function invokedAsScript() {
+  // realpath both sides: macOS /tmp is a symlink, and import.meta.url resolves
+  // through it while process.argv[1] does not.
+  try {
+    return realpathSync(process.argv[1] ?? "") === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+}
+
+if (invokedAsScript()) main();

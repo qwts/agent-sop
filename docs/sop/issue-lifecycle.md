@@ -1,6 +1,6 @@
 # SOP: Issue lifecycle
 
-How work is claimed, tracked, and closed against GitHub issues in any `qwts`
+How work is claimed, tracked, and closed against GitHub issues in any fleet
 repo. Shared baseline under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md),
 inherited by default and varied only by a documented delta. It pairs with the
 [branch, PR, and review workflow](branch-pr-review.md): the issue is where work
@@ -85,7 +85,7 @@ radius or a failure mode that looks like success is T1.
 
 ## Changelog
 
-- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series; fleet scope lines generalized.
 - 2026-07-22 — initial version; generalized the claim-and-close conventions from
   the photos and cartograph working agreements (ENG-0008).
 - 2026-08-03 — added the mandatory implementation-prompt and model-routing

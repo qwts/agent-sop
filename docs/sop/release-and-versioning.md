@@ -1,6 +1,6 @@
 # SOP: Release and versioning
 
-How a `qwts` repo that cuts releases tracks versions, records changes, and
+How a fleet repository that cuts releases tracks versions, records changes, and
 handles dependency bumps. Shared baseline under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md).
 This SOP is deliberately thin: release *mechanics* (tooling, tag format,
 changeset flow) are still largely repo-local, so the baseline states only the
@@ -92,7 +92,7 @@ changelog updated, then let consumers re-point. A shared change never moves a
 
 ## Changelog
 
-- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series; fleet scope lines generalized.
 - 2026-08-02 — distinguished source release inputs from generated release
   projections and prohibited empty marker files as a regeneration workaround.
 - 2026-08-01 — distinguish semantic Changesets releases from governance-only

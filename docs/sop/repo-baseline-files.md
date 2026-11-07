@@ -1,6 +1,6 @@
 # SOP: Repository baseline files
 
-**Scope:** every `qwts` repository. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
+**Scope:** every repository in the fleet. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
 inherit by default, vary by explicit delta.
 
 ## Required in every repo (mandatory — extend, don't drop)
@@ -11,7 +11,7 @@ inherit by default, vary by explicit delta.
 | `LICENSE` | Exactly this filename. Licensing is deliberately per-repo (MIT, PolyForm NC, proprietary, Apache-2.0 all in use); *absence* is the only violation. |
 | `AGENTS.md` | Canonical agent context per [ENG-0006](../decisions/ENG-0006-agentic-primitives-governance.md); vendor files are thin adapters. Its marked shared-conventions and skills block is projected from this baseline, pointing agents to the org-wide conventions, shared skills index, SOPs, and ENG records rather than copying them. Repo-specific context remains outside that block. |
 | `CONTRIBUTING.md` | May be a pointer stub into `docs/` (the photos pattern). |
-| `.github/CODEOWNERS` | Minimum: `* @qwts` plus explicit `/.github/` ownership. |
+| `.github/CODEOWNERS` | Minimum: the account as default owner plus explicit `/.github/` ownership. |
 | Feature issue template | The shared [feature-lifecycle](feature-lifecycle.md) form ([ENG-0007](../decisions/ENG-0007-feature-lifecycle-convention.md)); repos may add fields, not drop sections. |
 | `.prettierignore` | Repository-owned rules; preserve every local rule. |
 
