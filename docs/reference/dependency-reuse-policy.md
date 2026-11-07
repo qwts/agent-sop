@@ -2,7 +2,7 @@
 
 This is the operational cache contract selected by
 [ENG-0269](../decisions/ENG-0269-trusted-dependency-reuse.md). Runtime failure
-bounds remain in the [CI runtime policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-runtime-policy.md).
+bounds remain in the [CI runtime policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-runtime-policy.md).
 
 ## Shared action
 
@@ -18,7 +18,7 @@ The action performs one ordered transaction:
    the default branch.
 
 ```yaml
-- uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
+- uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@8bcaace6d4d990fcb75e847c1fb500516cc19fc6
   env:
     NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
   with:

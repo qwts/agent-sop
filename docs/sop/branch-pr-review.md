@@ -16,7 +16,7 @@ repositories already followed; where a repo differs, it records a delta.
   current. Organization-owned repositories use the native merge queue to
   validate the approved change with the latest `main`. User-owned repositories,
   where GitHub does not offer that queue, use the governed updater fallback in
-  the [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md).
+  the [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md).
 
 ## Opening the PR
 
@@ -40,7 +40,7 @@ repositories already followed; where a repo differs, it records a delta.
 
 ## The merge bar (mandatory — extend, don't drop)
 
-- CI follows the shared [execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md):
+- CI follows the shared [execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md):
   agents run fast checks locally before leaving draft, every agreed gate passes
   on the exact ready merge candidate either through manual preflight or the
   ready event, and a short post-merge check runs only when that exact commit was
