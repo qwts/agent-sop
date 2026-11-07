@@ -4,7 +4,7 @@ Canonical, vendor-neutral agent context for this repository, per [ENG-0006](docs
 
 ## What this repository is
 
-The org's cross-repo home for engineering decisions (ENG records), shared SOPs, the org-wide agent conventions, and the SDLC guides. The mechanisms every `qwts` repo consumes — shared CI, the docs-governance gate, the dependency inventory, the Copilot SDLC chain — live in capability repositories, each pinned to a commit. Full map: [README.md](README.md).
+The fleet's cross-repo home for engineering decisions (ENG records), shared SOPs, the org-wide agent conventions, and the SDLC guides. The mechanisms every repo derived from this template consumes — shared CI, the docs-governance gate, the dependency inventory, the Copilot SDLC chain — live in capability repositories, each pinned to a commit. Full map: [README.md](README.md).
 
 <!-- governed:shared-agent-discovery:start -->
 
@@ -12,17 +12,16 @@ The org's cross-repo home for engineering decisions (ENG records), shared SOPs, 
 
 PR-first workflow, validation-before-push, commit and PR hygiene, and the
 untrusted-input threat model are defined once, for every repo, in the
-[org-wide agent conventions](https://github.com/qwts/agent-sop/blob/main/docs/reference/agent-conventions.md).
+[org-wide agent conventions](docs/reference/agent-conventions.md).
 Before creating or copying a repo-local skill, consult the reviewed
-[shared agent skills](https://github.com/qwts/agent-sop/blob/74e775ef23d8e7d8f8e693ccc2329f430978c096/skills/README.md)
-index. Reuse only the pinned version supplied by the governed harness; a skill
-genuinely specific to this repository belongs in its local context.
-This repository is governed by
-[agent-sop](https://github.com/qwts/agent-sop) — its
-[shared SOPs](https://github.com/qwts/agent-sop/blob/main/docs/sop/README.md)
-and [engineering decisions](https://github.com/qwts/agent-sop/blob/main/docs/decisions/README.md)
-apply here by default
-([ENG-0008](https://github.com/qwts/agent-sop/blob/main/docs/decisions/ENG-0008-shared-sop-inheritance.md):
+[shared agent skills](skills/README.md)
+index; reuse the pinned version its index records, and keep a skill
+genuinely specific to this repository in its local context.
+This repository is the fleet's agent-SOP home: its
+[shared SOPs](docs/sop/README.md)
+and [engineering decisions](docs/decisions/README.md)
+apply here, and to every fleet repository by default
+([ENG-0008](docs/decisions/ENG-0008-shared-sop-inheritance.md):
 inherit by default, vary by explicit delta).
 <!-- governed:shared-agent-discovery:end -->
 
