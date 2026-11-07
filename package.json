@@ -10,6 +10,6 @@
     "lint:markdown:fix": "markdownlint docs/ skills/ AGENTS.md --fix"
   },
   "devDependencies": {
-    "markdownlint-cli": "^0.49.1"
+    "markdownlint-cli": "^0.50.0"
   }
 }
