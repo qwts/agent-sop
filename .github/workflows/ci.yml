@@ -146,6 +146,10 @@ jobs:
         uses: qwts/qwts-agent-ci/.github/actions/ci-runtime-check@3a5617b287d922e37f262210a1d8750d8217b56d
       - name: Markdown lint
         run: npm run lint:markdown
+      - name: Template checks
+        run: |
+          npm run check:template
+          npm test
 
   docs-gov:
     needs: [policy, merge-evidence]

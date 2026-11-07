@@ -8,7 +8,12 @@ It is also the home for **cross-repo engineering decisions** — see the [decisi
 
 ## Using this template
 
-Create your repository from this template, then substitute your identity — the `CODEOWNERS` owner, the license copyright line, the docs-governance `homeRepo` and `Issue` patterns — and run the validation gates before the first push. The template ships a script that automates the substitution and validation; the same script prints the `~/.config/agent-sop/config.toml` pointer that routes an agent harness to the new repository.
+```bash
+# after "Use this template" created <owner>/<owner>-agent-sop, and you cloned it:
+node scripts/init.mjs <owner>
+```
+
+The script rewrites the identity surfaces (`CODEOWNERS`, license, package name, issue-template links), renumbers the inherited decision records into a reserved block so your own issue-derived numbering starts fresh, stamps a provenance record, runs the validation gates, and prints the `~/.config/agent-sop/config.toml` pointer that routes an agent harness to the new repository. Details and options: [template instantiation](docs/reference/template-instantiation.md). How harnesses find and consume the result: [harness bootstrap](docs/reference/harness-bootstrap.md).
 
 ## Engineering decisions (ENG series)
 

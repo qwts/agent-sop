@@ -91,8 +91,8 @@ unchanged, in the qwts instance's
 Staying records cite them there.
 
 A repository created from this template inherits the eighteen records above as
-the genesis of its own series; the instantiation script documents how its own
-records continue the numbering without collision.
+the genesis of its own series; [template instantiation](../reference/template-instantiation.md)
+describes how its own records continue the numbering without collision.
 
 ## Related
 
