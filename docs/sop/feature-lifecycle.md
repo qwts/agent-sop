@@ -1,6 +1,6 @@
 # SOP: Feature lifecycle
 
-**Scope:** every `qwts` repository. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
+**Scope:** every repository in the fleet. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
 inherit by default, vary by explicit delta. **Decision:** [ENG-0007](../decisions/ENG-0007-feature-lifecycle-convention.md).
 
 A feature opens as a spec and closes as a record. The open-time issue form captures
@@ -67,15 +67,15 @@ sections, and why. Write "none" only when the build matched the spec.
 Source of truth is here; repos consume it under the [ENG-0003](../decisions/ENG-0003-repo-is-documentation-source-of-truth.md) /
 [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) write-once model.
 
-- **photos, image-trail, cartograph** — extend their existing story / task templates
-  with the Design and Proposed-solution sections they currently lack; keep their extra
-  fields.
-- **bookmarkit** — adopt the shared form as its first issue template.
-- **quorum** — born with the form when the repo is scaffolded.
+- Repos with existing story / task templates — extend them with the Design and
+  Proposed-solution sections they currently lack; keep their extra fields.
+- Repos without templates — adopt the shared form as their first issue template.
+- New repos — born with the form when the repo is scaffolded.
 - The closeout instruction is carried by the org-wide agent conventions doc (playbook#7),
   which links to this SOP rather than restating it.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized.
 - 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-07-22 — initial version; implements [ENG-0007](../decisions/ENG-0007-feature-lifecycle-convention.md) (playbook#9).

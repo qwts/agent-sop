@@ -9,27 +9,8 @@ here by link — never copied into this tree.
 
 ## Available skills
 
-- [agent-bot](https://github.com/qwts/agent-bot-identity/tree/28b5ee1be2f12dcf548d96309d21c4a1c8ad2b9d/skills/agent-bot)
-  — owned by
-  [qwts/agent-bot-identity](https://github.com/qwts/agent-bot-identity).
-  Per-harness GitHub App identities for coding agents: bootstrap and
-  installation, bot credential minting, authorized secure-store reads,
-  GitHub-verified bot commits, transcript-bound Agent IDs, and Agent Spaces.
-  Absorbed the old signed-commit skill (`signed-commit.mjs`). Install per its
-  `SKILL.md`.
-- [managed-machine](https://github.com/qwts/managed-machine/blob/v0.3.19/skills/SKILL.md)
-  v0.3.19 — owned by
-  [qwts/managed-machine](https://github.com/qwts/managed-machine). Bootstrap,
-  update, and manage a Mac via the `managed-machine` Homebrew formula: fresh
-  setup, version reporting, setup scripts, brew ownership fixes, fleet SSH
-  keys, gitleaks hooks, and agent-CLI installs. Install per its `SKILL.md`.
-
-The signed-commit skill previously lived here. A machine that installed it
-from this repo has a dangling symlink; remove it:
-
-```bash
-rm -f ~/.claude/skills/signed-commit
-```
+None yet. The catalog fills as a fleet gains skills worth sharing across
+repos; a skill that only one repo needs belongs in that repo's own tree.
 
 ## Installing
 
@@ -41,8 +22,8 @@ carries its own install line, symlinking the skill directory into the harness
 so a `git pull` here updates every machine, rather than copying and drifting:
 
 ```bash
-PLAYBOOK_ROOT="$(git rev-parse --show-toplevel)"
-ln -sfn "$PLAYBOOK_ROOT/skills/<name>" ~/.claude/skills/<name>
+SOP_ROOT="$(git rev-parse --show-toplevel)"
+ln -sfn "$SOP_ROOT/skills/<name>" ~/.claude/skills/<name>
 ```
 
 Distribution is manual today. Automating it — a worktree-create step, or a

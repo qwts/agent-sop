@@ -10,13 +10,7 @@
   "tokenBudgets": {
     "perDoc": 2600,
     "bankSlack": 0.25,
-    "overrides": [
-      {
-        "path": "docs/reference/agent-bot-identity.md",
-        "budget": 1200,
-        "reason": "the identity model, permissions, and the installed CLI boundary are one governance contract; runtime setup and troubleshooting moved to agent-bot-identity under ENG-0128. Raised 1100 → 1200 on 2026-09-16 when the roster left for the organization's org repository (agent-org, qwts/agent-sop#372): the doc now says where the roster and profile live instead of holding them, which is a few more words, not a longer roster"
-      }
-    ],
+    "overrides": [],
     "contextSets": []
   },
   "structure": {

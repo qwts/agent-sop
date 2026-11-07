@@ -1,6 +1,6 @@
 # ENG-0006 conformance checklist
 
-The test for whether a repo is aligned with [ENG-0006](../decisions/ENG-0006-agentic-primitives-governance.md) §6, for the per-repo alignment issues to link to instead of restating: qwts/agent-sop#7 (this repo), qwts/photos#718, qwts/image-trail#688, qwts/cartograph#262, qwts/bookmarkit#64.
+The test for whether a repo is aligned with [ENG-0006](../decisions/ENG-0006-agentic-primitives-governance.md) §6, for the per-repo alignment issues to link to instead of restating. Each fleet repo carries a tracked alignment issue; the origin fleet's issues are preserved in the qwts instance's copy.
 
 The governed repos these issues track are enumerated in the manifest in the
 organization's org repository ([the governed-repos manifest](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md),

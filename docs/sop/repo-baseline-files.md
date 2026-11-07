@@ -24,7 +24,7 @@ inherit by default, vary by explicit delta.
 | Design docs | Anything beyond a trivial tool: `DESIGN.md` for small repos, `docs/design/` or `design/` for large ones. Location is free; existence is not. |
 | `.github/PULL_REQUEST_TEMPLATE.md` | Only when the repo needs more than the org default (gates, coverage maps); otherwise inherit. |
 
-## Inherited from `qwts/.github` (do not copy into repos)
+## Inherited from the account's `.github` profile repository (do not copy into repos)
 
 `SECURITY.md`, `SUPPORT.md`, and the default PR template are served
 automatically to any repo that lacks its own. A repo adds a local copy only
@@ -51,6 +51,7 @@ the repository's enabled merge methods.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized.
 - 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-10-17 — remove the harness folders (`.claude/`, `.codex/`,
   `.cursor/`, `.windsurf/`) from this template; harness config lives in
