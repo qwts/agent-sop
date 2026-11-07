@@ -11,7 +11,7 @@ and keeps reaching the same answer:
 
 - [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md): shared
   documentation lives centrally; repos reference it.
-- [ENG-0004](ENG-0004-centralize-shared-cicd.md): shared CI is written once
+- [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md): shared CI is written once
   and consumed at `@v1`; repo-specific lanes stay per-repo.
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md): org-wide agent
   conventions live here; per-repo AGENTS.md files link rather than restate.
@@ -21,10 +21,10 @@ and keeps reaching the same answer:
 Four records, one unnamed pattern: **a shared baseline defined centrally,
 inherited by default, with bounded per-repo variation.** Meanwhile the
 procedures themselves — release process, PR workflow, review expectations,
-versioning/changesets, incident handling — exist unevenly: photos maintains
-real SOPs (originally in its wiki, per its ADR series), cartograph and
-image-trail restate overlapping working agreements in their AGENTS.md files,
-bookmarkit has none. Every restatement is a fork that drifts silently — the
+versioning/changesets, incident handling — exist unevenly: one repo maintains
+real SOPs (originally in its wiki, per its ADR series), two more restate
+overlapping working agreements in their AGENTS.md files, the rest have none.
+Every restatement is a fork that drifts silently — the
 same failure mode ENG-0004 measured in CI (411- vs 319-line near-identical
 `ci.yml`s) and PR #8's review caught in this very repo's self-knowledge.
 
@@ -49,7 +49,7 @@ class, not per-instance:
    fact stated in two agent files (ENG-0006).
 4. **Promotion and demotion are cheap and expected.** A repo-local procedure
    that a second repo starts needing moves up (PR here, repos re-point). A
-   shared SOP that only one repo still follows moves down. The playbook's
+   shared SOP that only one repo still follows moves down. This repository's
    ENG index treats SOP moves as routine maintenance, not decisions —
    this record is the standing authorization.
 5. **Baselines are versioned by changelog, not frozen.** Each SOP carries a
@@ -60,9 +60,9 @@ class, not per-instance:
 
 ## Consequences
 
-- Migration work: inventory the procedures that exist today (photos' SOPs,
-  the working agreements restated across AGENTS.md files), promote the
-  genuinely shared ones into `docs/sop/`, and replace restatements with
+- Migration work: inventory the procedures that exist today (the per-repo
+  SOPs and the working agreements restated across AGENTS.md files), promote
+  the genuinely shared ones into `docs/sop/`, and replace restatements with
   link + delta. This folds naturally into the ENG-0006 alignment issues
   already open per repo — dedupe and re-pointing are the same pass.
 - This repo becomes procedure-load-bearing the way ENG-0004 made it
@@ -77,11 +77,11 @@ class, not per-instance:
   The line: SOPs say *how work moves* (branch → PR → review → release);
   product and architecture decisions stay in ENG records and repo ADRs. When
   in doubt, it is a decision, not an SOP.
-- bookmarkit and quorum get their process for free — the point of the whole
-  exercise. The cost lands on photos, whose mature local SOPs must be split
-  into "shared baseline" and "photos delta."
+- Repos without local process get it for free — the point of the whole
+  exercise. The cost lands on the repo with mature local SOPs, which must be
+  split into "shared baseline" and "repo delta."
 
 ## References
 
-- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md), [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0006](ENG-0006-agentic-primitives-governance.md), [ENG-0007](ENG-0007-feature-lifecycle-convention.md) — the four instances this record generalizes
-- [`qwts/photos` wiki/docs](https://github.com/qwts/photos/wiki) — the existing SOP corpus the migration inventory starts from
+- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md), [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md), [ENG-0006](ENG-0006-agentic-primitives-governance.md), [ENG-0007](ENG-0007-feature-lifecycle-convention.md) — the four instances this record generalizes
+- [ENG-0011](ENG-0011-governed-scope-manifest.md) — the manifest that records which repositories inherit these baselines

@@ -8,7 +8,7 @@
 
 Every standard GitHub-hosted job starts clean. Back-to-back PRs therefore
 repeat npm, Cargo, browser, and OS downloads even when their lockfiles and
-toolchains are identical. Cartograph demonstrated the cost when Ubuntu and
+toolchains are identical. One repository demonstrated the cost when Ubuntu and
 Playwright origins stalled several concurrent jobs.
 
 The repositories are user-owned, while GitHub custom images require

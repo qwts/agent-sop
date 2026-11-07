@@ -29,8 +29,9 @@ has already happened by authoring time.
 
 1. **A new ENG record's number *is* its originating issue's number**,
    zero-padded to four digits. Issue #35 → `ENG-0035`. The originating issue
-   lives in the decision-home repo, `qwts/playbook-engineering`
-   ([ENG-0001](ENG-0001-cross-repo-decision-home.md)), so a single counter
+   lives in the decision-home repo — the fleet's agent-SOP repository
+   ([ENG-0001](ENG-0001-cross-repo-decision-home.md); named
+   `qwts/playbook-engineering` at the time) — so a single counter
    backs the whole series.
 2. **Allocation is therefore collision-free by construction.** GitHub hands out
    issue numbers atomically and never reuses them, and the number is fixed the
@@ -41,7 +42,7 @@ has already happened by authoring time.
    check that was candidate (c) on the issue). It fails when two records share
    a number, and — for records under this convention — when the `ENG-NNNN`
    filename number does not equal the `**Issue:**` field's issue number, or the
-   issue is not in `qwts/playbook-engineering`. So a manual slip fails loudly
+   issue is not in the decision-home repository. So a manual slip fails loudly
    and deterministically in the gate rather than racing at merge.
 4. **ENG-0001 through ENG-0016 are grandfathered.** Their numbers predate this
    rule and do not equal their issues; docs-gov exempts them by exclusion glob,

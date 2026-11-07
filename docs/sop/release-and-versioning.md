@@ -1,6 +1,6 @@
 # SOP: Release and versioning
 
-How a `qwts` repo that cuts releases tracks versions, records changes, and
+How a fleet repository that cuts releases tracks versions, records changes, and
 handles dependency bumps. Shared baseline under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md).
 This SOP is deliberately thin: release *mechanics* (tooling, tag format,
 changeset flow) are still largely repo-local, so the baseline states only the
@@ -39,7 +39,7 @@ does not apply to it.
 
 - A changesets or equivalent version-packages PR is a ready PR. The generated
   version commit passes the repository's complete suite once under the
-  [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md).
+  [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md).
 - Version-cut automation generates and validates the version diff. It does not
   manually dispatch a second equivalent CI run in addition to the version PR's
   normal ready-PR run.
@@ -65,7 +65,7 @@ otherwise valid source.
 A generated Version packages PR is not a source PR. It has already consumed the
 release intent into its version and changelog diff, so never manufacture an
 empty input file to keep it green — see the
-[CI policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md#changesets-version-prs-and-releases).
+[CI policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md#changesets-version-prs-and-releases).
 
 Version planning, tag planning, and release verification all consume the same
 semantic release count produced by `changeset status --output`. A positive
@@ -75,7 +75,7 @@ may substitute `find .changeset`, a file count, or another raw-file heuristic.
 ## Changing a shared baseline
 
 A substantive edit to a shared SOP or reusable workflow is itself a release: it
-rides the [ENG-0004](../decisions/ENG-0004-centralize-shared-cicd.md)
+rides the [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md)
 review-then-propagate discipline — land it here behind review with the SOP
 changelog updated, then let consumers re-point. A shared change never moves a
 `@v1` tag before this repo's own gate is green.
@@ -92,6 +92,7 @@ changelog updated, then let consumers re-point. A shared change never moves a
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series; fleet scope lines generalized.
 - 2026-08-02 — distinguished source release inputs from generated release
   projections and prohibited empty marker files as a regeneration workaround.
 - 2026-08-01 — distinguish semantic Changesets releases from governance-only

@@ -1,6 +1,6 @@
 # Shared SOPs
 
-Standard operating procedures that describe **how work moves** across `qwts`
+Standard operating procedures that describe **how work moves** across a fleet's
 repositories — branch to PR to review to release. Each procedure is defined
 once here and inherited by every repo under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md):
 silence means baseline, and a repo varies a procedure only by recording an
@@ -46,14 +46,9 @@ a bug, exactly like a shared fact stated twice in two agent files.
   moves up here; an SOP only one repo still follows moves back down. ENG-0008 is
   the standing authorization — no new decision record is required.
 
-## Migration status
-
-The one-time inventory of what each repo does today, its shared-vs-local
-classification, and the deltas each repo carries forward lives in
-[the SOP inventory](inventory.md).
-
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized; the one-time migration inventory retired to the qwts instance.
 - 2026-07-31 — make lifecycle-aware CI scheduling part of the shared branch/PR baseline.
 - 2026-07-22 — initial index; seeded the branch/PR/review, issue-lifecycle,
   release-and-versioning, and security-response baselines alongside the existing

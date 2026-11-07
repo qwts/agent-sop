@@ -6,12 +6,12 @@
 
 ## Context
 
-The playbook governs a set of repositories, but nothing says *which* set. The
-model is settled — [ENG-0008](ENG-0008-shared-sop-inheritance.md) makes every
-`qwts` repo inherit the shared baselines by default — yet the scope itself lives
+The fleet's SOP repository governs a set of repositories, but nothing says
+*which* set. The model is settled — [ENG-0008](ENG-0008-shared-sop-inheritance.md) makes every
+repo in the fleet inherit the shared baselines by default — yet the scope itself lives
 only as prose, restated across at least four documents that already disagree:
 
-- [the SOP inventory](../sop/inventory.md) lists photos, cartograph, image-trail, bookmarkit, quorum;
+- the SOP inventory lists five repositories by name;
 - [the GitHub account reference](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md) adds private repos;
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md) enumerates a fifth, overlapping set;
 - [the conformance checklist](../reference/agentic-primitives-conformance-checklist.md) hardcodes per-repo alignment issue numbers.
@@ -40,7 +40,7 @@ govern" has no answerable home.
    supersede-don't-erase rule, so the record of what was once governed survives.
 4. **The manifest is a registry, not an allowlist.** It records the governed
    universe; it does not gate governance. ENG-0008's inherit-by-default still
-   holds: a new `qwts` repo is governed the moment it exists, and the manifest's
+   holds: a new repo in the fleet is governed the moment it exists, and the manifest's
    job is to make that set *knowable in one place*, not to admit repos into it.
 5. **The scattered prose re-points here.** The non-decision docs that enumerated
    repos now link to the manifest instead of restating it; the ENG records that
@@ -69,5 +69,5 @@ govern" has no answerable home.
 
 - qwts/playbook-engineering#20 — the originating issue (opened retroactively, pre-ENG-0013)
 - [ENG-0008](ENG-0008-shared-sop-inheritance.md) — inherit-by-default, the model this registry records against
-- [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0009](ENG-0009-documentation-governance-gate.md) — the zero-dependency, CI-gated tooling shape reused here
+- [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md), [ENG-0009](ENG-0009-documentation-governance-gate.md) — the zero-dependency, CI-gated tooling shape reused here
 - [governed-repos.md](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/governed-repos.md) — the generated view and the add/remove process, at their last revision here; the manifest, its tooling, and the generated view now live in the organization's org repository (contract: [qwts/agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md))

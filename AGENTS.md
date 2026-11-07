@@ -4,7 +4,7 @@ Canonical, vendor-neutral agent context for this repository, per [ENG-0006](docs
 
 ## What this repository is
 
-The org's cross-repo home for engineering decisions (ENG records), shared SOPs, the org-wide agent conventions, and the SDLC guides. The mechanisms every `qwts` repo consumes — shared CI, the docs-governance gate, the dependency inventory, the Copilot SDLC chain — live in capability repositories, each pinned to a commit. Full map: [README.md](README.md).
+The fleet's cross-repo home for engineering decisions (ENG records), shared SOPs, the org-wide agent conventions, and the SDLC guides. The mechanisms every repo derived from this template consumes — shared CI, the docs-governance gate, the dependency inventory, the Copilot SDLC chain — live in capability repositories, each pinned to a commit. Full map: [README.md](README.md).
 
 <!-- governed:shared-agent-discovery:start -->
 
@@ -12,17 +12,16 @@ The org's cross-repo home for engineering decisions (ENG records), shared SOPs, 
 
 PR-first workflow, validation-before-push, commit and PR hygiene, and the
 untrusted-input threat model are defined once, for every repo, in the
-[org-wide agent conventions](https://github.com/qwts/agent-sop/blob/main/docs/reference/agent-conventions.md).
+[org-wide agent conventions](docs/reference/agent-conventions.md).
 Before creating or copying a repo-local skill, consult the reviewed
-[shared agent skills](https://github.com/qwts/agent-sop/blob/74e775ef23d8e7d8f8e693ccc2329f430978c096/skills/README.md)
-index. Reuse only the pinned version supplied by the governed harness; a skill
-genuinely specific to this repository belongs in its local context.
-This repository is governed by
-[agent-sop](https://github.com/qwts/agent-sop) — its
-[shared SOPs](https://github.com/qwts/agent-sop/blob/main/docs/sop/README.md)
-and [engineering decisions](https://github.com/qwts/agent-sop/blob/main/docs/decisions/README.md)
-apply here by default
-([ENG-0008](https://github.com/qwts/agent-sop/blob/main/docs/decisions/ENG-0008-shared-sop-inheritance.md):
+[shared agent skills](skills/README.md)
+index; reuse the pinned version its index records, and keep a skill
+genuinely specific to this repository in its local context.
+This repository is the fleet's agent-SOP home: its
+[shared SOPs](docs/sop/README.md)
+and [engineering decisions](docs/decisions/README.md)
+apply here, and to every fleet repository by default
+([ENG-0008](docs/decisions/ENG-0008-shared-sop-inheritance.md):
 inherit by default, vary by explicit delta).
 <!-- governed:shared-agent-discovery:end -->
 
@@ -31,6 +30,7 @@ inherit by default, vary by explicit delta).
 - **ENG records:** format, numbering, and the supersede-don't-rewrite rule are in [docs/decisions/README.md](docs/decisions/README.md). Adding or changing a record updates its row in that index table in the same PR — an unindexed record fails docs-gov's `orphan-doc` check.
 - **SOPs:** baselines under [docs/sop/](docs/sop/) propagate to every repo per [ENG-0008](docs/decisions/ENG-0008-shared-sop-inheritance.md); edits need the changelog at the bottom of the SOP updated.
 - **Governed scope:** the set of governed repos is the manifest `governance/repos.json` in the organization's org repository, not in this template ([ENG-0011](docs/decisions/ENG-0011-governed-scope-manifest.md); the contract and its validators are [agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/docs/manifest.md)). Editing the manifest, the App roster, or the capability pins is a PR there; nothing here holds or checks organization data.
+- **Instantiation:** a repository created from this template is stamped by [scripts/init.mjs](scripts/init.mjs) — identity surfaces, the ENG-9xxx renumber of the inherited records, and a provenance record; see [template instantiation](docs/reference/template-instantiation.md).
 - **Docs-gov gate:** every change under `docs/` or `skills/`, plus this file, must pass the docs-gov check and `npm run lint:markdown` before a PR is opened or updated. The check runs from the pinned `qwts-agent-docs-gov` capability — the same commit `.github/workflows/ci.yml` calls — against this repository's `docs-gov.config.json`:
 
   ```bash
@@ -38,9 +38,8 @@ inherit by default, vary by explicit delta).
   ```
 
   See [documentation governance](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/documentation-governance.md) for what each rule catches. New files must be reachable by link from [README.md](README.md), or the `orphan-doc` rule fails them.
-- **Machine memory guard:** retired by the owner. The [retirement record](docs/reference/agent-memory-guard.md) preserves the decision, issue dispositions, and historical source; downstream removal paths remain recorded.
 - **Shared skills:** [skills/](skills/README.md) holds skills installed into every agent's harness, not just this repo's. They are ENG-0006 primitives owned in `.github/CODEOWNERS` and subject to the same gates as docs; adding one means linking it from the skills index.
-- **Shared CI:** this repository hosts no reusable workflows or composite actions any more. Its own `.github/workflows/ci.yml` consumes `qwts-agent-ci` (Action Policy, bounded installer, runtime-policy check) and `qwts-agent-docs-gov` (the docs gate) at the 40-hex commits listed in [README.md](README.md) ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md) as amended by [ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)). A pin bump is a reviewed PR here; the [pin-reachability guard](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/tools/pins/pin-reachability.mjs) in `qwts-agent-ci` ([ENG-0282](docs/decisions/ENG-0282-immutable-pins-recorded-selection-no-aligner.md)), run from a checkout of that repository at the pinned commit with this repository's root as the working directory, verifies each pin is reachable from the capability repository's default branch.
+- **Shared CI:** this repository hosts no reusable workflows or composite actions any more. Its own `.github/workflows/ci.yml` consumes `qwts-agent-ci` (Action Policy, bounded installer, runtime-policy check) and `qwts-agent-docs-gov` (the docs gate) at the 40-hex commits listed in [README.md](README.md) ([ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)). A pin bump is a reviewed PR here; the [pin-reachability guard](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/tools/pins/pin-reachability.mjs) in `qwts-agent-ci` ([ENG-0282](docs/decisions/ENG-0282-immutable-pins-recorded-selection-no-aligner.md)), run from a checkout of that repository at the pinned commit with this repository's root as the working directory, verifies each pin is reachable from the capability repository's default branch.
 
 ## ENG-0006 conformance
 

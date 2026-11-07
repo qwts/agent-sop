@@ -1,6 +1,6 @@
 # SOP: Security reporting and response
 
-How a vulnerability is reported and handled in any `qwts` repo, and the repo
+How a vulnerability is reported and handled in any fleet repository, and the repo
 settings that back the process. Shared baseline under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md),
 inherited by every repo. It builds on the security settings recorded in
 [repository baseline files](repo-baseline-files.md).
@@ -12,7 +12,7 @@ inherited by every repo. It builds on the security settings recorded in
   that channel is GitHub private vulnerability reporting (security advisories); on
   a **private** repo, where GitHub does not offer that reporting UI, it is the
   private security contact `SECURITY.md` designates.
-- `SECURITY.md` is served from `qwts/.github` unless a repo publishes its own;
+- `SECURITY.md` can be served from the account's `.github` profile repository unless a repo publishes its own;
   either way it is the single entry point and names a channel reachable for the
   repo's visibility.
 
@@ -20,7 +20,7 @@ inherited by every repo. It builds on the security settings recorded in
 
 Every repo keeps these on — the security floor recorded in
 [repository baseline files](repo-baseline-files.md) (rationale in
-[ENG-0005](../decisions/ENG-0005-static-analysis-survey-results.md)). Disabling
+[ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md)). Disabling
 one is a security regression, not a delta:
 
 - Private vulnerability reporting **enabled** where GitHub offers it (public
@@ -44,7 +44,7 @@ one is a security regression, not a delta:
 
 - A user-affecting incident gets a short, blameless write-up: what happened, the
   root cause, and the concrete guardrail added. The standing org guardrail from
-  the 2026-07-21 photos incident — agent-authored changes are gated and require
+  the 2026-07-21 runaway-agent incident — agent-authored changes are gated and require
   at least one human approval — lives in the
   [branch, PR, and review workflow](branch-pr-review.md).
 
@@ -56,6 +56,8 @@ one is a security regression, not a delta:
 
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized.
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-07-31 — require lifecycle-controlled CodeQL advanced setup when the
   Actions Policy blocks GitHub's unselectable default-setup actor.
 - 2026-07-22 — initial version; unified vulnerability reporting on private

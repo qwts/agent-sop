@@ -1,6 +1,6 @@
 # SOP: Repository baseline files
 
-**Scope:** every `qwts` repository. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
+**Scope:** every repository in the fleet. **Model:** [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md) —
 inherit by default, vary by explicit delta.
 
 ## Required in every repo (mandatory — extend, don't drop)
@@ -11,7 +11,7 @@ inherit by default, vary by explicit delta.
 | `LICENSE` | Exactly this filename. Licensing is deliberately per-repo (MIT, PolyForm NC, proprietary, Apache-2.0 all in use); *absence* is the only violation. |
 | `AGENTS.md` | Canonical agent context per [ENG-0006](../decisions/ENG-0006-agentic-primitives-governance.md); vendor files are thin adapters. Its marked shared-conventions and skills block is projected from this baseline, pointing agents to the org-wide conventions, shared skills index, SOPs, and ENG records rather than copying them. Repo-specific context remains outside that block. |
 | `CONTRIBUTING.md` | May be a pointer stub into `docs/` (the photos pattern). |
-| `.github/CODEOWNERS` | Minimum: `* @qwts` plus explicit `/.github/` ownership. |
+| `.github/CODEOWNERS` | Minimum: the account as default owner plus explicit `/.github/` ownership. |
 | Feature issue template | The shared [feature-lifecycle](feature-lifecycle.md) form ([ENG-0007](../decisions/ENG-0007-feature-lifecycle-convention.md)); repos may add fields, not drop sections. |
 | `.prettierignore` | Repository-owned rules; preserve every local rule. |
 
@@ -24,7 +24,7 @@ inherit by default, vary by explicit delta.
 | Design docs | Anything beyond a trivial tool: `DESIGN.md` for small repos, `docs/design/` or `design/` for large ones. Location is free; existence is not. |
 | `.github/PULL_REQUEST_TEMPLATE.md` | Only when the repo needs more than the org default (gates, coverage maps); otherwise inherit. |
 
-## Inherited from `qwts/.github` (do not copy into repos)
+## Inherited from the account's `.github` profile repository (do not copy into repos)
 
 `SECURITY.md`, `SUPPORT.md`, and the default PR template are served
 automatically to any repo that lacks its own. A repo adds a local copy only
@@ -35,12 +35,12 @@ duplicate of the default.
 
 Private vulnerability reporting **enabled** (SECURITY.md depends on it);
 secret scanning + push protection and Dependabot security updates **on**
-(the ENG-0005 baseline); CodeQL **on** once the repo has code. Private
+(the shared security-settings baseline); CodeQL **on** once the repo has code. Private
 repositories skip vulnerability reporting and CodeQL: a personal account
 cannot enable either there, and governed CI skips the CodeQL lane while the
 repository is private ([#355](https://github.com/qwts/agent-sop/issues/355)). Configure the
 repository Actions Policy and CI/branch-protection settings from the shared
-[CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md). Use CodeQL advanced
+[CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md). Use CodeQL advanced
 setup so the same coverage runs through governed CI; default setup's internal
 actor cannot be selected in the restricted-actor policy. Keep the default
 workflow token read-only and disable GitHub Actions PR creation/approval unless
@@ -51,6 +51,8 @@ the repository's enabled merge methods.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized.
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-10-17 — remove the harness folders (`.claude/`, `.codex/`,
   `.cursor/`, `.windsurf/`) from this template; harness config lives in
   the harness user directory, tracked in qwts/qwts-agent-sop#89.

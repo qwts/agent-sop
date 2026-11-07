@@ -53,7 +53,7 @@ jobs:
       release_gate_mode: ${{ steps.policy.outputs.release_gate_mode }}
     steps:
       - id: policy
-        uses: qwts/qwts-agent-ci/.github/actions/ci-policy@3a5617b287d922e37f262210a1d8750d8217b56d
+        uses: qwts/qwts-agent-ci/.github/actions/ci-policy@8bcaace6d4d990fcb75e847c1fb500516cc19fc6
 
   merge-evidence:
     name: Verify merged commit evidence
@@ -128,7 +128,7 @@ jobs:
       # cache and launches npm through the bounded-command runner at the same
       # pinned commit.
       - name: Install locked dependencies
-        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
+        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@8bcaace6d4d990fcb75e847c1fb500516cc19fc6
         env:
           NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
         with:
@@ -143,9 +143,13 @@ jobs:
           attempts: '2'
           retry-delay-seconds: '5'
       - name: Workflow runtime policy
-        uses: qwts/qwts-agent-ci/.github/actions/ci-runtime-check@3a5617b287d922e37f262210a1d8750d8217b56d
+        uses: qwts/qwts-agent-ci/.github/actions/ci-runtime-check@8bcaace6d4d990fcb75e847c1fb500516cc19fc6
       - name: Markdown lint
         run: npm run lint:markdown
+      - name: Template checks
+        run: |
+          npm run check:template
+          npm test
 
   docs-gov:
     needs: [policy, merge-evidence]
@@ -199,7 +203,7 @@ jobs:
           node-version: 22
           package-manager-cache: false
       - name: Seed trusted default-branch dependency cache
-        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@3a5617b287d922e37f262210a1d8750d8217b56d
+        uses: qwts/qwts-agent-ci/.github/actions/bounded-dependency-install@8bcaace6d4d990fcb75e847c1fb500516cc19fc6
         env:
           NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-dependency-cache/npm
         with:

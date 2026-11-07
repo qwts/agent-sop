@@ -61,8 +61,8 @@ on two real revisions with a haiku-class executor
   baseline). This is cheap but nonzero, and it is the price of refusing an
   LLM judge — a judge would remove calibration work and add nondeterminism,
   which is the wrong trade for a ratchet.
-- quorum inherits this loop for its own agent-facing docs per
-  [ENG-0006](ENG-0006-agentic-primitives-governance.md)'s eval-gating
+- Repos inheriting the fleet apply this loop to their own agent-facing docs
+  per [ENG-0006](ENG-0006-agentic-primitives-governance.md)'s eval-gating
   direction; the golden-task sets ENG-0006 calls for can reuse this harness.
 
 ## References

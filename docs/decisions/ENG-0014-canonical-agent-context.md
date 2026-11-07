@@ -16,7 +16,7 @@ the dominant tool, does not natively read `AGENTS.md`. The surveyed matrix
 Code, Antigravity, and Grok implement a `SKILL.md` skills primitive, each at
 a different path. Separately, the link-vs-copy boundary was never crisply
 stated, and agents working in governed repos should not need to clone this
-playbook — or wade through process — to reach guidance they need every
+repository — or wade through process — to reach guidance they need every
 session.
 
 ## Decision

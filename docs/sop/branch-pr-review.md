@@ -1,11 +1,10 @@
 # SOP: Branch, PR, and review workflow
 
-How a change travels from a branch to a merged commit in any `qwts` repo, and
+How a change travels from a branch to a merged commit in any fleet repository, and
 the bar a pull request clears before it merges. Shared baseline under
 [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md); a repo varies it
-only by a documented delta. This is the common denominator already followed by
-photos, cartograph, and image-trail — the [inventory](inventory.md) records
-where each repo differs.
+only by a documented delta. This is the common denominator of the working agreements the fleet's
+repositories already followed; where a repo differs, it records a delta.
 
 ## Branching (mandatory — extend, don't drop)
 
@@ -17,12 +16,12 @@ where each repo differs.
   current. Organization-owned repositories use the native merge queue to
   validate the approved change with the latest `main`. User-owned repositories,
   where GitHub does not offer that queue, use the governed updater fallback in
-  the [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md).
+  the [CI execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md).
 
 ## Opening the PR
 
 - An agent opens its PR under the dedicated bot identity
-  ([ENG-0016](../decisions/ENG-0016-agent-pr-bot-identity.md)), never as the
+  ([ENG-0016](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0016-agent-pr-bot-identity.md)), never as the
   human account. GitHub does not let a PR's author approve it, so an agent PR
   authored by the human account makes the human-review requirement below
   unsatisfiable.
@@ -41,7 +40,7 @@ where each repo differs.
 
 ## The merge bar (mandatory — extend, don't drop)
 
-- CI follows the shared [execution policy](https://github.com/qwts/qwts-agent-ci/blob/3a5617b287d922e37f262210a1d8750d8217b56d/docs/ci-execution-policy.md):
+- CI follows the shared [execution policy](https://github.com/qwts/qwts-agent-ci/blob/8bcaace6d4d990fcb75e847c1fb500516cc19fc6/docs/ci-execution-policy.md):
   agents run fast checks locally before leaving draft, every agreed gate passes
   on the exact ready merge candidate either through manual preflight or the
   ready event, and a short post-merge check runs only when that exact commit was
@@ -50,12 +49,12 @@ where each repo differs.
   without review — fix the gate first.
 - At least one approving human review is required. Agent-authored changes are
   never self-merged; a human approves before merge. (Org mandate following the
-  2026-07-21 photos incident.)
+  2026-07-21 runaway-agent incident.)
 - That approval is never delegated. No broker, grant, or automation approves,
   merges, dismisses an approval, or otherwise satisfies
   `required_approving_review_count` on the human's behalf. A bounded grant may
   ask a human to review; it may never supply the review
-  ([ENG-0016](../decisions/ENG-0016-agent-pr-bot-identity.md)).
+  ([ENG-0016](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0016-agent-pr-bot-identity.md)).
 - Every review thread is resolved before merge in one explicit state: **fixed**
   (name the commit), **deferred** (link a follow-up issue with the reason), or
   **rejected** (give the technical reason). No thread is silently dismissed;
@@ -79,9 +78,9 @@ where each repo differs.
   response to feedback.
 - Comments explain *why*, not *what*.
 
-## Recorded deltas (see the inventory for the full list)
+## Recorded deltas (each repo records its own)
 
-- **cartograph** prefixes branches `feat/ fix/ chore/ docs/` and requires an
+- One repo prefixes branches `feat/ fix/ chore/ docs/` and requires an
   issue to exist before the branch is cut.
 - Per-repo CI gates (coverage floors, acceptance-coverage maps, language
   toolchains) are release-and-validation deltas, not workflow changes; they live
@@ -89,6 +88,8 @@ where each repo differs.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: fleet-specific examples and scope lines generalized.
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-08-13 — state the deny list in the merge bar: approval, merge, and
   anything satisfying the required review count are never delegated to a broker
   or a grant (ENG-0016).

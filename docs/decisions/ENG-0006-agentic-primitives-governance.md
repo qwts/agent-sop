@@ -6,29 +6,25 @@
 
 ## Context
 
-Agents write most of the code in this org (the standing premise since
-ENG-0002), and every repo now carries files whose only job is to steer them:
+Agents write most of the code in this org (the standing premise since [ENG-0002](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0002-static-analysis-direction.md)), and every repo now carries files whose only job is to steer them:
 instruction files, slash commands, tool settings, and soon skills and MCP
-servers. quorum raises the stakes — it is an agent-orchestration product, so
-its agent configuration *is* product surface.
+servers. An agent-orchestration product raises the stakes — its agent
+configuration *is* product surface.
 
-Inventory at survey time (2026-07-22):
-
-| Repo | AGENTS.md | CLAUDE.md | copilot-instructions.md | Other |
-| --- | --- | --- | --- | --- |
-| photos | 287 lines (canonical) | 47 — pointer + Claude-specific | 42 | `.claude/commands`, `settings.json`, `launch.json`, `.cursor` |
-| image-trail | 222 (canonical) | 62 — pointer | 60 — genuine Copilot review rules | `.claude/commands`, `settings.json`, `.cursor` |
-| cartograph | 117 (canonical) | 26 — pointer | — | — |
-| bookmarkit | **none** | 113 — became de-facto canonical | **leftover scaffolding boilerplate** (a stale setup checklist re-read every session) | — |
-| playbook | none | none | 17 — thin pointer into `docs/` | 7 Copilot `.agent.md` agents (SDLC handoff chain) + 29 `.prompt.md` files |
+The survey that prompted this record (2026-07-22, in the origin fleet; the
+fleet-specific tables are preserved in the instance's copy of this record)
+found every repo carrying steering files in some state: canonical
+`AGENTS.md` with thin vendor pointers; vendor files that had quietly become
+the de-facto canonical source; and leftover scaffolding boilerplate — a
+stale setup checklist — re-read by every session.
 
 Three observations drive this record:
 
-1. **The good pattern already exists but is convention, not policy.** photos'
-   CLAUDE.md opens: *"Start with `AGENTS.md`… This file only adds
-   Claude-specific orientation; do not duplicate `AGENTS.md` here."* That is
-   exactly right, and nothing requires the next repo to do it — bookmarkit
-   didn't.
+1. **The good pattern already exists but is convention, not policy.** One
+   repo's vendor file opened: *"Start with `AGENTS.md`… This file only adds
+   vendor-specific orientation; do not duplicate `AGENTS.md` here."* That is
+   exactly right, and nothing required the next repo to do it — another repo
+   never adopted it.
 2. **These files are attack surface, not documentation.** An instruction file
    steers an agent that holds the repo's write access; a skill or MCP server
    is third-party code in the loop (the same supply-chain class as the
@@ -51,7 +47,7 @@ than arriving ungoverned.
 
 1. **One canonical, vendor-neutral source per repo: `AGENTS.md`.** Vendor
    files are thin adapters: orientation plus a pointer, plus content that is
-   genuinely vendor-specific (image-trail's Copilot *review* rules qualify;
+   genuinely vendor-specific (genuine Copilot *review* rules qualify;
    restated architecture does not). **The test: a shared fact stated in two
    agent files is a bug**, the same way duplicated logic is. Semantic
    redundancy is the failure mode — every restatement is a second copy an
@@ -93,12 +89,13 @@ than arriving ungoverned.
      the deployed artifact.
    - An instruction-file PR states what behavior it changes and, where
      feasible, cites eval evidence. "It reads better" is not evidence.
-   - quorum dogfoods this from day one: an agent-orchestration product whose
-     own agent configuration is unmeasured would be self-refuting.
-5. **Placement follows ENG-0003/ENG-0004:** org-wide agent conventions live
+   - An agent-orchestration product dogfoods this from day one: shipping
+     agent configuration that is itself unmeasured would be self-refuting.
+5. **Placement follows [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md)
+   and [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md):** org-wide agent conventions live
    in this repository and repos point to them; only repo-specific content
    lives in the repo's own AGENTS.md. Shared eval harness wiring is a
-   playbook reusable workflow when it stabilizes.
+   reusable workflow when it stabilizes.
 6. **Existing repos must align — there is no grandfathering.** This record
    is prescriptive going forward, and "going forward" includes the current
    repos: each one gets a tracked alignment issue, and a repo is conformant
@@ -106,22 +103,22 @@ than arriving ungoverned.
    a thin adapter with zero duplicated shared semantics, (c) the root file
    passes a progressive-disclosure review, and (d) agent-facing supply chain
    (MCP servers, third-party skills, tool permissions) is pinned and
-   least-privilege. New repos (quorum) are born conformant; existing repos
+   least-privilege. New repos are born conformant; existing repos
    converge rather than coexist with the standard.
 
 ## Consequences
 
 - Immediate, mandatory per-repo work (tracked as alignment issues, one per
-  repo): bookmarkit extracts its CLAUDE.md into a canonical AGENTS.md and
-  deletes the scaffolding-boilerplate copilot-instructions; this playbook
-  repo adds a root AGENTS.md of its own **and brings its existing Copilot
-  agent/prompt suite (7 `.agent.md` + 29 `.prompt.md`) under this
-  governance** — vendor-specific interactive handoffs are legitimate vendor
-  content, but they get the same review-as-code, dedupe-against-`docs/`, and
-  disclosure discipline as everything else; photos and image-trail take
-  progressive-disclosure passes on their 287- and 222-line root files;
-  cartograph audits its (already close) pair for duplication; quorum is
-  bootstrapped conformant with its first code.
+  repo): the repo whose vendor file had become the de-facto canonical source
+  extracts a canonical `AGENTS.md` from it and deletes the
+  scaffolding-boilerplate copilot-instructions; this repository adds a root
+  AGENTS.md of its own **and brings its existing vendor agent/prompt suite
+  under this governance** — vendor-specific interactive handoffs are
+  legitimate vendor content, but they get the same review-as-code,
+  dedupe-against-`docs/`, and disclosure discipline as everything else; the
+  repos with the largest root files take progressive-disclosure passes; the
+  already-close pair is audited for duplication; a new repo is bootstrapped
+  conformant with its first code.
 - Eval-gating adds real friction and token cost to what used to be a
   ten-second markdown edit. Accepted deliberately: unmeasured instruction
   growth is how context windows rot. The golden-task sets start small
@@ -133,15 +130,15 @@ than arriving ungoverned.
   check exists, enforcement is review-time and will occasionally fail.
 - "Future paradigms inherit this by default" means a new primitive may be
   briefly over-constrained until an amendment tailors rules to it. That is
-  the right failure direction — the alternative is bookmarkit's stale
-  scaffolding checklist, multiplied by every new vendor's file format.
+  the right failure direction — the alternative is the stale scaffolding
+  checklist, multiplied by every new vendor's file format.
 
 ## References
 
 - [Org-wide agent conventions](../reference/agent-conventions.md) — the shared working agreement this record's decision item 5 places in this repository; every repo's `AGENTS.md` links here instead of restating it
 - [Agentic primitives conformance checklist](../reference/agentic-primitives-conformance-checklist.md) — the operationalized §6 checklist per-repo alignment issues link to
-- [ENG-0002](ENG-0002-static-analysis-direction.md) — the "agents write most of the code, quality must be machine-checkable" premise this extends to the agents' own configuration
-- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) / [ENG-0004](ENG-0004-centralize-shared-cicd.md) — placement and shared-workflow delivery model
-- [ENG-0005](ENG-0005-static-analysis-survey-results.md) — the supply-chain pinning direction MCP/skill governance mirrors
+- [ENG-0002](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0002-static-analysis-direction.md) — the "agents write most of the code, quality must be machine-checkable" premise this extends to the agents' own configuration
+- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) / [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) — placement and shared-workflow delivery model
+- [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md) — the supply-chain pinning direction MCP/skill governance mirrors
 - [microsoft/SkillOpt](https://github.com/microsoft/SkillOpt) · [MSR blog: agent skills as trainable parameters](https://www.microsoft.com/en-us/research/blog/skillopt-agent-skills-as-trainable-parameters/)
 - [agents.md](https://agents.md) — the vendor-neutral AGENTS.md convention this adopts as canonical

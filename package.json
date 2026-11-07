@@ -7,7 +7,9 @@
   },
   "scripts": {
     "lint:markdown": "markdownlint docs/ skills/ AGENTS.md",
-    "lint:markdown:fix": "markdownlint docs/ skills/ AGENTS.md --fix"
+    "lint:markdown:fix": "markdownlint docs/ skills/ AGENTS.md --fix",
+    "check:template": "node scripts/init.mjs --check",
+    "test": "node --test scripts/init.test.mjs"
   },
   "devDependencies": {
     "markdownlint-cli": "^0.50.0"

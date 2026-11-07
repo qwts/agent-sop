@@ -6,23 +6,23 @@
 
 ## Context
 
-Decision records were accumulating in `qwts/photos` — its wiki holds `ADR-0001`
-through `ADR-0023` — because it was the most active repo, not because it owned
-the decisions. Some of those records are not about photos at all. `ADR-0001
-Automation Check Governance` is a general engineering-process decision that
-happens to live in a photo library app's wiki.
+Decision records were accumulating in the busiest repo's wiki — it holds
+`ADR-0001` through `ADR-0023` — because it was the most active repo, not
+because it owned the decisions. Some of those records are not about that repo
+at all. `ADR-0001 Automation Check Governance` is a general
+engineering-process decision that happens to live in a product repo's wiki.
 
-That misfiling has real costs. Decisions applying to `cartograph`,
-`image-trail`, or `agent-comms` are invisible from those repos. If `photos` is
-ever archived, the cross-cutting records go with it. And a contributor — human
-or agent — working in another repo has no reason to look in photos' wiki.
+That misfiling has real costs. Decisions applying to other repositories are
+invisible from those repos. If the busiest repo is ever archived, the
+cross-cutting records go with it. And a contributor — human or agent —
+working in another repo has no reason to look in its wiki.
 
 Tools considered and rejected:
 
 - **A GitHub organization.** Free tier is sufficient (Enterprise is not
   required), but user-level Projects already span repos, so an org buys little
-  today. Transferring repos also breaks the `qwts.github.io/photos` Pages URL,
-  which is hardcoded in photos' CI for per-PR Playwright reports. Revisit when
+  today. Transferring repos also breaks their GitHub Pages URLs, which are
+  hardcoded in repo CI for per-PR Playwright reports. Revisit when
   collaborators are added — that is the actual forcing function.
 - **Linear.** A good issue tracker, but decision records are documents, not
   issues. It does not solve this problem, and moving tracking off GitHub splits
@@ -33,24 +33,25 @@ Tools considered and rejected:
 
 ## Decision
 
-Cross-repo decisions live in `qwts/playbook-software-engineering`, under
-`docs/decisions/`, as an `ENG-NNNN` series.
+Cross-repo decisions live in the fleet's agent-SOP repository (this
+repository; named `qwts/playbook-software-engineering` at the time — see the
+amendments below), under `docs/decisions/`, as an `ENG-NNNN` series.
 
-Records are kept **in-repo rather than in this repository's wiki**, deviating
-from photos' wiki-first convention. GitHub code search indexes repository
-contents but not wiki pages, and cross-repo findability is the entire problem
-being solved. In-repo files are also greppable by agents working from a clone
-and reviewable through pull requests.
+Records are kept **in-repo rather than in a wiki**, deviating from the
+wiki-first convention the busiest repo used. GitHub code search indexes
+repository contents but not wiki pages, and cross-repo findability is the
+entire problem being solved. In-repo files are also greppable by agents
+working from a clone and reviewable through pull requests.
 
-Per-repo decisions do not move. Photos keeps its `ADR-NNNN` series in its wiki.
+Per-repo decisions do not move. Each repo keeps its own `ADR-NNNN` series.
 
 ## Consequences
 
 - Cross-cutting decisions survive any single repo's archival, and are findable
   by code search from anywhere.
 - Two decision homes now exist. The routing rule — *if exactly one repo would
-  have to change, it is not an ENG record* — must stay unambiguous, and photos'
-  `adr` label gate needs to state which home it means.
+  have to change, it is not an ENG record* — must stay unambiguous, and a
+  repo's `adr` label gate needs to state which home it means.
 - Distinct `ENG-` and `ADR-` prefixes prevent citation collisions, but everyone
   must use them consistently; a bare "ADR-0005" is now ambiguous.
 - This repo becomes load-bearing. It was previously a dormant SDLC-workflow

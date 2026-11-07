@@ -1,6 +1,6 @@
 # SOP: Issue lifecycle
 
-How work is claimed, tracked, and closed against GitHub issues in any `qwts`
+How work is claimed, tracked, and closed against GitHub issues in any fleet
 repo. Shared baseline under [ENG-0008](../decisions/ENG-0008-shared-sop-inheritance.md),
 inherited by default and varied only by a documented delta. It pairs with the
 [branch, PR, and review workflow](branch-pr-review.md): the issue is where work
@@ -40,7 +40,7 @@ drop them.
 ## Implementation prompt and model routing (mandatory — extend, don't drop)
 
 An issue intended for agent execution carries a prompt an agent can act on and a
-routing recommendation ([ENG-0151](../decisions/ENG-0151-model-routing.md)).
+routing recommendation ([ENG-0151](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0151-model-routing.md)).
 Issues filed only to record a problem may omit it.
 
 ```markdown
@@ -85,12 +85,13 @@ radius or a failure mode that looks like success is T1.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series; fleet scope lines generalized.
 - 2026-07-22 — initial version; generalized the claim-and-close conventions from
   the photos and cartograph working agreements (ENG-0008).
 - 2026-08-03 — added the mandatory implementation-prompt and model-routing
   section: agent-executed issues carry a tier, routing retrieved from
   `governance/agent-models.json` rather than recalled from memory, and evidence
-  that would fail if the change were wrong ([ENG-0151](../decisions/ENG-0151-model-routing.md)).
+  that would fail if the change were wrong ([ENG-0151](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0151-model-routing.md)).
 - 2026-08-22 — the model registry and reader moved to agent-bot-identity, which
   owns agent identity and models; the routing lookup now points at that
   checkout instead of a synced per-repo copy.

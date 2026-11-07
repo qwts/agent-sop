@@ -9,7 +9,7 @@
 [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) made repos the
 documentation source of truth, which made docs versioned files that CI can
 read. Nothing yet gates them: a doc PR merges on markdownlint alone, while the
-org's standing premise (since [ENG-0002](ENG-0002-static-analysis-direction.md))
+org's standing premise (since [ENG-0002](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0002-static-analysis-direction.md))
 is that agents write most of the code — and agents are also the primary
 *readers* of these docs.
 
@@ -40,11 +40,11 @@ supplies the mechanism and extends it to `docs/` generally.
    for tidiness.
 3. **Budgets are measured in estimated tokens and ratchet like the existing
    gate floors** — downward freely, upward only with a recorded reason.
-4. **Delivery follows [ENG-0004](ENG-0004-centralize-shared-cicd.md):** the
+4. **Delivery follows [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md):** the
    checks are a zero-dependency CLI in this repository, exposed to consumers
    as a reusable workflow; configuration (globs, budgets, terminology) stays
-   per-repo. Adoption order: this repo first (it gates itself), then photos,
-   then the rest per [ENG-0006](ENG-0006-agentic-primitives-governance.md)'s
+   per-repo. Adoption order: this repo first (it gates itself), then the rest
+   of the fleet per [ENG-0006](ENG-0006-agentic-primitives-governance.md)'s
    no-grandfathering rule.
 5. **The evaluation loop (Phase 2) is explicitly deferred, not adopted.**
    A SkillOpt-shaped loop — benchmark tasks, doc revisions scored against
@@ -63,7 +63,7 @@ supplies the mechanism and extends it to `docs/` generally.
   version bumps. The cost is that budget numbers are approximate; the ratchet
   only needs them to be deterministic and monotone.
 - The `stale-path` check is scoped per-repo to the directories the repo owns,
-  because this playbook's docs legitimately describe *other* repos' trees.
+  because a fleet SOP repo's docs legitimately describe *other* repos' trees.
   A cross-repo reference that goes stale is not caught. Accepted for now.
 - The #565 link verifier this repo intended to inherit was never committed
   and its working session is unrecoverable; the link check here is a fresh

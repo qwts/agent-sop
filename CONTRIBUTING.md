@@ -25,8 +25,7 @@ How work moves here:
   Before opening or updating a PR, run the local gates listed in
   [AGENTS.md](AGENTS.md): the docs-gov check from the pinned capability and
   `npm run lint:markdown`.
-- **Shared CI** ([ENG-0004](docs/decisions/ENG-0004-centralize-shared-cicd.md),
-  amended by [ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)):
+- **Shared CI** ([ENG-0355](docs/decisions/ENG-0355-static-router-one-pointer-pinned-capabilities.md)):
   the composite actions and reusable workflows live in `qwts-agent-ci` and
   `qwts-agent-docs-gov` and are consumed at a 40-hex commit; a pin bump in
   this repository is a reviewed PR, and the capability repository's own CI
