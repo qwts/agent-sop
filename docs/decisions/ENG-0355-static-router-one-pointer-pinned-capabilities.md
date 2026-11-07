@@ -6,11 +6,11 @@
 
 ## Context
 
-Four records assume this repository distributes: [ENG-0004](ENG-0004-centralize-shared-cicd.md)
+Four records assume this repository distributes: [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md)
 publishes shared CI under a moving major tag, [ENG-0011](ENG-0011-governed-scope-manifest.md)
 makes the manifest the source of truth that tooling converges repositories
-toward, [ENG-0038](ENG-0038-governance-reconciler.md) proposes the reconciler
-that pushes seeds into them, and [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md)
+toward, [ENG-0038](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0038-governance-reconciler.md) proposes the reconciler
+that pushes seeds into them, and [ENG-0279](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0279-immutable-releases-and-repo-lockfiles.md)
 proposes an aligner that opens a pull request in every repository per release.
 Each channel writes into other repositories, needs an operator or bot token
 to do it, and leaves a machine unable to answer the first question an agent
@@ -110,9 +110,11 @@ private-looking data (its roster, its manifest, its account notes).
 
 ## References
 
-- [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0011](ENG-0011-governed-scope-manifest.md),
-  [ENG-0038](ENG-0038-governance-reconciler.md), [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md),
+- [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md), [ENG-0011](ENG-0011-governed-scope-manifest.md),
+  [ENG-0038](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0038-governance-reconciler.md), [ENG-0279](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0279-immutable-releases-and-repo-lockfiles.md),
   [ENG-0282](ENG-0282-immutable-pins-recorded-selection-no-aligner.md).
+  ENG-0004, ENG-0038, and ENG-0279 retired from this template in the 2026-11
+  conversion and live on in the qwts instance's series.
 - Discussions #365, #367, #371, #372, and qwts/agent-org#2, linked above.
 
 ## Amendment, 2026-09-16

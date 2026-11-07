@@ -75,7 +75,7 @@ may substitute `find .changeset`, a file count, or another raw-file heuristic.
 ## Changing a shared baseline
 
 A substantive edit to a shared SOP or reusable workflow is itself a release: it
-rides the [ENG-0004](../decisions/ENG-0004-centralize-shared-cicd.md)
+rides the [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md)
 review-then-propagate discipline — land it here behind review with the SOP
 changelog updated, then let consumers re-point. A shared change never moves a
 `@v1` tag before this repo's own gate is green.
@@ -92,6 +92,7 @@ changelog updated, then let consumers re-point. A shared change never moves a
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-08-02 — distinguished source release inputs from generated release
   projections and prohibited empty marker files as a regeneration workaround.
 - 2026-08-01 — distinguish semantic Changesets releases from governance-only

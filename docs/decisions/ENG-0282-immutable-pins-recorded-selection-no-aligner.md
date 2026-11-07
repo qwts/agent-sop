@@ -6,7 +6,7 @@
 
 ## Context
 
-[ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md) proposed
+[ENG-0279](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0279-immutable-releases-and-repo-lockfiles.md) proposed
 signed, immutable releases with a hash manifest, a per-repository lockfile
 (`.playbook/lock.json`), and a nightly aligner that opens one align PR per
 repository, under the rule that the fleet runs one version, the latest.
@@ -94,5 +94,7 @@ Points 1 and 2 read without the router; nothing else changes.
 
 ## References
 
-- [ENG-0004](ENG-0004-centralize-shared-cicd.md), [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md),
+- [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md), [ENG-0279](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0279-immutable-releases-and-repo-lockfiles.md),
   [ENG-0355](ENG-0355-static-router-one-pointer-pinned-capabilities.md).
+  ENG-0004 and ENG-0279 retired from this template in the 2026-11 conversion
+  and live on in the qwts instance's series.

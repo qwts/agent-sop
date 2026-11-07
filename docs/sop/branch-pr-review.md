@@ -22,7 +22,7 @@ where each repo differs.
 ## Opening the PR
 
 - An agent opens its PR under the dedicated bot identity
-  ([ENG-0016](../decisions/ENG-0016-agent-pr-bot-identity.md)), never as the
+  ([ENG-0016](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0016-agent-pr-bot-identity.md)), never as the
   human account. GitHub does not let a PR's author approve it, so an agent PR
   authored by the human account makes the human-review requirement below
   unsatisfiable.
@@ -55,7 +55,7 @@ where each repo differs.
   merges, dismisses an approval, or otherwise satisfies
   `required_approving_review_count` on the human's behalf. A bounded grant may
   ask a human to review; it may never supply the review
-  ([ENG-0016](../decisions/ENG-0016-agent-pr-bot-identity.md)).
+  ([ENG-0016](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0016-agent-pr-bot-identity.md)).
 - Every review thread is resolved before merge in one explicit state: **fixed**
   (name the commit), **deferred** (link a follow-up issue with the reason), or
   **rejected** (give the technical reason). No thread is silently dismissed;
@@ -89,6 +89,7 @@ where each repo differs.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-08-13 — state the deny list in the merge bar: approval, merge, and
   anything satisfying the required review count are never delegated to a broker
   or a grant (ENG-0016).

@@ -1,8 +1,6 @@
 # Shared agent skills
 
-The fleet's skills home, per
-[ENG-0004](../docs/decisions/ENG-0004-centralize-shared-cicd.md) — no per-repo
-copies. Skills are agent primitives under
+The fleet's skills home — no per-repo copies. Skills are agent primitives under
 [ENG-0006](../docs/decisions/ENG-0006-agentic-primitives-governance.md): read as
 directives, shipped with executable scripts, reviewed as code, and owned in
 `.github/CODEOWNERS`. A skill listed here either lives in this repo under

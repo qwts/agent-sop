@@ -20,7 +20,7 @@ inherited by every repo. It builds on the security settings recorded in
 
 Every repo keeps these on — the security floor recorded in
 [repository baseline files](repo-baseline-files.md) (rationale in
-[ENG-0005](../decisions/ENG-0005-static-analysis-survey-results.md)). Disabling
+[ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md)). Disabling
 one is a security regression, not a delta:
 
 - Private vulnerability reporting **enabled** where GitHub offers it (public
@@ -56,6 +56,7 @@ one is a security regression, not a delta:
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-07-31 — require lifecycle-controlled CodeQL advanced setup when the
   Actions Policy blocks GitHub's unselectable default-setup actor.
 - 2026-07-22 — initial version; unified vulnerability reporting on private

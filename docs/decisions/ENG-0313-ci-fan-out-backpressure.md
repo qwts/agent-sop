@@ -10,7 +10,7 @@ One `main` push brings every open pull request up to date. Each update mints a
 fresh head SHA, so exact-SHA evidence reuse cannot match and per-PR
 cancellation never fires — each PR gets exactly one new run. A single push
 therefore starts O(open PRs) complete suites at once, and their identical
-dependency installs race the same origins. Cartograph measured seven
+dependency installs race the same origins. One repository measured seven
 simultaneous suites from one action-pin bump, and that stampede produced the
 six-hour stalled `apt-get update`.
 

@@ -35,7 +35,7 @@ duplicate of the default.
 
 Private vulnerability reporting **enabled** (SECURITY.md depends on it);
 secret scanning + push protection and Dependabot security updates **on**
-(the ENG-0005 baseline); CodeQL **on** once the repo has code. Private
+(the shared security-settings baseline); CodeQL **on** once the repo has code. Private
 repositories skip vulnerability reporting and CodeQL: a personal account
 cannot enable either there, and governed CI skips the CodeQL lane while the
 repository is private ([#355](https://github.com/qwts/agent-sop/issues/355)). Configure the
@@ -51,6 +51,7 @@ the repository's enabled merge methods.
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-10-17 — remove the harness folders (`.claude/`, `.codex/`,
   `.cursor/`, `.windsurf/`) from this template; harness config lives in
   the harness user directory, tracked in qwts/qwts-agent-sop#89.

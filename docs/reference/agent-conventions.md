@@ -14,7 +14,7 @@ No direct pushes to instruction files, skills, slash commands, MCP config, or ho
 
 Run the repo's cheap gates locally before opening or updating a PR: lint, typecheck, unit tests, and the repo's `docs-gov` check if its docs are enrolled (see [documentation governance](https://github.com/qwts/qwts-agent-docs-gov/blob/67db7dc9c20bc29222fb605b7ff9432fd58a2a3f/docs/documentation-governance.md)). A change whose cheap gates have not been run is not ready for review.
 
-**Agents do not run the heavy suites on a local machine.** End-to-end, Storybook, performance, coverage and whole-`ci` lanes fan out to many workers — an end-to-end worker boots a full application — and several agent sessions doing that at once across repos and worktrees is what exhausts a developer's memory ([ENG-0138](../decisions/ENG-0138-machine-scoped-agent-memory-budget.md)). Push the branch and let GitHub verify: CI is the authoritative lane, its workflow invokes the underlying CI entrypoint directly, and nothing is lost but latency. The [machine memory guard is retired](agent-memory-guard.md); no guard wrapper or admission workflow is required. The local heavy-suite policy above remains unchanged.
+**Agents do not run the heavy suites on a local machine.** End-to-end, Storybook, performance, coverage and whole-`ci` lanes fan out to many workers — an end-to-end worker boots a full application — and several agent sessions doing that at once across repos and worktrees is what exhausts a developer's memory ([ENG-0138](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0138-machine-scoped-agent-memory-budget.md)). Push the branch and let GitHub verify: CI is the authoritative lane, its workflow invokes the underlying CI entrypoint directly, and nothing is lost but latency. The [machine memory guard is retired](agent-memory-guard.md); no guard wrapper or admission workflow is required. The local heavy-suite policy above remains unchanged.
 
 ## Commit and PR hygiene
 
@@ -51,7 +51,7 @@ intent (qwts/agent-sop#28).
 
 ## Supply chain and permissions
 
-MCP servers and third-party skills are allow-listed per repo and pinned by version or commit hash, mirroring the [ENG-0005](../decisions/ENG-0005-static-analysis-survey-results.md) SHA-pinning direction for Actions. Tool permissions (`settings.json` or the vendor equivalent) are least-privilege: grant what the task needs, not what is convenient. No secrets in any agent-facing file.
+MCP servers and third-party skills are allow-listed per repo and pinned by version or commit hash, mirroring the [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md) SHA-pinning direction for Actions. Tool permissions (`settings.json` or the vendor equivalent) are least-privilege: grant what the task needs, not what is convenient. No secrets in any agent-facing file.
 
 ## Threat model
 

@@ -7,16 +7,16 @@ the policy; the roster is data in the organization's org repository, under the
 [agent-org](https://github.com/qwts/agent-org/blob/de1a4ecfb86b652e246a3d56cf358b035ce39be4/README.md) contract; the standalone
 [`agent-bot-identity`](https://github.com/qwts/agent-bot-identity/tree/9ff7ce00b6a6945c7f249cf7a6ebf37cf58e86ee)
 repository owns runtime code, installation, hooks, token minting, and
-troubleshooting ([ENG-0128](../decisions/ENG-0128-agent-bot-runtime-ownership.md)).
+troubleshooting ([ENG-0128](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0128-agent-bot-runtime-ownership.md)).
 
 ## Organization identity model
 
 - Every independently attributable agent has its own App; the active roster
   is **harness-level** — one App per harness, no active model-level
-  identities ([ENG-0339](../decisions/ENG-0339-os-account-determines-persona.md)).
+  identities ([ENG-0339](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0339-os-account-determines-persona.md)).
 - Resolution picks the harness's default App, with macOS account name as the
   fallback detection input. A worktree pin
-  ([ENG-0079](../decisions/ENG-0079-per-agent-identity.md)) remains the
+  ([ENG-0079](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0079-per-agent-identity.md)) remains the
   explicit override but must name an active App: reactivating a retired
   slug means restoring its row, App, and installations, not pinning it.
 - Agents use short-lived installation tokens; humans never author through an
@@ -24,7 +24,7 @@ troubleshooting ([ENG-0128](../decisions/ENG-0128-agent-bot-runtime-ownership.md
 - Bot territory is the harness's macOS account, not a directory; worktrees
   are layout only, with no enforcement (ENG-0339 supersedes ENG-0045).
 - Conversation-level Agent IDs add audit provenance without granting authority
-  ([ENG-0081](../decisions/ENG-0081-transcript-bound-agent-execution-identities.md)).
+  ([ENG-0081](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0081-transcript-bound-agent-execution-identities.md)).
 
 ## Roster
 
@@ -35,7 +35,7 @@ active and onboarding governed repository; retired identities keep their rows
 but leave the active set.
 
 Which identities are active, one per harness
-([ENG-0339](../decisions/ENG-0339-os-account-determines-persona.md): the
+([ENG-0339](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0339-os-account-determines-persona.md): the
 harness-level slug is also the macOS agent account name), and which are
 retired is read from `governance/agents.json` in the org repository, never
 from this document: a copy here would go stale on the next roster change and

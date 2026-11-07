@@ -14,9 +14,10 @@ no single owning repo:
 
 ## What does not
 
-Anything owned by one repository stays in that repository. `qwts/photos` keeps
-its own `ADR-NNNN` series in its wiki; a decision about photos' renderer, IPC
-contract, or test strategy is a photos ADR, not an ENG record.
+Anything owned by one repository stays in that repository. A fleet repo keeps
+its own `ADR-NNNN` series in its wiki or `docs/`; a decision about one repo's
+renderer, IPC contract, or test strategy is that repo's ADR, not an ENG
+record.
 
 The test: **if exactly one repo would have to change, it is not an ENG record.**
 
@@ -28,11 +29,11 @@ issue-first issue this series already requires, then name the record after it �
 issue #35 → `ENG-0035`. GitHub allocates issue numbers atomically and never
 reuses them, so numbers are collision-free and no two open PRs can claim the
 same one. Numbering is therefore sparse and non-consecutive, not `+1` — that is
-expected. Records ENG-0001–0016 predate the rule and keep their sequential
+expected. The records ENG-0001–0016 predate the rule and keep their sequential
 numbers. docs-gov enforces the mapping and rejects duplicate numbers.
 
-The prefix is deliberately distinct from photos' `ADR-NNNN` so that a citation
-is never ambiguous about which series and which home it refers to.
+The prefix is deliberately distinct from the per-repo `ADR-NNNN` series so that
+a citation is never ambiguous about which series and which home it refers to.
 
 ## Format
 
@@ -60,10 +61,7 @@ principles; it does not waive the lower priorities.
 | ID | Title | Status |
 | --- | --- | --- |
 | [ENG-0001](ENG-0001-cross-repo-decision-home.md) | Cross-repo decisions live in this repository | Accepted |
-| [ENG-0002](ENG-0002-static-analysis-direction.md) | Static analysis: per-language natives now, central instrument later | Accepted |
 | [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) | The repository is the source of truth for documentation | Accepted |
-| [ENG-0004](ENG-0004-centralize-shared-cicd.md) | Centralize shared CI/CD in this repository | Accepted |
-| [ENG-0005](ENG-0005-static-analysis-survey-results.md) | Static-analysis survey: close the workflow-security gap, keep natives | Proposed |
 | [ENG-0006](ENG-0006-agentic-primitives-governance.md) | Governance of agentic primitives: one canonical source, progressive disclosure, eval-gated changes | Proposed |
 | [ENG-0007](ENG-0007-feature-lifecycle-convention.md) | Feature lifecycle: open with problem/requirements/design/proposed patterns, close with the solution as built | Proposed |
 | [ENG-0008](ENG-0008-shared-sop-inheritance.md) | Shared SOPs: defined once here, inherited by default, varied only by explicit delta | Accepted |
@@ -74,31 +72,29 @@ principles; it does not waive the lower priorities.
 | [ENG-0013](ENG-0013-issue-first-provenance.md) | ENG records are issue-first — the issue holds the why, the record holds the decision | Proposed |
 | [ENG-0014](ENG-0014-canonical-agent-context.md) | Canonical agent context is CLAUDE.md — AGENTS.md generated, copies gated, baselines vendored | Proposed |
 | [ENG-0015](ENG-0015-dependency-inventory.md) | Inventory dependencies and tooling across the fleet — report-only, Syft SBOM plus a shared normalizer | Proposed |
-| [ENG-0016](ENG-0016-agent-pr-bot-identity.md) | Agent-authored PRs come from dedicated bot identities (GitHub Apps, one per harness) | Proposed |
 | [ENG-0035](ENG-0035-issue-derived-record-numbers.md) | ENG record numbers are the originating issue number — allocation cannot collide | Proposed |
-| [ENG-0038](ENG-0038-governance-reconciler.md) | Governance reconciler — one operation converges any repo to the manifest | Superseded by ENG-0355 |
-| [ENG-0045](ENG-0045-agent-environments-are-bot-territory.md) | Agent coding environments are bot territory; installed tooling is commit-pinned | Superseded by ENG-0339 |
-| [ENG-0079](ENG-0079-per-agent-identity.md) | Agent identity is per agent — the harness is detected, the agent is pinned | Proposed |
-| [ENG-0081](ENG-0081-transcript-bound-agent-execution-identities.md) | Agent execution identities bind bot actions to provider transcripts | Proposed |
-| [ENG-0128](ENG-0128-agent-bot-runtime-ownership.md) | Agent identity runtime ownership; durable vs uninstalled classes; unmanaged publish as ai9d | Proposed |
-| [ENG-0138](ENG-0138-machine-scoped-agent-memory-budget.md) | The local memory budget is machine-scoped; same-user grants are legacy-only | Proposed |
-| [ENG-0149](ENG-0149-code-scanning.md) | Code scanning conformance is verified by analysis, not by configuration | Proposed |
-| [ENG-0151](ENG-0151-model-routing.md) | Model routing is retrieved from a registry, never recalled | Proposed |
-| [ENG-0160](ENG-0160-semantic-judge-arbitrates-size-ratchets.md) | The semantic judge arbitrates size-ratchet adjustments | Accepted |
-| [ENG-0172](ENG-0172-agent-space-is-durable-per-soul-storage.md) | Agent Space is durable per-soul storage outside bot territory | Proposed |
-| [ENG-0178](ENG-0178-evidence-bound-harness-projections.md) | Governed harness projections are evidence-bound no-release inputs | Accepted |
 | [ENG-0267](ENG-0267-bounded-ci-runtime.md) | Bound CI jobs and external setup tasks centrally | Proposed |
 | [ENG-0269](ENG-0269-trusted-dependency-reuse.md) | Reuse immutable dependency downloads on standard hosted runners | Accepted |
-| [ENG-0279](ENG-0279-immutable-releases-and-repo-lockfiles.md) | Playbook updates ship as immutable releases; repos align by lockfile | Superseded by ENG-0282 |
 | [ENG-0282](ENG-0282-immutable-pins-recorded-selection-no-aligner.md) | Versioning is immutable pins with recorded selection; there is no aligner | Proposed |
 | [ENG-0313](ENG-0313-ci-fan-out-backpressure.md) | Install lanes carry fan-out backpressure, and evidence lanes never queue behind them | Proposed |
-| [ENG-0339](ENG-0339-os-account-determines-persona.md) | The macOS account determines the persona | Proposed |
-| [ENG-0353](ENG-0353-delegate-writes-require-an-explicit-marker.md) | Delegate writes in the owner account require an explicit marker | Superseded by ENG-0375 |
 | [ENG-0355](ENG-0355-static-router-one-pointer-pinned-capabilities.md) | Distribution is a static router, one local pointer, and pinned capabilities | Proposed |
-| [ENG-0375](ENG-0375-owner-account-agent-context-is-the-delegate.md) | Agent context in the owner's account is the delegate — no marker, no undelegable set | Proposed |
+
+## History through 2026-11
+
+This template began as one fleet's SOP repository. Nineteen records that are
+that fleet's history — ENG-0002, ENG-0004, ENG-0005, ENG-0016, ENG-0038,
+ENG-0045, ENG-0079, ENG-0081, ENG-0128, ENG-0138, ENG-0149, ENG-0151,
+ENG-0160, ENG-0172, ENG-0178, ENG-0279, ENG-0339, ENG-0353, and ENG-0375 —
+retired from the template in the 2026-11 conversion and live on, meaning
+unchanged, in the qwts instance's
+[decision index](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/README.md).
+Staying records cite them there.
+
+A repository created from this template inherits the eighteen records above as
+the genesis of its own series; the instantiation script documents how its own
+records continue the numbering without collision.
 
 ## Related
 
 - [Shared SOPs index](../sop/README.md) — the standard operating procedures ENG-0008 governs (how work moves: branch → PR → review → release)
-- GitHub account reference — the account tier and what decisions assume about it; organization data, so it now lives in the organization's org repository (an [agent-org](https://github.com/qwts/agent-org/tree/de1a4ecfb86b652e246a3d56cf358b035ce39be4) instance). Last revision here: [github-account.md at `bf072f7`](https://github.com/qwts/agent-sop/blob/bf072f7ab2ed077af781fdc3f754425c43f197c5/docs/reference/github-account.md)
-- [`qwts/photos` wiki](https://github.com/qwts/photos/wiki) — photos' own `ADR-NNNN` series and SOPs
+- [Org-wide agent conventions](../reference/agent-conventions.md) — the working agreement ENG-0006 places in this repository

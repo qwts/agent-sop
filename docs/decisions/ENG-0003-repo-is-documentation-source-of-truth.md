@@ -6,9 +6,9 @@
 
 ## Context
 
-`qwts/photos` follows a wiki-first convention: long-lived docs, SOPs, and ADRs
-live in its GitHub wiki, and repo markdown is a pointer map to it. That wiki now
-holds 59 pages and roughly 60,000 words, including `ADR-0001` through
+One fleet repo followed a wiki-first convention: long-lived docs, SOPs, and
+ADRs live in its GitHub wiki, and repo markdown is a pointer map to it. That
+wiki holds 59 pages and roughly 60,000 words, including `ADR-0001` through
 `ADR-0023`, acceptance tests, user stories, and security reviews.
 
 [ENG-0001](ENG-0001-cross-repo-decision-home.md) already deviated from that
@@ -31,7 +31,7 @@ A GitHub wiki is a separate git repository with real consequences:
   A documentation change cannot be reviewed alongside the code it describes, and
   no CI check can read it.
 
-That last point has a concrete cost today. Photos' `AGENTS.md` defines an ADR
+That last point has a concrete cost today. That repo's `AGENTS.md` defines an ADR
 gate — an issue labeled `adr` may not begin implementation until the governing
 ADR is accepted — but nothing can enforce it, because the ADR lives somewhere no
 script can practically check.
@@ -55,7 +55,7 @@ requires a personal access token with write scope stored in CI (the default
 discipline that nothing enforces. That is real machinery to maintain a lossy
 copy of something the repository already renders.
 
-Photos' wiki-first rule in `AGENTS.md` is reversed accordingly.
+That repo's wiki-first rule in `AGENTS.md` is reversed accordingly.
 
 ## Consequences
 
@@ -66,14 +66,14 @@ Photos' wiki-first rule in `AGENTS.md` is reversed accordingly.
 - **The ADR gate becomes machine-checkable.** With ADRs in-repo, a script can
   verify the governing record exists and reads `Status: Accepted`, moving the
   rule from convention into the gate stack.
-- One-time migration cost in photos: 59 pages, 16 in-repo URL references across
-  7 files, plus stub generation. Other repos have no wiki content and adopt
-  `docs/` directly.
-- Wiki git history (97 commits in photos) is preserved via subtree merge rather
+- One-time migration cost in that repo: 59 pages, 16 in-repo URL references
+  across 7 files, plus stub generation. Other repos had no wiki content and
+  adopt `docs/` directly.
+- Wiki git history (97 commits) is preserved via subtree merge rather
   than orphaned; the reasoning trail on ADRs is worth keeping.
 - Anything deep-linking to a wiki *anchor*, or rendering wiki content
   externally, will break. Stubs preserve page URLs, not fragments.
-- Documentation changes now trigger CI. Photos already path-filters its
+- Documentation changes now trigger CI. That repo already path-filters its
   expensive lanes, so the cost is small, but other repos must not regress here.
 - Editing docs requires a commit rather than a browser. For a solo,
   agent-driven workflow this is a benefit — it is what makes review possible —
@@ -81,6 +81,5 @@ Photos' wiki-first rule in `AGENTS.md` is reversed accordingly.
 
 ## Scope
 
-Applies to every repository. Photos is the only one with substantial wiki
-content and is therefore the whole migration; the rest adopt `docs/` from the
-start.
+Applies to every repository. One repo had substantial wiki content and was
+therefore the whole migration; the rest adopt `docs/` from the start.

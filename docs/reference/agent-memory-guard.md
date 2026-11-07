@@ -21,7 +21,7 @@ scheduled synchronization remains disabled.
 
 ## Historical evidence
 
-- [ENG-0138](../decisions/ENG-0138-machine-scoped-agent-memory-budget.md)
+- [ENG-0138](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0138-machine-scoped-agent-memory-budget.md)
   retains the original proposal and its retirement amendment.
 - [Source before retirement](https://github.com/qwts/agent-sop/tree/41af9d7917a418810b3277f2cec969e4e003b0b3/tools/agent-guard)
   preserves the implementation and tests at an immutable revision.

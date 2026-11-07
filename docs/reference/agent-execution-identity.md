@@ -3,7 +3,7 @@
 Each agent conversation carries a private Agent ID in addition to its GitHub
 App actor. The App controls authorship and permissions; the Agent ID answers
 which transcript produced a commit and grants no authority. Policy is defined
-by [ENG-0081](../decisions/ENG-0081-transcript-bound-agent-execution-identities.md);
+by [ENG-0081](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0081-transcript-bound-agent-execution-identities.md);
 runtime mechanics belong to
 [`agent-bot-identity`](https://github.com/qwts/agent-bot-identity/tree/9ff7ce00b6a6945c7f249cf7a6ebf37cf58e86ee).
 
@@ -30,7 +30,7 @@ linked worktree has a matching App pin, bot author, credential helper, Agent ID,
 and execution-identity hooks. Claude's governed `WorktreeCreate` hook invokes
 `agent-bot claude-worktree-create` only inside a `qwts-*-agent` account; in
 the owner's account it exits without pinning
-([ENG-0339](../decisions/ENG-0339-os-account-determines-persona.md)). Both
+([ENG-0339](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0339-os-account-determines-persona.md)). Both
 may use `AGENT_BOT_BIN` to select an explicit installed executable.
 
 Current runtime commands include:

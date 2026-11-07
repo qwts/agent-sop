@@ -65,7 +65,7 @@ sections, and why. Write "none" only when the build matched the spec.
 ## Rollout
 
 Source of truth is here; repos consume it under the [ENG-0003](../decisions/ENG-0003-repo-is-documentation-source-of-truth.md) /
-[ENG-0004](../decisions/ENG-0004-centralize-shared-cicd.md) write-once model.
+[ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) write-once model.
 
 - **photos, image-trail, cartograph** — extend their existing story / task templates
   with the Design and Proposed-solution sections they currently lack; keep their extra
@@ -77,4 +77,5 @@ Source of truth is here; repos consume it under the [ENG-0003](../decisions/ENG-
 
 ## Changelog
 
+- 2026-11-06 — template conversion: citations to ENG records retired from the template re-point to the qwts instance's series.
 - 2026-07-22 — initial version; implements [ENG-0007](../decisions/ENG-0007-feature-lifecycle-convention.md) (playbook#9).

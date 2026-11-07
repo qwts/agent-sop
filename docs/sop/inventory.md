@@ -34,7 +34,8 @@ and image-trail):
 - Changelog-in-the-same-PR, version consistency, and Dependabot-only dependency
   bumps → [release and versioning](release-and-versioning.md).
 - Private-advisory reporting and the ENG-0005 security settings → [security
-  reporting and response](security-response.md).
+  reporting and response](security-response.md); the underlying survey data:
+  [static-analysis survey](../reference/static-analysis-survey-2026-07-22.md).
 
 **Kept repo-local** (product and architecture, not *how work moves* — they stay
 in each repo's ADRs or ENG records):

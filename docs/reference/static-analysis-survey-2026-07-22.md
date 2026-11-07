@@ -1,6 +1,6 @@
 # Static-analysis tooling survey — raw results (2026-07-22)
 
-Supporting data for [ENG-0005](../decisions/ENG-0005-static-analysis-survey-results.md);
+Supporting data for [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md);
 produced for [playbook#1](https://github.com/qwts/playbook-software-engineering/issues/1).
 
 Repos surveyed at GitHub `main`: photos @0970249c, cartograph @c400349,

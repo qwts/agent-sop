@@ -6,9 +6,9 @@
 
 ## Context
 
-Feature issues across the org already lean the right way — photos, image-trail,
-and cartograph carry user-story templates, and strong issues (e.g. photos#662)
-open with Problem / Scope / Acceptance criteria. But the discipline is
+Feature issues across the org already lean the right way — several repos
+carry user-story templates, and strong issues open with
+Problem / Scope / Acceptance criteria. But the discipline is
 half-adopted and unevenly enforced:
 
 - Templates capture problem and scope; **none require a design section or name
@@ -16,9 +16,9 @@ half-adopted and unevenly enforced:
 - **Nothing anywhere requires a closeout.** Issues close on a merged PR, and
   the "what was actually built, and how it differed from the proposal"
   narrative evaporates into the diff. The reasoning trail this org treats as
-  sacred for decisions (ENG series, photos ADRs) has no equivalent for
+  sacred for decisions (ENG series, per-repo ADR series) has no equivalent for
   features.
-- bookmarkit has no templates at all; rigor there is per-author.
+- At least one repo has no templates at all; rigor there is per-author.
 
 Two org-specific reasons this matters more than ordinary process hygiene:
 
@@ -29,7 +29,7 @@ Two org-specific reasons this matters more than ordinary process hygiene:
    and reuse work — and, per ENG-0006, closed features with clean closeouts
    are the natural source of golden-task evals.
 2. **Secure SDLC/STLC requires design before build.** Requirements stated up
-   front become the acceptance criteria that tests trace to (cartograph's CI
+   front become the acceptance criteria that tests trace to (one repo's CI
    already runs a traceability check); a design stated up front is what a
    security review can actually review. Code-first-then-backfill defeats
    both.
@@ -68,9 +68,10 @@ if the change warrants design review, it warrants the lifecycle.
 **Enforcement and delivery.**
 
 - A shared feature template implementing sections 1–4 lives in this
-  repository and rolls out to every repo (issue-form YAML; the ENG-0003/0004
+  repository and rolls out to every repo (issue-form YAML; the
+  [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md)/[0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md)
   delivery model — written once, consumed everywhere). Repo templates may
-  extend it (photos' milestone/order fields); they may not drop sections.
+  extend it (extra milestone/order fields, say); they may not drop sections.
 - The closeout is checked at close time: the org-wide agent conventions doc
   (playbook#7) instructs agents to write section 5 before closing a feature
   they worked on, and review culture holds humans to the same bar.
@@ -93,11 +94,12 @@ if the change warrants design review, it warrants the lifecycle.
 - Pattern naming only pays off if names stay consistent; the org-wide
   conventions doc should grow a short pattern glossary as closeouts
   accumulate, or the same pattern will accrete three names.
-- bookmarkit gets issue templates for the first time as part of rollout.
+- Rollout gives every repo the shared template — for at least one repo, its
+  first issue template.
 
 ## References
 
-- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) / [ENG-0004](ENG-0004-centralize-shared-cicd.md) — the write-once, consume-everywhere delivery model the shared template uses
+- [ENG-0003](ENG-0003-repo-is-documentation-source-of-truth.md) / [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) — the write-once, consume-everywhere delivery model the shared template uses
 - [ENG-0006](ENG-0006-agentic-primitives-governance.md) — agent conventions carry the closeout instruction; closeouts feed the golden-task eval sets
-- [photos#662](https://github.com/qwts/photos/issues/662) — the de-facto house style this record completes with design/patterns/closeout
-- cartograph's CI traceability check — the existing requirements→tests trace this record's numbered requirements feed
+- [photos#662](https://github.com/qwts/photos/issues/662) — a worked example of the de-facto house style this record completes with design/patterns/closeout
+- one repo's CI traceability check — the existing requirements→tests trace this record's numbered requirements feed

@@ -13,9 +13,9 @@ which tools does the fleet already run so it adopts the stack instead of
 recreating the wheel. Both are inventory questions, not gate questions — nothing
 should fail a build because of them.
 
-[ENG-0005](ENG-0005-static-analysis-survey-results.md) already chose the tools
+[ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md) already chose the tools
 that would enforce license and advisory policy; it did not produce a catalog of
-what is in use. [ENG-0004](ENG-0004-centralize-shared-cicd.md) established the
+what is in use. [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) established the
 delivery mechanism this reuses: a zero-dependency CLI here, exposed as a reusable
 workflow, configured per repo. License *detection* — matching files to SPDX
 identifiers — is the one genuinely hard part, and mature tooling (Syft) already
@@ -31,7 +31,7 @@ does it well; reimplementing it by hand is exactly the wheel this record avoids.
    `@v1`, like every reusable workflow here.
 2. **Report-only, always.** It emits artifacts and never fails a build. License
    and advisory *enforcement* stays with osv-scanner and cargo-deny per
-   [ENG-0005](ENG-0005-static-analysis-survey-results.md); duplicating that as a
+   [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md); duplicating that as a
    gate here would only re-litigate the false-positive problem that record
    already settled.
 3. **Two views from one normalizer.** A reusable per-repo workflow gives each
@@ -45,7 +45,7 @@ does it well; reimplementing it by hand is exactly the wheel this record avoids.
    choose," which is a direct-dependency fact.
 5. **Action pin-status rides along.** The normalizer records whether each
    third-party action is SHA-pinned, so the catalog surfaces the
-   [ENG-0005](ENG-0005-static-analysis-survey-results.md) workflow-security gap
+   [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md) workflow-security gap
    as a by-product without becoming a second enforcement path.
 
 ## Consequences
@@ -68,8 +68,8 @@ does it well; reimplementing it by hand is exactly the wheel this record avoids.
 
 ## References
 
-- [ENG-0004](ENG-0004-centralize-shared-cicd.md) — the reusable-workflow delivery model and `@v1` pinning this follows
-- [ENG-0005](ENG-0005-static-analysis-survey-results.md) — the tools that keep enforcement, and the SHA-pinning direction the pin-status view supports
+- [ENG-0004](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0004-centralize-shared-cicd.md) — the reusable-workflow delivery model and `@v1` pinning this follows
+- [ENG-0005](https://github.com/qwts/qwts-agent-sop/blob/main/docs/decisions/ENG-0005-static-analysis-survey-results.md) — the tools that keep enforcement, and the SHA-pinning direction the pin-status view supports
 - [Dependency inventory reference](https://github.com/qwts/agent-sop/blob/ed5c5d8/docs/reference/dependency-inventory.md) — schema, consumption, and the SHA-pin asymmetry
 - [Release and versioning SOP](../sop/release-and-versioning.md) — the lockfile-and-Dependabot dependency policy this inventories against
 - [Repo baseline files SOP](../sop/repo-baseline-files.md) — the `LICENSE` and `THIRD-PARTY-NOTICES.md` obligations the license inventory helps satisfy
